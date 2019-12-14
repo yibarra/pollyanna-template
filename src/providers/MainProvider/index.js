@@ -8,7 +8,7 @@ import { config } from '../../config';
 
 // main context
 const MainContext = createContext({
-  template: {},
+  pages: {},
   mouse: {},
 });
 
@@ -39,11 +39,11 @@ const MainProvider = props => {
   // render
   return (
     <FirestoreProvider firebase={firebase} {...config}>
-      <FirestoreCollection path="pollyanna/" orderByValue={"created_on"}>
+      <FirestoreCollection path="pages/" orderByValue={"created_on"}>
         {({ value }) => {
           return <MainContext.Provider
             value={{
-              template: value,
+              pages: value,
               mouse: mouse,
             }}>
             {props.children}

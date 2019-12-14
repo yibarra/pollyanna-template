@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import ColorProvider from '../../providers/ColorProvider';
 import { ThemeContext } from '../../providers/ThemeProvider';
 
 import './theme.scss';
@@ -29,7 +30,9 @@ const Theme = props => {
   // render
   return (
     <div className="theme" ref={element}>
-      {props.children}
+      <ColorProvider>
+        {props.children}
+      </ColorProvider>
     </div>
   );
 };

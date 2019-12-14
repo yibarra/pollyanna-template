@@ -1,13 +1,10 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { MainContext } from '../MainProvider';
 
 // Theme Context
 const ThemeContext = createContext({
   location: '',
   theme: null,
-  themes: {},
 });
 
 // Theme Provider
@@ -16,8 +13,8 @@ const ThemeProvider = props => {
   const location = props.location;
   // theme
   const [ theme, setTheme ] = useState(null);
-  // themes
-  const [ themes, setThemes ] = useState({});
+  // pages
+  const pages = props.pages;
 
   /*
   home: {
@@ -46,40 +43,35 @@ const ThemeProvider = props => {
     },
   */
 
-  // main context
-  const mainContext = useContext(MainContext);
-
   // set theme
   const setThemeColorSelect = useCallback(location => {
     let theme = null;
 
-    Object.entries(themes).forEach(([name]) => {
-      if (location === '' || location === '/') {
-        theme = themes['home'];
-
-      } else {
-        if (name === location) {
-          theme = themes[name];
+    if (Array.isArray(pages)) {
+      for (let element of pages) {
+        if (location === '' || location === '/') {
+          theme = element.name.toLowerCase() === 'home' ? element.theme : null;
+        } else {
+          if (element.name === location) {
+            theme = element.theme;
+          }
         }
       }
-    });
+    }
 
     setTheme(theme);
-  }, [ setTheme, themes ]);
+  }, [ pages ]);
 
   // set Theme Color
-  const setThemeColor = (name, color) => {
-    if (name && color) {
-      const theme = themes[name];
+  const setThemeColor = color => {
+    if (!!color) {
+      const newTheme = theme;
 
       if (theme instanceof Object) {
-        theme['--background-color'] = color;
-        theme['--text-color'] = color;
-
-        const themesUpdate = themes;
-        themesUpdate[name] = theme;
+        newTheme['--background-color'] = color;
+        newTheme['--text-color'] = color;
         
-        setTheme(themesUpdate);
+        setTheme(newTheme);
 
         document.documentElement.style.setProperty('--background-color', color);
         document.documentElement.style.setProperty('--text-color', color);
@@ -92,18 +84,16 @@ const ThemeProvider = props => {
     if (routeLocation instanceof Object) {
       const location = routeLocation.pathname.substring(1).split('/')[0];
 
-      setThemeColorSelect(location);
+      return setThemeColorSelect(location);
     }
+
+    return setThemeColorSelect('/');
   }, [ setThemeColorSelect ]);
 
   // use effect
   useEffect(() => {
     handleLocationChange(location);
-
-    if (Array.isArray(mainContext.template)) {
-      setThemes(mainContext.template[0].themes);
-    }
-  }, [handleLocationChange, location, mainContext.template]);
+  }, [ handleLocationChange, location ]);
 
   // render
   return (
