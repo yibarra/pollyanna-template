@@ -1,16 +1,37 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { MainContext } from '../../providers/MainProvider';
+
+import HeaderTop from './HeaderTop';
+import HeaderMenu from './HeaderMenu';
 
 import './header.scss';
 
 // Header
 const Header = props => {
+  // active
+  const [ active, setActive ] = useState(false);
+
+  // main context
+  const mainContext = useContext(MainContext);
+
+  // pages
+  const pages = mainContext.pages;
+
+  // on open menu
+  const onToggleActive = () => {
+    setActive(!active);
+  };
+
   // render
   return (
-    <header>
-      header
+    <header className="header" data-active={active}>
+      <HeaderTop active={active} onActive={onToggleActive} />
+
+      <HeaderMenu pages={pages} />
     </header>
-  )
+  );
 };
 
 Headers.propTypes = {

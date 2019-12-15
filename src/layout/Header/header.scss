@@ -1,8 +1,41 @@
 /* --- HEADER --- */
-@import '../../styles/settings/settings';
-@import '../../styles/tools/mixins';
+@import './../../styles/settings/settings';
+@import './../../styles/tools/mixins';
 
-header {
+.header {
   @include box-display;
-  display: none;
+  float: left;
+  height: 100vh;
+  left: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 99;
+
+  &--bio,
+  &--menu {
+    display: none;
+    pointer-events: none;
+  }
+
+  &--top {
+    pointer-events: all;
+  }
+
+  &[data-active="true"] {
+    height: 100vh;
+    
+    .header {
+      &--menu {
+        display: inline-block;
+      }
+
+      &--top {
+        &--current {
+          display: none;
+        }
+      }
+    }
+  }
 }

@@ -1,0 +1,91 @@
+/* --- HEADER TOP --- */
+@import './../../../styles/settings/settings';
+@import './../../../styles/tools/mixins';
+
+@import './../../../styles/components/forms/buttons';
+
+.header {
+  &--top {
+    @include box-display;
+    align-content: space-between;
+    align-items: center;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 15px 20px;
+    min-height: 70px;
+    height: 70px;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+
+    &--current,
+    &--info {
+      @include box-display;
+      position: relative;
+    }
+    
+    &--current {
+      float: left;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  
+      .link {
+        @include box-display;
+        @include font($font-default, 18px, 600, $black-900);
+        letter-spacing: -0.025em;
+        line-height: 1em;
+        float: left;
+        margin: 0;
+        padding: 14px 20px;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        i {
+          @include box-display;
+          @include rem('font-size', 9px);
+          display: none;
+          margin: 0 10px 0 0;
+        }
+
+        &[data-last="true"] {
+          @include font($font-default, 14px, 400, $black-900);
+          background-color: transparent;
+          letter-spacing: -0.025em;
+          text-transform: capitalize;
+
+          i {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    &--info {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+
+      .btn-open {
+        @extend %btn-clear;
+        float: left;
+        margin: 0 40px 0 0;
+        padding: 0;
+
+        .material-icons {
+          @include box-display;
+          @include rem('font-size', 24px);
+          color: $black-900;
+        }
+      }
+    }
+  }
+
+  .lang-select {
+    right: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
