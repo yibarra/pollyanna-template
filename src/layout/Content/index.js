@@ -1,24 +1,38 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ColorContext } from '../../providers/ColorProvider';
-import { ThemeContext } from '../../providers/ThemeProvider';
+import { Route, Switch } from 'react-router-dom';
+
+import BackgroundProvider from '../../providers/BackgroundProvider';
+
+import BackgroundText from '../../components/BackgroundText';
+import Header from '../Header';
+import Footer from '../Footer';
+
+import Bio from '../../pages/Bio';
+import Events from '../../pages/Events';
+import Home from '../../pages/Home';
+
+import './content.scss';
 
 // Content
 const Content = props => {
-  const themeContext = useContext(ThemeContext);
-
-  const colorContext = useContext(ColorContext);
-
-  const switchColor = () => {
-    themeContext.setThemeColor(colorContext.setNewColor());
-  };
-
   // render
   return (
-    <div>
-      <p style={{color: themeContext.theme ? themeContext.theme['--text-color'] : 'red'}}>content</p>
-      <button onClick={() => switchColor()}>mudar de cor</button>
+    <div className="content">
+      <BackgroundProvider>
+        <BackgroundText />
+      </BackgroundProvider>
+
+      <Header location={props.location} />
+
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/bio" component={Bio} />
+        <Route path="/events" component={Events} />
+      </Switch>
+
+      <Footer />
     </div>
   );
 };

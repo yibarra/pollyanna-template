@@ -34,6 +34,6 @@ const Main = () => {
 
 Main.propTypes = {
   any: PropTypes.any,
-}
+};
 
 export default withRouter(Main);

@@ -1,0 +1,8 @@
+/* --- LOADER --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.loader {
+  @include box-display;
+  display: none;
+}

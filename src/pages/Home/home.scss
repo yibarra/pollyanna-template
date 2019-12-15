@@ -1,0 +1,29 @@
+/* --- HOME  --- */
+@import './../../styles/settings/settings';
+@import './../../styles/tools/mixins';
+
+.home {
+  @include box-display;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  position: relative;
+  vertical-align: top;
+  z-index: 16;
+  
+  &--audio {
+    @include box-display;
+    bottom: 20px;
+    right: 20px;
+    position: absolute;
+    text-align: right;
+    width: 50%;
+    z-index: 11;
+
+    .mini-player {
+      float: right;
+      width: 315px;
+    }
+  }
+}

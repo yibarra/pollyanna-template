@@ -1,0 +1,8 @@
+/* --- HEADER --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+header {
+  @include box-display;
+  display: none;
+}

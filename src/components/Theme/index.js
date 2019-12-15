@@ -39,6 +39,6 @@ const Theme = props => {
 
 Theme.propTypes = {
   any: PropTypes.any,
-}
+};
 
 export default Theme;

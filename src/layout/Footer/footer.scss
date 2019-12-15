@@ -1,0 +1,8 @@
+/* --- BACKGROUND TEXT --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+footer {
+  @include box-display;
+  display: none;
+}

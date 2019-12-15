@@ -1,0 +1,59 @@
+/* --- BACKGROUND TEXT --- */
+@import './../../styles/settings/settings';
+@import './../../styles/tools/mixins';
+
+.background-text {
+  @include box-display;
+  left: 0;
+  height: 100vh;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+
+  &--list,
+  &--item {
+    @include box-display;
+    position: absolute;
+  }
+
+  &--list {
+    list-style: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  &--item {
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    
+    .title {
+      @include box-display;
+      @include font($font-secondary, 120px, 700, $black-900);
+      text-shadow: 1px 1px red;
+      line-height: 1em;
+      letter-spacing: -0.10em;
+      margin: 0;
+      opacity: 0.05;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    &:nth-child(1) {
+      top: 10%;
+    }
+
+    &:nth-child(2) {
+      top: 25%;
+    }
+
+    &:nth-child(3) {
+      top: 70%;
+    }
+
+    &:nth-child(4) {
+      top: 85%;
+    }
+  }
+}

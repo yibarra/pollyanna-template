@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import './loader.scss';
+
 // loader
 const Loader = props => {
   // complete
@@ -17,7 +19,7 @@ const Loader = props => {
 
   // render
   return (
-    <div data-complete={complete}>{props.children}</div>
+    <div className="loader" data-complete={complete}>{props.children}</div>
   );
 };
 
