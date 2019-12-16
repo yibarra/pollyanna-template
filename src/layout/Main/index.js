@@ -13,14 +13,14 @@ import Theme from '../../components/Theme';
 import './../../styles/main.scss';
 
 // Main
-const Main = () => {
+const Main = props => {
   // render
   return (
     <Suspense fallback="loading...">
       <MainProvider>
         <MainContext.Consumer>
           {(context) =>
-            <ThemeProvider {...context}>
+            <ThemeProvider location={props.location} {...context}>
               <Theme>
                 <Loader />
                 <Content />

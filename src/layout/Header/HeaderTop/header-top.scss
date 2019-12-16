@@ -33,7 +33,7 @@
   
       .link {
         @include box-display;
-        @include font($font-default, 18px, 600, $black-900);
+        @include font($font-default, 18px, 400, $black-900);
         letter-spacing: -0.025em;
         line-height: 1em;
         float: left;
@@ -70,8 +70,8 @@
       .btn-open {
         @extend %btn-clear;
         float: left;
-        margin: 0 40px 0 0;
-        padding: 0;
+        margin: 0;
+        padding: 1px 0 0;
 
         .material-icons {
           @include box-display;

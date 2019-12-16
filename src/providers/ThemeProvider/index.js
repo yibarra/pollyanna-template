@@ -50,9 +50,9 @@ const ThemeProvider = props => {
     if (Array.isArray(pages)) {
       for (let element of pages) {
         if (location === '' || location === '/') {
-          theme = element.name.toLowerCase() === 'home' ? element.theme : null;
+          theme = element.slug === '/' ? element.theme : null;
         } else {
-          if (element.name === location) {
+          if (element.slug === `/${location}`) {
             theme = element.theme;
           }
         }

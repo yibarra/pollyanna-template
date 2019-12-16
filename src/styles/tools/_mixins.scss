@@ -41,6 +41,15 @@
   }
 }
 
+/* --- DELAY --- */
+@mixin delay($rule, $number, $value) {
+  @for $i from 1 to ($number + 1) {
+    &:nth-child(#{$i}) {
+      #{$rule}-delay: (#{$i * $value});
+    }
+  }
+}
+
 /* --- SCROLL --- */
 @mixin scrollV($width: 6px, $bg-color: $white-900, $bg-bar-color: $black-900) {
   &::-webkit-scrollbar-track {

@@ -11,7 +11,8 @@ const HeaderMenu = props => {
   return (
     <div className="header--menu">
       <ul className="header--menu--list">
-        {Array.isArray(props.pages) && props.pages.map((item, index) => <li className="header--menu--item" key={index}>
+        {Array.isArray(props.pages) && props.pages.map((item, index) => 
+          <li className="header--menu--item" key={index} style={{order: item.index}}>
             <NavLink className="link" exact={item.slug === '/'} activeClassName="active" to={item.slug}>{item.name}</NavLink>
           </li>)}
       </ul>
