@@ -8,8 +8,8 @@ import { config } from '../../config';
 
 // main context
 const MainContext = createContext({
-  pages: {},
   mouse: {},
+  pages: {},
 });
 
 // Main provider
@@ -43,20 +43,20 @@ const MainProvider = props => {
         {({ value }) => {
           return <MainContext.Provider
             value={{
-              pages: value,
               mouse: mouse,
+              pages: value,
             }}>
             {props.children}
           </MainContext.Provider>;
         }}
       </FirestoreCollection>
     </FirestoreProvider>
-  )
-}
+  );
+};
 
 MainProvider.propTypes = {
   any: PropTypes.any,
-}
+};
 
 export { MainProvider, MainContext };
 export default MainProvider;

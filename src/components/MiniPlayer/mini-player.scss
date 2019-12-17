@@ -1,0 +1,35 @@
+/* --- MIN PLAYER --- */
+@import './../../styles/settings/settings';
+@import './../../styles/tools/mixins';
+
+@import './../../styles/components/forms/buttons';
+
+.mini-player {
+  @include box-display;
+  float: right;
+  position: relative;
+  text-align: right;
+  width: 100%;
+
+  &--controls,
+  &--info {
+    @include box-display;
+    position: relative;
+    vertical-align: top;
+  }
+
+  .line {
+    @include box-display;
+    bottom: -13px;
+    float: left;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+
+    path {
+      fill: none;
+      stroke: $black-900;
+      stroke-width: 2px;
+    }
+  }
+}

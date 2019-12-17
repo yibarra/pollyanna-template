@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { MainContext } from '../../providers/MainProvider';
@@ -15,14 +15,22 @@ const Header = props => {
 
   // main context
   const mainContext = useContext(MainContext);
-
   // pages
   const pages = mainContext.pages;
+  // location
+  const location = props.location;
 
   // on open menu
   const onToggleActive = () => {
     setActive(!active);
   };
+
+  // use effect
+  useEffect(() => {
+    if (location) {
+      setActive(false);
+    }
+  }, [ location ]);
 
   // render
   return (

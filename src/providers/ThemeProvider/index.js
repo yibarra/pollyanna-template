@@ -1,5 +1,7 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import { PageContext } from '../PageProvider';
 
 // Theme Context
 const ThemeContext = createContext({
@@ -9,12 +11,13 @@ const ThemeContext = createContext({
 
 // Theme Provider
 const ThemeProvider = props => {
-  // location
-  const location = props.location;
   // theme
   const [ theme, setTheme ] = useState(null);
-  // pages
-  const pages = props.pages;
+
+  // page context
+  const pageContext = useContext(PageContext);
+  // current page
+  const page = pageContext.page;
 
   /*
   home: {
@@ -44,23 +47,12 @@ const ThemeProvider = props => {
   */
 
   // set theme
-  const setThemeColorSelect = useCallback(location => {
-    let theme = null;
-
-    if (Array.isArray(pages)) {
-      for (let element of pages) {
-        if (location === '' || location === '/') {
-          theme = element.slug === '/' ? element.theme : null;
-        } else {
-          if (element.slug === `/${location}`) {
-            theme = element.theme;
-          }
-        }
-      }
+  const setThemeColorSelect = useCallback(() => {
+    if (page instanceof Object) {
+      setTheme(page.theme);
     }
 
-    setTheme(theme);
-  }, [ pages ]);
+  }, [ page, setTheme ]);
 
   // set Theme Color
   const setThemeColor = color => {
@@ -80,20 +72,16 @@ const ThemeProvider = props => {
   };
 
   // Handle Location Change
-  const handleLocationChange = useCallback(routeLocation => {
-    if (routeLocation instanceof Object) {
-      const location = routeLocation.pathname.substring(1).split('/')[0];
-
-      return setThemeColorSelect(location);
-    }
-
-    return setThemeColorSelect('/');
+  const handleLocationChange = useCallback(page => {
+    if (page instanceof Object) {
+      return setThemeColorSelect(page);
+    };
   }, [ setThemeColorSelect ]);
 
   // use effect
   useEffect(() => {
-    handleLocationChange(location);
-  }, [ handleLocationChange, location ]);
+    handleLocationChange(page);
+  }, [ handleLocationChange, page ]);
 
   // render
   return (

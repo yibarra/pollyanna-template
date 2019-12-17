@@ -38,7 +38,7 @@ const Content = props => {
 };
 
 Content.propTypes = {
-  any: PropTypes.any,
+  location: PropTypes.object,
 };
 
 export default Content;

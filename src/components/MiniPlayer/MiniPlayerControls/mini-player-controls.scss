@@ -1,0 +1,59 @@
+/* --- MINI PLAYER CONTROLS --- */
+@import './../../../styles/settings/settings';
+@import './../../../styles/tools/mixins';
+
+@import './../../../styles/components/forms/buttons';
+
+.mini-player {
+  &--controls {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+    z-index: 3;
+
+    .btn {
+      @extend %btn-clear;
+      margin: 0 3px;
+      position: relative;
+      padding: 0;
+
+      i {
+        @include box-display;
+        @include rem('font-size', 16px);
+        color: $black-900;
+        pointer-events: none;
+      }
+
+      &-play {
+        i {
+          display: none;
+        }
+
+        &[data-paused="false"] {
+          i {
+            display: inline-block;
+
+            &:last-child {
+              display: none;
+            }
+          }
+        }
+
+        &[data-paused="true"] {
+          i {
+            display: none;
+            
+            &:last-child {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 import MainProvider, { MainContext } from '../../providers/MainProvider';
+import PageProvider from '../../providers/PageProvider';
+import PlayerProvider from '../../providers/PlayerProvider';
 import ThemeProvider from '../../providers/ThemeProvider';
 
 import Content from '../Content';
@@ -20,12 +22,16 @@ const Main = props => {
       <MainProvider>
         <MainContext.Consumer>
           {(context) =>
-            <ThemeProvider location={props.location} {...context}>
-              <Theme>
-                <Loader />
-                <Content />
-              </Theme>
-            </ThemeProvider>}
+            <PageProvider location={props.location} {...context}>
+              <ThemeProvider {...context}>
+                <Theme>
+                  <Loader />
+                  <PlayerProvider>
+                    <Content location={props.location} />
+                  </PlayerProvider>
+                </Theme>
+              </ThemeProvider>
+            </PageProvider>}
         </MainContext.Consumer>
       </MainProvider>
     </Suspense>
