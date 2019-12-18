@@ -10,8 +10,9 @@
     flex-flow: row nowrap;
     margin: 0 15px 0 0;
     height: 15px;
-    padding: 0;
+    padding: 0 3px;
     text-align: left;
+    width: calc(100% - (15px + 65px));
     z-index: 2;
 
     .info,
@@ -21,48 +22,32 @@
     }
 
     .info {
-      @include font($font-default, 11px, 400, $black-900);
+      @include font($font-default, 12px, 600, $black-900);
       float: left;
       margin: 0 10px 0 0;
       opacity: 0.7;
-      letter-spacing: -0.025em;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+      width: 55px;
     }
 
     .name {
-      @include font($font-default, 12px, 700, $black-900);
+      @include font($font-default, 12px, 400, $black-900);
       border: none;
       float: left;
-      letter-spacing: -0.075em;
       overflow: hidden;
-      padding: 0 10px;
+      letter-spacing: 0.020em;
+      padding: 0;
       position: relative;
-      width: 180px;
-
-      .text-scroll {
-        @include box-display;
-        float: left;
-        position: relative;
-        width: auto;
-        white-space: nowrap;
-      }
+      text-overflow: ellipsis;
+      width: calc(100% - (55px + 10px));
+      white-space: nowrap;
     }
 
     &[data-played="true"] {
       .name {
-        .text-scroll {
-          animation: animation-text-scroll 7s linear 0ms infinite forwards;
-        }
+        
       }
     }
-  }
-}
-
-/* --- ANIMATION --- */
-@keyframes animation-text-scroll {
-  0% {
-    transform: translateX(180px);
-  }
-  100% {
-    transform: translateX(calc(-100% - 5px));
   }
 }

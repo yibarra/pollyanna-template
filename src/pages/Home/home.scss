@@ -14,16 +14,17 @@
   
   &--audio {
     @include box-display;
-    bottom: 20px;
+    bottom: 15px;
     right: 20px;
+    height: 30px;
     position: absolute;
+    pointer-events: auto;
     text-align: right;
     width: 50%;
-    z-index: 11;
+    z-index: 100;
 
     .mini-player {
-      float: right;
-      width: 315px;
+      width: 320px;
     }
   }
 }

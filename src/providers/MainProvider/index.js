@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 
 import 'firebase/firestore';
@@ -8,34 +8,11 @@ import { config } from '../../config';
 
 // main context
 const MainContext = createContext({
-  mouse: {},
   pages: {},
 });
 
 // Main provider
 const MainProvider = props => {
-  // mouse
-  const [ mouse, setMouse ] = useState({ x: 0, y: 0 });
-
-  // cursor
-  const cursor = event => {
-    if (!event instanceof Object) return false;
-    
-    setMouse({
-      x: event.clientX,
-      y: event.clientY,
-    });
-  };
-
-  // use effect
-  useEffect(() => {
-    window.addEventListener('mousemove', e => cursor(e), false);
-
-    return () => {
-      window.removeEventListener('mousemove', () => cursor);
-    };
-  }, []);
-
   // render
   return (
     <FirestoreProvider firebase={firebase} {...config}>
@@ -43,7 +20,6 @@ const MainProvider = props => {
         {({ value }) => {
           return <MainContext.Provider
             value={{
-              mouse: mouse,
               pages: value,
             }}>
             {props.children}

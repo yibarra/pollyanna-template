@@ -8,8 +8,11 @@
   &--controls {
     align-items: center;
     display: inline-flex;
+    float: right;
     justify-content: center;
     flex-flow: row nowrap;
+    top: -2px;
+    width: 65px;
     z-index: 3;
 
     .btn {

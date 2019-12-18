@@ -5,7 +5,7 @@
 .header {
   @include box-display;
   float: left;
-  height: 100vh;
+  height: auto;
   left: 0;
   padding: 0;
   position: fixed;
@@ -20,7 +20,7 @@
   }
 
   &--top {
-    pointer-events: all;
+    pointer-events: auto;
   }
 
   &[data-active="true"] {

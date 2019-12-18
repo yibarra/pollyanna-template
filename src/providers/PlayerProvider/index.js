@@ -1,19 +1,28 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-// Player Context
+/**
+ * Player Context
+ */
 const PlayerContext = createContext({
-  analyser: null,
-  audio: null,
-  audioData: null,
-  context: null,
-  dataArray: null,
-  source: null,
+  audio: {},
+  onPlayAudio: () => {},
+  onSetAudio: () => {},
 });
 
-// Player Provider
+/**
+ * Player Provider
+ *
+ * @class PlayerProvider
+ * @extends {Component}
+ */
 class PlayerProvider extends Component {
-  // constructor
+  /**
+   * Creates an instance of PlayerProvider.
+   * 
+   * @param {*} props
+   * @memberof PlayerProvider
+   */
   constructor(props) {
     super(props);
 
@@ -36,7 +45,11 @@ class PlayerProvider extends Component {
     this.onSetAudio = this.onSetAudio.bind(this);
   }
 
-  // animation
+  /**
+   * animation
+   *
+   * @memberof PlayerProvider
+   */
   animation() {
     if (typeof this.callbackAnimation === 'function') {
       this.refAnimation = requestAnimationFrame(this.animation);
@@ -45,13 +58,17 @@ class PlayerProvider extends Component {
         this.analyser.getByteFrequencyData(this.state.dataArray);
       }
 
-      this.callbackAnimation(this.state.dataArray);
+      this.callbackAnimation(this.state.dataArray, this.state.audio);
     } else {
       cancelAnimationFrame(this.refAnimation);
     }
   }
 
-  // on load audio
+  /**
+   * on load audio
+   *
+   * @memberof PlayerProvider
+   */
   onLoadAudio() {
     this.setState({
       audio: new Audio(this.state.audioData.url),
@@ -61,7 +78,13 @@ class PlayerProvider extends Component {
     });
   }
   
-  // on load audio complete
+  /**
+   * on load audio complete
+   *
+   * @param {*} event
+   * @returns
+   * @memberof PlayerProvider
+   */
   onLoadAudioComplete(event) {
     if (event instanceof Object === false || !event) return false;
 
@@ -77,7 +100,7 @@ class PlayerProvider extends Component {
         this.state.source.connect(this.analyser);
 
         this.analyser.connect(this.state.context.destination);
-        this.analyser.fftSize = 256;
+        this.analyser.fftSize = 512;
 
         this.setState({
           buffer: this.analyser.frequencyBinCount,
@@ -90,7 +113,13 @@ class PlayerProvider extends Component {
     });
   }
 
-  // on play audio
+  /**
+   * on play audio
+   *
+   * @param {*} value
+   * @returns
+   * @memberof PlayerProvider
+   */
   onPlayAudio(value) {
     if (!this.state.audio) {
       return false;
@@ -110,7 +139,13 @@ class PlayerProvider extends Component {
     return false;
   }
 
-  // on set audio
+  /**
+   * on set audio
+   *
+   * @param {*} audio
+   * @param {*} callback
+   * @memberof PlayerProvider
+   */
   onSetAudio(audio, callback) {
     if (audio instanceof Object) {
       this.onPlayAudio();
@@ -124,7 +159,12 @@ class PlayerProvider extends Component {
     }
   }
 
-  // render
+  /**
+   * render
+   *
+   * @returns
+   * @memberof PlayerProvider
+   */
   render() {
     return (
       <PlayerContext.Provider value={

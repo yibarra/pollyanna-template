@@ -5,24 +5,16 @@ import { useTranslation } from 'react-i18next';
 
 import './mini-player-info.scss';
 
-/**
- * Mini Player Info
- */
+// Mini Player Info
 const MiniPlayerInfo = (props) => {
+  // translate
   const { t } = useTranslation();
 
-  /**
-   * render
-   *
-   * @returns
-   * @memberof MiniPlayerControls
-   */
+  // render
   return (
     <p className="mini-player--info" data-played={props.play}>
       <span className="info">{t('play_now')}</span>
-      <span className="name">
-      <span className="text-scroll">{props.name}</span>
-      </span>
+      <span className="name">{props.name}</span>
     </p>
   )
 };
