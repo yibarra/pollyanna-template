@@ -1,28 +1,51 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { PlayerProvider } from '../../providers/PlayerProvider';
-import { PageContext } from '../../providers/PageProvider';
+import { MouseProvider } from '../../providers/MouseProvider';
 
-import HomePlayer from './HomePlayer';
+import Webdoor from '../../components/Webdoor';
 
 import './home.scss';
 
-/**
- * Home
- */
+// Home
 const Home = props => {
-  // page context
-  const pageContext = useContext(PageContext);
-  // page
-  const page = pageContext.page;
+  // current
+  const [ current, setCurrent ] = useState(0);
+
+  // props
+  const { page: { webdoor } } = props;
+
+  // on set item
+  const onSetItem = (index) => {
+    if (Number.isInteger(index) === true) {
+      setCurrent(index);
+    }
+  };
+
+  // on next prev
+  const onNextPrev = (e = 'prev') => {
+    let index = 0;
+    const total = webdoor.length - 1;
+
+    if (e === 'prev') {
+      index = (current - 1) < 0 ? total : current - 1;
+    } else if (e === 'next') {
+      index = (current + 1) > total ? 0 : (current + 1);
+    }
+
+    onSetItem(index);
+  };
 
   // return
   return (
     <div className="page home">
-      <PlayerProvider>
-        <HomePlayer page={page} />
-      </PlayerProvider>
+      <MouseProvider>
+        <Webdoor
+          current={current}
+          items={webdoor}
+          onNextPrev={onNextPrev}
+          setCurrent={setCurrent} />
+      </MouseProvider>
     </div>
   );
 }

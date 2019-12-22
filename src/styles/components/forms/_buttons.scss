@@ -11,15 +11,16 @@
 
 %btn-more {
   @extend %btn-clear;
-  @include font($font-default, 12px, 500, $black-900);
+  @include font($font-default, 12px, 600, $black-900);
   background-color: transparent;
   border: none;
   border-bottom: 9px solid $black-900;
   cursor: pointer;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.025em;
   margin: 0;
   padding: 10px 15px;
   text-decoration: none;
+  text-transform: uppercase;
 
   &:before {
     @include box-display;

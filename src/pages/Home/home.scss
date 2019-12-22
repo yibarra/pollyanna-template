@@ -8,23 +8,8 @@
   display: inline-flex;
   justify-content: center;
   flex-flow: row nowrap;
+  pointer-events: auto;
   position: relative;
   vertical-align: top;
   z-index: 16;
-  
-  &--audio {
-    @include box-display;
-    bottom: 15px;
-    right: 20px;
-    height: 30px;
-    position: absolute;
-    pointer-events: auto;
-    text-align: right;
-    width: 50%;
-    z-index: 100;
-
-    .mini-player {
-      width: 320px;
-    }
-  }
 }

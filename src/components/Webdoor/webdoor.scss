@@ -1,0 +1,60 @@
+/* --- WEBDOOR --- */
+@import './../../styles/settings/settings';
+@import './../../styles/tools/mixins';
+
+@import './../../styles/components/forms/buttons';
+@import './../../styles/components/typography';
+
+.webdoor {
+  @include box-display;
+  height: 100vh;
+  float: left;
+  overflow: hidden;
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  vertical-align: top;
+
+  &--image {
+    @include box-display;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    
+    .repultion {
+      @include box-display;
+      align-items: center;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      .image {
+        @include box-display;
+        position: relative;
+        transform-origin: center;
+        vertical-align: top;
+      }
+    }
+  }
+
+  .slider {
+    height: 100vh;
+    margin: 0 50px 0 0;
+    width: 100%;
+    z-index: 4;
+
+    &--container {
+      height: 100vh;
+      float: right;
+      width: calc(270px + 90px);
+    }
+  }
+}

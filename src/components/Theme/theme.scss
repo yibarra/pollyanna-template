@@ -3,10 +3,8 @@
 @import '../../styles/tools/mixins';
 
 .theme {
-  --background-color: white;
-  --text-color: black;
-
   @include box-display;
+  background-color: var(--background-color);
   min-height: 100vh;
   position: relative;
   width: 100%;

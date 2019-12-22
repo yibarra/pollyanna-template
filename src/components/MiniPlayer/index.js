@@ -1,5 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { PlayerContext } from '../../providers/PlayerProvider';
 
 import MiniPlayerControls from './MiniPlayerControls';
 import MiniPlayerInfo from './MiniPlayerInfo';
@@ -9,24 +11,68 @@ import './mini-player.scss';
 
 // Mini Player
 const MiniPlayer = props => {
-  // play
-  const [ play, setPlay ] = useState(false);
-  // props
-  const { item, onNextPrev } = props;
+  // player context
+  const playerContext = useContext(PlayerContext);
+  // audios
+  const { audio, onPlayAudio, audio: { paused } } = playerContext;
 
-  // on set play
-  const onSetPlay = () => {
-    props.onPlay(!play);
-    setPlay(!play);
+  // item
+  const [ item, setItem ] = useState({});
+  // current
+  const [ current, setCurrent ] = useState(0);
+
+  // audios
+  const { audios } = props;
+  
+  // on next prev
+  const onNextPrev = (e = 'prev') => {
+    let index = 0;
+    const total = audios.length - 1;
+
+    if (e === 'prev') {
+      index = (current - 1) < 0 ? total : current - 1;
+    } else if (e === 'next') {
+      index = (current + 1) > total ? 0 : (current + 1);
+    }
+
+    onSetItem(index);
   };
+
+  // set audio
+  const setAudio = useCallback(audio => {
+    if (audio instanceof Object) {
+      setItem(audio);
+    }
+  }, [ setItem ]);
+
+  // on set item
+  const onSetItem = useCallback(index => {
+    if (Number.isInteger(index) === true) {
+      const item = audios[index];
+
+      if (item instanceof Object) {
+        setAudio(item);
+      }
+
+      setCurrent(index);
+    }
+  }, [ audios, setAudio ]);
+
+  // use effect
+  useEffect(() => {
+    if (audios) {
+      onSetItem(0);
+    }
+  }, [ audios, onSetItem ]);
 
   // redner
   return (
     <div className="mini-player">
       {item && 
         <Fragment>
-          <MiniPlayerInfo play={play} {...item} />
-          <MiniPlayerControls play={play} onNextPrev={onNextPrev} onPlay={onSetPlay} />
+          <MiniPlayerInfo {...item} />
+          <MiniPlayerControls 
+            audio={audio} onNextPrev={onNextPrev} onPlay={onPlayAudio} paused={paused} />
         </Fragment>
       }
 
@@ -34,7 +80,6 @@ const MiniPlayer = props => {
         color={'#000'}
         height={40}
         item={item}
-        play={play}
         width={320} />
     </div>
   );
@@ -45,3 +90,57 @@ MiniPlayer.propTypes = {
 }
 
 export default MiniPlayer;
+
+/*
+// player context
+  const playerContext = useContext(PlayerContext);
+
+  // item
+  const [ item, setItem ] = useState({});
+  // current
+  const [ current, setCurrent ] = useState(0);
+
+  // page
+  const { page, page: { audios } } = props;
+
+  // on next prev
+  const onNextPrev = (e = 'prev') => {
+    let index = 0;
+    const total = page.audios.length - 1;
+
+    if (e === 'prev') {
+      index = (current - 1) < 0 ? total : current - 1;
+    } else if (e === 'next') {
+      index = (current + 1) > total ? 0 : (current + 1);
+    }
+
+    onSetItem(index);
+  };
+
+  // set audio
+  const setAudio = useCallback(audio => {
+    if (audio instanceof Object) {
+      setItem(audio);
+    }
+  }, [ setItem ]);
+
+  // on set item
+  const onSetItem = useCallback(index => {
+    if (Number.isInteger(index) === true) {
+      const item = audios[index];
+
+      if (item instanceof Object) {
+        setAudio(item);
+      }
+
+      setCurrent(index);
+    }
+  }, [ audios, setAudio ]);
+
+  // use effect
+  useEffect(() => {
+    if (page instanceof Object && Array.isArray(audios)) {
+      onSetItem(0);
+    }
+  }, [ audios, page, onSetItem ]);
+  */

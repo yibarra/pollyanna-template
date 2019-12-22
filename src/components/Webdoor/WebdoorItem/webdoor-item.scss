@@ -1,0 +1,61 @@
+/* --- WEBDOOR ITEM --- */
+@import './../../../styles/settings/settings';
+@import './../../../styles/tools/mixins';
+
+@import './../../../styles/components/animations';
+@import './../../../styles/components/forms/buttons';
+@import './../../../styles/components/typography';
+
+.webdoor {
+  &--item {
+    @include box-display;
+    left: 0;
+    height: 100vh;
+    max-width: 230px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+
+    &--content {
+      @include box-display;
+      float: left;
+      padding: 0 90px 0 0;
+      position: relative;
+
+      .description,
+      .link,
+      .title {
+        float: left;
+        margin: 0;
+        position: relative;
+      }
+
+      .description {
+        @extend %text;
+        line-height: 1.7em;
+        padding: 15px 20px;
+      }
+
+      .link {
+        @extend %btn-more;
+        bottom: -60px;
+        right: 90px;
+        position: absolute;
+      }
+
+      .title {
+        @extend %title-block-1;
+        width: 100%;
+      }
+    }
+  }
+
+  .slider {
+    &--item {
+      &[data-active="true"] {
+        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+    }
+  }
+}

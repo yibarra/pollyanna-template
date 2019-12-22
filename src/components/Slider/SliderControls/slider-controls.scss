@@ -8,6 +8,7 @@
   @include box-display;
   position: relative;
   width: 100%;
+  vertical-align: top;
 
   &[data-type="1"] {
     bottom: 50px;
@@ -17,20 +18,24 @@
     padding: 0;
     position: absolute;
     text-align: center;
+    vertical-align: top;
 
     .slider-controls {
       &--item {
         @include box-display;
+        height: 8px;
         margin: 0 2px;
         position: relative;
+        vertical-align: top;
 
         .item {
           @extend %btn-clear;
           background-color: rgba(0, 0, 0, 0);
-          height: 8px;
+          height: 100%;
           padding: 0;
           position: relative;
           width: 9px;
+          vertical-align: top;
 
           &:after,
           &:before {
@@ -38,6 +43,7 @@
             content: '';
             height: 8px;
             position: absolute;
+            top: 0;
             transition: border 400ms ease-in;
             width: 4px;
           }

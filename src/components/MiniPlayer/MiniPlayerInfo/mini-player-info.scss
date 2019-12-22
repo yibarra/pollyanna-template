@@ -32,14 +32,15 @@
     }
 
     .name {
-      @include font($font-default, 12px, 400, $black-900);
+      @include font($font-text, 12px, 500, $black-900);
       border: none;
       float: left;
       overflow: hidden;
-      letter-spacing: 0.020em;
+      letter-spacing: -0.020em;
       padding: 0;
       position: relative;
       text-overflow: ellipsis;
+      top: -2px;
       width: calc(100% - (55px + 10px));
       white-space: nowrap;
     }

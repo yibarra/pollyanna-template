@@ -27,7 +27,7 @@
 }
 
 %text {
-  @include font($font-default, 12px, 400, $black-900);
+  @include font($font-text, 13px, 400, $black-900);
   line-height: 1.4em;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.05em;
 }

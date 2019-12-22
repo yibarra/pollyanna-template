@@ -34,6 +34,7 @@ class PlayerProvider extends Component {
       context: null,
       dataArray: null,
       source: null,
+      paused: false,
     };
 
     this.analyser = null;
@@ -107,7 +108,7 @@ class PlayerProvider extends Component {
         }, () => {
           this.setState({
             dataArray: new Uint8Array(this.analyser.frequencyBinCount),
-          });
+          }, () => this.onPlayAudio(true));
         });
       });
     });
@@ -126,13 +127,18 @@ class PlayerProvider extends Component {
     } else {
       if (value === true && this.state.audio.paused === true) {
         this.state.audio.play();
-        this.animation(this.state.buffer);
+
+        this.setState({
+          paused: false,
+        }, () => this.animation(this.state.buffer));
 
         return true;
       } else {
         this.state.audio.pause();
 
-        cancelAnimationFrame(this.refAnimation);
+        this.setState({
+          paused: true,
+        }, () => cancelAnimationFrame(this.refAnimation));
       }
     }
 
