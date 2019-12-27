@@ -24,7 +24,7 @@
       i {
         @include box-display;
         @include rem('font-size', 16px);
-        color: $black-900;
+        color: var(--text-color);
         pointer-events: none;
       }
 

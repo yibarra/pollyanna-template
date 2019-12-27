@@ -8,6 +8,7 @@ const Bio = () => {
   return (
     <div className="page bio">
       <h1>Bio</h1>
+      
     </div>
   )
 };

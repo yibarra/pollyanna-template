@@ -22,7 +22,7 @@
     }
 
     .info {
-      @include font($font-default, 12px, 600, $black-900);
+      @include font($font-default, 12px, 600, var(--text-color));
       float: left;
       margin: 0 10px 0 0;
       opacity: 0.7;
@@ -32,7 +32,7 @@
     }
 
     .name {
-      @include font($font-text, 12px, 500, $black-900);
+      @include font($font-text, 12px, 500, var(--text-color));
       border: none;
       float: left;
       overflow: hidden;

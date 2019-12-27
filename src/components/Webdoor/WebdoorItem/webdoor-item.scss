@@ -20,12 +20,11 @@
     &--content {
       @include box-display;
       float: left;
-      padding: 0 90px 0 0;
+      padding: 0 20px 0 0;
       position: relative;
 
       .description,
-      .link,
-      .title {
+      .link {
         float: left;
         margin: 0;
         position: relative;
@@ -34,19 +33,14 @@
       .description {
         @extend %text;
         line-height: 1.7em;
-        padding: 15px 20px;
+        padding: 15px 0 0 20px;
       }
 
       .link {
         @extend %btn-more;
         bottom: -60px;
-        right: 90px;
+        right: 20px;
         position: absolute;
-      }
-
-      .title {
-        @extend %title-block-1;
-        width: 100%;
       }
     }
   }

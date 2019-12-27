@@ -75,7 +75,12 @@ class PlayerProvider extends Component {
       audio: new Audio(this.state.audioData.url),
     }, () => {
       const { audio } = this.state;
-      audio.onloadeddata = (e) => this.onLoadAudioComplete(e);
+
+      try {
+        audio.onloadeddata = (e) => this.onLoadAudioComplete(e);
+      } catch (e) {
+        console.log('Error: ', e);
+      } 
     });
   }
   
@@ -125,6 +130,8 @@ class PlayerProvider extends Component {
     if (!this.state.audio) {
       return false;
     } else {
+      if (this.state.audio instanceof Object === false) return false;
+
       if (value === true && this.state.audio.paused === true) {
         this.state.audio.play();
 

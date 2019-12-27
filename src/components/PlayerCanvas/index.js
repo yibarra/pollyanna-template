@@ -14,7 +14,8 @@ const PlayerCanvas = props => {
   // ctx
   const ctx = useRef();
   // play
-  const { color, item, width, height } = props;
+  const { item, width, height } = props;
+  const color = props['--background-color'];
 
   // code
   const code = useCallback(bufferAudio => {

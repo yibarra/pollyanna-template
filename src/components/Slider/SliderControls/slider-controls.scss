@@ -11,64 +11,58 @@
   vertical-align: top;
 
   &[data-type="1"] {
-    bottom: 50px;
     left: 0;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 20px;
     position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
     text-align: center;
     vertical-align: top;
+    width: 50px;
 
     .slider-controls {
       &--item {
         @include box-display;
-        height: 8px;
-        margin: 0 2px;
+        height: 9px;
+        float: left;
+        margin: 1px 0;
         position: relative;
         vertical-align: top;
-
+        width: 100%;
+        
         .item {
           @extend %btn-clear;
-          background-color: rgba(0, 0, 0, 0);
+          background-color: $black-900;
           height: 100%;
           padding: 0;
           position: relative;
-          width: 9px;
+          width: 100%;
           vertical-align: top;
 
-          &:after,
           &:before {
             @include box-display;
+            border: 1px solid transparent;
+            border-left: none;
+            border-right: none;
+            border-top: none;
             content: '';
-            height: 8px;
-            position: absolute;
-            top: 0;
-            transition: border 400ms ease-in;
-            width: 4px;
-          }
-
-          &:after {
-            border: 2px solid $black-900;
-            border-left: transparent;
-            right: 0;
-          }
-          
-          &:before {
-            border: 2px solid $black-900;
-            border-right: transparent;
+            height: 0;
             left: 0;
+            position: absolute;
+            top: 4px;
+            transition: all 400ms ease-in;
+            width: 0;
           }
         }
 
         &[data-current="true"] {
           .item {
-            &:after {
-              border-left: 2px solid $black-900;
-            }
-
             &:before {
-              border-right: 2px solid $black-900;
+              background-color: $black-900;
+              left: -100%;
+              width: 30px;
             }
           }
         }

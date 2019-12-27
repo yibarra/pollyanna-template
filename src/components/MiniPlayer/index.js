@@ -2,6 +2,7 @@ import React, { Fragment, useCallback, useEffect, useContext, useState } from 'r
 import PropTypes from 'prop-types';
 
 import { PlayerContext } from '../../providers/PlayerProvider';
+import { ThemeContext } from '../../providers/ThemeProvider';
 
 import MiniPlayerControls from './MiniPlayerControls';
 import MiniPlayerInfo from './MiniPlayerInfo';
@@ -13,6 +14,9 @@ import './mini-player.scss';
 const MiniPlayer = props => {
   // player context
   const playerContext = useContext(PlayerContext);
+  // theme context
+  const themeContext = useContext(ThemeContext);
+
   // audios
   const { audio, onPlayAudio, audio: { paused } } = playerContext;
 
@@ -77,7 +81,7 @@ const MiniPlayer = props => {
       }
 
       <PlayerCanvas
-        color={'#000'}
+        {...themeContext.theme}
         height={40}
         item={item}
         width={320} />
