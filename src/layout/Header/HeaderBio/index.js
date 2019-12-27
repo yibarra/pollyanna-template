@@ -8,8 +8,8 @@ import './header-bio.scss';
 // Header bio
 const HeaderBio = () => {
   const items = [
-    { img: 'https://placeimg.com/640/480/people', title: 'about me' },
-    { img: 'https://placeimg.com/640/480/natural', title: 'about me' },
+    { img: process.env.PUBLIC_URL + '/images/bio-webdoor-1.png', title: 'about me' },
+    { img: process.env.PUBLIC_URL + '/images/bio-webdoor-2.png', title: 'about me' },
     { img: 'https://placeimg.com/640/480/arch', title: 'about me' },
     { img: 'https://placeimg.com/640/480/sepia', title: 'about me' },
   ];

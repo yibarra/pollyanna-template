@@ -9,7 +9,6 @@
   &--bio {
     @include box-display;
     background-color: $black-900;
-    display: none;
     height: 50vh;
     right: 0;
     position: absolute;
@@ -38,7 +37,6 @@
         overflow: hidden;
         top: 0;
         width: 100%;
-        z-index: 1;
 
         .image {
           @include box-display;
@@ -63,6 +61,18 @@
               display: inline-block;
             }
           }
+
+          &:after {
+            @include box-display;
+            background-color: rgba($blue-900, .5);
+            content: '';
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 3;
+          }
         }
 
         .slider {
@@ -71,6 +81,7 @@
           position: absolute;
           top: 0;
           width: 100%;
+          z-index: 2;
 
           &--item,
           &--container {
@@ -80,28 +91,33 @@
             top: 0;
             width: 100%;
           }
+
+          &--controls {
+            z-index: 4;
+          }
         }
       }
 
       &--info {
         background-color: transparent;
-        height: 100%;
-        padding: 20px 20px 0;
-        position: relative;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        position: absolute;
         width: 50%;
-        vertical-align: top;
-        z-index: 2;
+        vertical-align: bottom;
+        z-index: 3;
 
         .description {
           @extend %text;
           margin: 0;
+          padding: 0 0 0 20px;
         }
     
         .link {
           @extend %btn-more;
-          bottom: 20px;
-          right: 20px;
-          position: absolute;
+          float: right;
+          margin: 20px 0 0;
         }
     
         .title {
@@ -110,5 +126,33 @@
         }
       }
     }
+
+    &:before {
+      @include box-display;
+      
+      background-color: rgba($blue-900, .5);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    animation: slide-in-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation slide-in-top
+ * ----------------------------------------
+ */
+ @keyframes slide-in-top {
+  0% {
+    transform: translateX(1000px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

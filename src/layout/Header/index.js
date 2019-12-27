@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 
 import { MainContext } from '../../providers/MainProvider';
 
-import HeaderTop from './HeaderTop';
+import HeaderAlbum from './HeaderAlbum';
+import HeaderBio from './HeaderBio';
+import HeaderEvents from './HeaderEvents';
+import HeaderGallery from './HeaderGallery';
 import HeaderMenu from './HeaderMenu';
+import HeaderTop from './HeaderTop';
 
 import './header.scss';
-import HeaderBio from './HeaderBio';
 
 // Header
 const Header = props => {
@@ -40,6 +43,9 @@ const Header = props => {
 
       <HeaderMenu pages={pages} />
       <HeaderBio />
+      <HeaderEvents />
+      <HeaderGallery />
+      <HeaderAlbum />
     </header>
   );
 };

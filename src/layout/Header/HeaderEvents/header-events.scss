@@ -1,0 +1,32 @@
+/* -- HEADER EVENTS --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+.header {
+  &--events {
+    @include box-display;
+    animation: slide-in-bottom 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation-delay: 100ms;
+    background-color: $blue-900;
+    height: calc(100vh / 3);
+    right: 0;
+    position: absolute;
+    top: calc(100vh / 3);
+    width: 35vw;
+    z-index: 2;
+  }
+}
+
+/**
+ * ----------------------------------------
+ * animation slide-in-bottom
+ * ----------------------------------------
+ */
+ @keyframes slide-in-bottom {
+  0% {
+    transform: translateX(1000px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
