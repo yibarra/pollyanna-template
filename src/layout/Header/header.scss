@@ -13,12 +13,6 @@
   width: 100vw;
   z-index: 100;
 
-  &--bio,
-  &--menu {
-    display: none;
-    pointer-events: none;
-  }
-
   &--top {
     pointer-events: auto;
   }
@@ -27,12 +21,17 @@
     height: 100vh;
     
     .header {
+      &--bio,
       &--menu {
         display: inline-block;
 
         &:before {
           animation: slide-in-blurred-left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
         }
+      }
+
+      &--bio {
+        animation: slide-in-blurred-right 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
       }
 
       &--top {

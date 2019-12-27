@@ -1,0 +1,114 @@
+/* --- HEADER BIO --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+@import '../../../styles/components/forms/buttons';
+@import '../../../styles/components/typography';
+
+.header {
+  &--bio {
+    @include box-display;
+    background-color: $black-900;
+    display: none;
+    height: 50vh;
+    right: 0;
+    position: absolute;
+    top: 0;
+    width: 70%;
+
+    &--content {
+      @include box-display;
+      float: left;
+      height: 100%;
+      position: relative;
+      width: 100%;
+      vertical-align: top;
+
+      &--info,
+      &--images {
+        @include box-display;
+        float: left;
+        position: relative;
+      }
+
+      &--images {
+        left: 0;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+
+        .image {
+          @include box-display;
+          display: inline-flex;
+          float: left;
+          height: 100%;
+          position: relative;
+          width: 100%;
+
+          img {
+            @include box-display;
+            display: none;
+            object-fit: cover;
+            float: left;
+            position: relative;
+            width: 100%;
+            vertical-align: top;
+          }
+
+          &[data-active="true"] {
+            img {
+              display: inline-block;
+            }
+          }
+        }
+
+        .slider {
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+
+          &--item,
+          &--container {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+          }
+        }
+      }
+
+      &--info {
+        background-color: transparent;
+        height: 100%;
+        padding: 20px 20px 0;
+        position: relative;
+        width: 50%;
+        vertical-align: top;
+        z-index: 2;
+
+        .description {
+          @extend %text;
+          margin: 0;
+        }
+    
+        .link {
+          @extend %btn-more;
+          bottom: 20px;
+          right: 20px;
+          position: absolute;
+        }
+    
+        .title {
+          @extend %title-block-1;
+          color: $black-900;
+        }
+      }
+    }
+  }
+}

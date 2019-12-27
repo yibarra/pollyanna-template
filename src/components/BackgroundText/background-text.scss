@@ -4,6 +4,8 @@
 
 .background-text {
   @include box-display;
+  background-image: url(/images/noise.png);
+  background-repeat: repeat;
   left: 0;
   height: 100vh;
   pointer-events: none;

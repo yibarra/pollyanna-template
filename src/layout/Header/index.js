@@ -7,6 +7,7 @@ import HeaderTop from './HeaderTop';
 import HeaderMenu from './HeaderMenu';
 
 import './header.scss';
+import HeaderBio from './HeaderBio';
 
 // Header
 const Header = props => {
@@ -38,6 +39,7 @@ const Header = props => {
       <HeaderTop active={active} onActive={onToggleActive} />
 
       <HeaderMenu pages={pages} />
+      <HeaderBio />
     </header>
   );
 };

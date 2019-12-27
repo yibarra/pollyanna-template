@@ -132,20 +132,24 @@ class PlayerProvider extends Component {
     } else {
       if (this.state.audio instanceof Object === false) return false;
 
-      if (value === true && this.state.audio.paused === true) {
-        this.state.audio.play();
+      try {
+        if (value === true && this.state.audio.paused === true) {
+          this.state.audio.play();
 
-        this.setState({
-          paused: false,
-        }, () => this.animation(this.state.buffer));
+          this.setState({
+            paused: false,
+          }, () => this.animation(this.state.buffer));
 
-        return true;
-      } else {
-        this.state.audio.pause();
+          return true;
+        } else {
+          this.state.audio.pause();
 
-        this.setState({
-          paused: true,
-        }, () => cancelAnimationFrame(this.refAnimation));
+          this.setState({
+            paused: true,
+          }, () => cancelAnimationFrame(this.refAnimation));
+        }
+      } catch (e) {
+        console.error('Error: ', e);
       }
     }
 

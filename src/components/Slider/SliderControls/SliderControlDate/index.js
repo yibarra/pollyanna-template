@@ -9,13 +9,11 @@ import { useTranslation } from 'react-i18next';
  * @param {*} props 
  */
 const SliderControlDate = props => {
-  // t
   const { t } = useTranslation();
 
   // return
   return (
-    <div className={`control ${props.type}`}
-      data-disable={props.type === 'prev' ? props.current === 0 : props.current === (props.length - 1)}>
+    <div className={`control ${props.type}`}>
       <button className={`btn ${props.type}`} onClick={() => props.onNextPrev(props.type)}>{t(props.type)}</button>
     </div>
   )
