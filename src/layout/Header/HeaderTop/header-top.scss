@@ -88,4 +88,24 @@
     top: 50%;
     transform: translate(0, -50%);
   }
+
+  &[data-active="true"] {
+    .lang-select {
+      &--icon {
+        i {
+          color: $white-900;
+        }
+      }
+
+      &--item {
+        .lang {
+          color: $white-900;
+
+          &:before {
+            background-color: $white-900;
+          }
+        }
+      }
+    }
+  }
 }

@@ -23,7 +23,7 @@ const Content = props => {
   // page context
   const pageContext = useContext(PageContext);
   // page
-  const { page, page: { audios } } = pageContext;
+  const { page } = pageContext;
 
   // render
   return (
@@ -45,7 +45,7 @@ const Content = props => {
       </div>
 
       <PlayerProvider>
-        <MiniPlayer audios={audios} />
+        <MiniPlayer />
       </PlayerProvider>
     </Fragment>
   );

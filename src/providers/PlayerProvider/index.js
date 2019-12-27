@@ -1,11 +1,17 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 
+import 'firebase/firestore';
+import firebase from 'firebase/app';
+import { FirestoreProvider, FirestoreCollection } from '@react-firebase/firestore';
+import { config } from '../../config';
+
 /**
  * Player Context
  */
 const PlayerContext = createContext({
   audio: {},
+  audios: null,
   onPlayAudio: () => {},
   onSetAudio: () => {},
 });
@@ -184,11 +190,17 @@ class PlayerProvider extends Component {
    */
   render() {
     return (
-      <PlayerContext.Provider value={
-          { audio: this.state, onPlayAudio: this.onPlayAudio, onSetAudio: this.onSetAudio, }
-        }>
-        {this.props.children}
-      </PlayerContext.Provider>
+      <FirestoreProvider firebase={firebase} {...config}>
+        <FirestoreCollection path="audios/" orderByValue={"created_on"}>
+          {({ value }) => {
+            return <PlayerContext.Provider value={
+              { audio: this.state, audios: value, onPlayAudio: this.onPlayAudio, onSetAudio: this.onSetAudio, }
+            }>
+          {this.props.children}
+        </PlayerContext.Provider>
+        }}
+        </FirestoreCollection>
+      </FirestoreProvider>
     )
   }
 }

@@ -36,7 +36,9 @@ const HeaderBio = () => {
 
         <div className="header--bio--content--info">
           <h1 className="title">Bio</h1>
-          <p className="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make</p>
+          <p className="description">Cantora carioca formada em Musicoterapia pelo Conservatório Brasileiro de Música, onde estudou também canto lírico e violão. Porém, foi no samba, na bossa nova, na música brasileira que se encontrou e faz dela sua expressão artística.
+          <br/><br/>
+          Pollyanna estudou canto na Escola Portátil de Choro. Vocalista do Grupo Fala Brasil de samba e choro durante 10 anos.</p>
           <a href="/" className="link">ver mais</a>
         </div>
       </div>

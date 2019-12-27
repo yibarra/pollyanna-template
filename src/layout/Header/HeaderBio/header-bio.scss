@@ -64,14 +64,22 @@
 
           &:after {
             @include box-display;
-            background-color: rgba($blue-900, .5);
+            background-color: rgba($black-900, 0.7);
             content: '';
             height: 100%;
             left: 0;
+            opacity: 0.7;
             position: absolute;
+            transition: all 600ms cubic-bezier(0.47, 0, 0.745, 0.715);
             top: 0;
             width: 100%;
             z-index: 3;
+          }
+
+          &:hover {
+            &:after {
+              opacity: 0.5;
+            }
           }
         }
 
@@ -110,33 +118,29 @@
 
         .description {
           @extend %text;
+          color: $white-900;
           margin: 0;
           padding: 0 0 0 20px;
         }
     
         .link {
           @extend %btn-more;
+          border-bottom-color: $white-900;
+          color: $white-900;
           float: right;
           margin: 20px 0 0;
+
+          &:before {
+            background-color: $white-900;
+            left: 100%;
+          }
         }
     
         .title {
           @extend %title-block-1;
-          color: $black-900;
+          color: $white-900;
         }
       }
-    }
-
-    &:before {
-      @include box-display;
-      
-      background-color: rgba($blue-900, .5);
-      content: '';
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
     }
 
     animation: slide-in-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;

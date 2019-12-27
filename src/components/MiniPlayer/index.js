@@ -11,22 +11,19 @@ import PlayerCanvas from '../PlayerCanvas';
 import './mini-player.scss';
 
 // Mini Player
-const MiniPlayer = props => {
+const MiniPlayer = () => {
   // player context
   const playerContext = useContext(PlayerContext);
   // theme context
   const themeContext = useContext(ThemeContext);
 
   // audios
-  const { audio, onPlayAudio, audio: { paused } } = playerContext;
+  const { audios, audio, onPlayAudio, audio: { paused } } = playerContext;
 
   // item
   const [ item, setItem ] = useState({});
   // current
   const [ current, setCurrent ] = useState(0);
-
-  // audios
-  const { audios } = props;
   
   // on next prev
   const onNextPrev = (e = 'prev') => {
