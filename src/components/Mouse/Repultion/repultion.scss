@@ -1,0 +1,12 @@
+/* --- REPULTION --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+.repultion {
+  @include box-display;
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}

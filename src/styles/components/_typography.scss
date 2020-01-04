@@ -4,19 +4,18 @@
 
 %title-block-1 {
   @include box-display;
-  @include font($font-default, 17px, 600, $black-900);
+  @include font($font-default, 21px, 700, $black-900);
   line-height: 1.4em;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   outline: none;
   margin: 0 0 20px;
   padding: 0;
   position: relative;
-  text-transform: uppercase;
   vertical-align: top;
 }
 
 %text {
   @include font($font-text, 13px, 400, $black-900);
-  line-height: 1.7em;
-  letter-spacing: 0.04em;
+  line-height: 1.9em;
+  letter-spacing: 0.06em;
 }

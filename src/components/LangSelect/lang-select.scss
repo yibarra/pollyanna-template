@@ -52,7 +52,7 @@
       &:before {
         @include box-display;
         background-color: $black-900;
-        bottom: 0;
+        bottom: -5px;
         content: '';
         height: 2px;
         left: 0;

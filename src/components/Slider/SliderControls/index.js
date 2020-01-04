@@ -13,7 +13,7 @@ const SliderControls = (props) => {
   const createItem =  () => {
     const items = [];
 
-    if (props.type === 1 || props.type === 2) {
+    if (props.type === 1 || props.type === 2 || props.type === 4) {
       for (let i = 0; i < props.length; i++) {
         items.push(typeElement(props.type, i));
       }
@@ -31,6 +31,7 @@ const SliderControls = (props) => {
     switch (type) {
       case 3: 
         return <li className="slider--controls--item" key={index}></li>;
+      case 4:
       case 2:
       case 1: 
       default:

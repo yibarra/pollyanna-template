@@ -11,6 +11,7 @@
     z-index: 9;
   }
 
+  &--background,
   &--container {
     @include box-display;
     align-items: center;
@@ -23,6 +24,42 @@
     position: relative;
   }
 
+  &--background {
+    @include box-display;
+    height: 100vh;
+    left: 0;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+    
+    .repultion {
+      @include box-display;
+      align-items: center;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      height: 100vh;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100vw;
+
+      .image {
+        @include box-display;
+        pointer-events: none;
+        position: relative;
+        transform-origin: center;
+        vertical-align: top;
+      }
+    }
+  }
+
+  &--container {
+    z-index: 5;
+  }
+
   &--item {
     @include box-display;
     display: none;
@@ -30,6 +67,16 @@
 
     &[data-active="true"] {
       display: inline-block;
+    }
+  }
+
+  &[data-type="4"] {
+    .number-text {
+      bottom: 40px;
+      left: initial;
+      left: 20px;
+      position: absolute;
+      text-align: right;
     }
   }
 }

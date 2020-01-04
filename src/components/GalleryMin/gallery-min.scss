@@ -1,0 +1,40 @@
+/* --- GALLERY MIN --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.gallery-min {
+  @include box-display;
+  left: 0;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  vertical-align: top;
+
+  .slider {
+    height: 100vh;
+    width: 100%;
+
+    &--controls {
+      left: 0;
+      right: initial;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+
+    &--container {
+      margin: 0 40px 0 0;
+      height: 610px;
+      right: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 390px;
+    }
+
+    &--item {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

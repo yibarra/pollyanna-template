@@ -15,36 +15,6 @@
   width: 100%;
   vertical-align: top;
 
-  &--image {
-    @include box-display;
-    height: 100vh;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    
-    .repultion {
-      @include box-display;
-      align-items: center;
-      display: inline-flex;
-      flex-flow: row nowrap;
-      justify-content: center;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-
-      .image {
-        @include box-display;
-        position: relative;
-        transform-origin: center;
-        vertical-align: top;
-      }
-    }
-  }
-
   .slider {
     height: 100vh;
     margin: 0 50px 0 0;

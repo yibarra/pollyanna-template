@@ -1,0 +1,60 @@
+/* --- NUMBER TEXT --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.number-text {
+  @include box-display;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  vertical-align: top;
+
+  .current,
+  .last {
+    @include box-display;
+    margin: 0;
+    position: relative;
+    text-align: left;
+    width: 100%;
+  }
+
+  &[data-type="1"] {
+    height: 85px;
+
+    .current,
+    .last {
+      @include font($font-default, 85px, 400, $black-900);
+      letter-spacing: -0.04em;
+      line-height: 1em;
+    }
+
+    .last {
+      left: 0;
+      position: absolute;
+      top: 0;
+      transform: translateY(-100%);
+    }
+
+    .current {
+      transform: translateY(100%);
+    }
+  }
+
+  &[data-type="2"] {
+    height: 40px;
+
+    .current,
+    .last {
+      @include font($font-default, 40px, 600, $white-900);
+      letter-spacing: 0.04em;
+      line-height: 1em;
+    }
+
+    .last {
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+  }
+}

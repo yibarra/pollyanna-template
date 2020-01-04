@@ -9,6 +9,11 @@ import './text-scroll.scss';
 const TextScroll = props => {
   return (
     <div className="text-scroll" data-type={props.type}>
+      <div className="text-scroll--info">
+        <h1>Pollyanna Ferrari</h1>
+        <p>Rio de Janeiro Brasil</p>
+      </div>
+
       <Scrollbars style={{ width: props.width, height: props.height }}>
         {props.children}
       </Scrollbars>

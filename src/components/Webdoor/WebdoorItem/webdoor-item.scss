@@ -12,10 +12,11 @@
     left: 0;
     height: 100vh;
     max-width: 230px;
+    pointer-events: none;
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 5;
 
     &--content {
       @include box-display;
@@ -33,7 +34,6 @@
 
       .description {
         @extend %text;
-        line-height: 1.7em;
         padding: 0 0 0 20px;
       }
 
@@ -41,7 +41,9 @@
         @extend %btn-more;
         bottom: -60px;
         right: 20px;
+        pointer-events: auto;
         position: absolute;
+        z-index: 10;
       }
 
       .title {

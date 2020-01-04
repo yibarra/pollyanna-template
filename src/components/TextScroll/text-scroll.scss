@@ -2,17 +2,51 @@
 @import '../../styles/settings/settings';
 @import '../../styles/tools/mixins';
 
+@import '../../styles/components/typography';
+
 .text-scroll {
   @include box-display;
+  align-content: center;
   align-items: center;
   display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
   float: left;
   height: 100vh;
   position: relative;
   text-align: right;
   width: 50%;
+  vertical-align: top;
+
+  &--info {
+    @include box-display;
+    float: left;
+    padding: 0 0 0 40px;
+    position: relative;
+    width: 100%;
+
+    h1 {
+      @extend %title-block-1;
+    }
+  }
 
   > div {
+    float: left;
+    width: 100%;
+
+    p {
+      @extend %text;
+      margin: 0 0 20px;
+      position: relative;
+      width: 100%;
+      vertical-align: top;
+
+      .link {
+        @include font($font-text, 14px, 600, $black-900);
+        line-height: 1.4em;
+      }
+    }
+
     > div {
       &:last-child {
         left: initial;
@@ -30,7 +64,7 @@
       
       > div {
         &:first-child {
-          padding: 0 0 0 40px;
+          padding: 0 0 0 70px;
         }
 
         &:last-child {

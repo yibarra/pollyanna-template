@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { MouseProvider } from '../../providers/MouseProvider';
-
 import Webdoor from '../../components/Webdoor';
 
 import './home.scss';
@@ -39,13 +37,11 @@ const Home = props => {
   // return
   return (
     <div className="page home">
-      <MouseProvider>
-        <Webdoor
-          current={current}
-          items={webdoor}
-          onNextPrev={onNextPrev}
-          setCurrent={setCurrent} />
-      </MouseProvider>
+      <Webdoor
+        current={current}
+        items={webdoor}
+        onNextPrev={onNextPrev}
+        setCurrent={setCurrent} />
     </div>
   );
 }

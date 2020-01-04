@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Repultion from '../Mouse/Repultion';
+import NumberText from '../NumberText';
 import SliderControls from './SliderControls';
 
 import './slider.scss';
@@ -24,6 +26,7 @@ class Slider extends Component {
     this.state = {
       direction: 'next',
       current: 0,
+      last: 0,
     };
 
     this.setCurrent = this.setCurrent.bind(this);
@@ -42,6 +45,7 @@ class Slider extends Component {
     this.setState((prevState) => {
       return {
         direction: index > prevState.current ? 'next' : 'prev',
+        last: prevState.current,
         current: index,
       };
     }, () => {
@@ -63,14 +67,31 @@ class Slider extends Component {
     });
 
     return (
-      <div className="slider" data-direction={this.state.direction}>
-        <ul className="slider--container">
-          {itemsChilds}
-        </ul>
+      <div className="slider" data-direction={this.state.direction} data-type={this.props.type}>
+        <ul className="slider--container">{itemsChilds}</ul>
+
+        {this.props.type === 4 && <NumberText current={this.props.current} last={this.state.last} type={1} />}
+
+        {this.props.type === 1 && this.props.background === true &&
+          <div className="slider--background">
+            <Repultion options={{
+              max: 10,
+              perspective: 1000,
+              scale: 1.02,
+            }}>
+              <img className="image" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
+            </Repultion>
+            <Repultion options={{
+              max: 11,
+              perspective: 900,
+              scale: 1.01,
+            }}>
+              <img className="image" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
+            </Repultion>
+          </div>}
 
         <SliderControls
           current={this.props.current}
-          items={this.props.items}
           type={this.props.type}
           setCurrent={this.setCurrent}
           length={React.Children.count(this.props.children)} />

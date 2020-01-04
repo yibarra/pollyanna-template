@@ -6,7 +6,7 @@
   @include box-display;
   bottom: 0;
   left: 0;
-  padding: 10px 20px 13px;
+  padding: 10px 0 20px 20px;
   position: fixed;
   width: 100%;
   z-index: 17;
@@ -49,10 +49,9 @@
     }
   
     .to {
-      @include font($font-default, 12px, 400, $black-900);
-      letter-spacing: 0.07em;
+      @include font($font-default, 10px, 400, $black-900);
+      letter-spacing: 0.04em;
       margin: 0 0 0 15px;
-      text-decoration: none;
     }
   }
 }

@@ -1,98 +1,127 @@
-import React, { Component } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import ReactDOM from 'react-dom';
+import { useMouseMove } from 'react-use-mouse-move';
 
-/**
- * Repultion
- *
- * @class Repultion
- * @extends {Component}
- */
-class Repultion extends Component { 
-  /**
-   * component did mount
-   *
-   * @memberof Repultion
-   */
-  componentDidMount() {
-    this.element = ReactDOM.findDOMNode(this);
-    this.animation();
-  }
+import './repultion.scss';
 
-  /**
-   * component did uptate
-   *
-   * @param {*} prevProps
-   * @memberof Repultion
-   */
-  componentDidUpdate(prevProps) {
-    if (this.props.mouse !== prevProps.mouse) {
-      this.animation();
-    }
-  }
+const defaultSettings = {
+  reverse: false,
+  max: 35,
+  perspective: 1000,
+  easing: 'cubic-bezier(.03,.98,.52,.99)',
+  scale: '1.1',
+  speed: '1000',
+  transition: true,
+  axis: null,
+  reset: true
+};
 
-  /**
-   * animation
-   *
-   * @memberof Repultion
-   */
-  animation() {
-    const point = this.element.getBoundingClientRect();
-    const move = this.onRepulsion(point);
-    
-    this.element.style.transform = `translate(${move.x}px,${move.y}px)`;
-  }
+// repulsion
+const Repultion = props => {
+  // settings
+  const settings = { ...defaultSettings, ...props.options };
+  // mouse
+  const mouse = useMouseMove(1);
 
-  /**
-   * on reulpsion
-   *
-   * @param {*} point
-   * @returns
-   * @memberof Repultion
-   */
-  onRepulsion(point) {
-    const dx = point.x - this.props.mouse.x;
-    const dy = point.y - this.props.mouse.y;
+  // width
+  const [ width, setWidth ] = useState(null);
+  // height
+  const [ height, setHeight ] = useState(null);
+  // let
+  const [ left, setLeft ] = useState(null);
+  // top
+  const [ top, setTop ] = useState(null);
+  // reverse
+  const reverse = settings.reverse ? -1 : 1;
 
-    const angle = Math.atan2(dy, dx);
-    const dist = this.props.strength / Math.sqrt(dx * dx + dy * dy);
+  // style
+  const [ style, setStyle ] = useState({});
 
-    const ox = dx / dist * this.props.length - dx;
-    const oy = dy / dist * this.props.length - dy;
+  // element
+  const element = useRef(false);
 
-    const px = this.props.mouse.x * 100 / document.body.clientWidth;
-    const py = this.props.mouse.y * 100 / document.body.clientHeight;
+  const getValues = useCallback(() => {
+    const x = (mouse.x - left) / width;
+    const y = (mouse.y - top) / height;
 
-    let x = px <= 50 ? (px - 50) : (px - 50);
-    let y = py <= 50 ? (py - 50) : (py - 50);
+    const _x = Math.min(Math.max(x, 0), 1);
+    const _y = Math.min(Math.max(y, 0), 1);
 
-    x += Math.cos(angle) * dist;
-    y += Math.sin(angle) * dist;
+    const tiltX = (reverse * (settings.max / 2 - _x * settings.max)).toFixed(2);
+    const tiltY = (reverse * (_y * settings.max -   settings.max / 2)).toFixed(2);
 
-    x += Math.floor((ox - x) * this.props.cushion);
-    y += Math.floor((oy - y) * this.props.cushion);
+    const percentageX = _x * 100;
+    const percentageY = _y * 100;
 
     return {
-      x: parseInt(x),
-      y: parseInt(y),
-    };
-  }
+      tiltX,
+      tiltY,
+      percentageX,
+      percentageY,
+    }
+  }, [ settings, left, top, mouse, reverse, height, width ]);
 
-  /**
-   * render
-   *
-   * @returns
-   * @memberof Repultion
-   */
-  render() {
-    return (
-      <div className="repultion">
-        {this.props.children}
-      </div>
-    )
-  }
-}
+  const setTransition = () => {
+    setStyle({
+      ...style,
+      transition: `${settings.speed}ms ${settings.easing}`,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTransition();
+
+    if (settings.reset) {
+      reset();
+    }
+  };
+
+  const update = useCallback(e => {
+    const values = getValues(e);
+
+    setStyle({
+      ...style,
+      transform: `perspective(${settings.perspective}px) rotateX(${settings.axis === 'x' ? 0 : values.tiltY}deg) rotateY(${settings.axis === 'y' ? 0 : values.tiltX}deg) scale3d(${settings.scale}, ${settings.scale}, ${settings.scale})`,
+    });
+  }, [style, setStyle, settings, getValues]);
+
+  const updateElementPosition = () => {
+    if (element.current instanceof Object === false) return false;
+
+    const rect = element.current.getBoundingClientRect();
+
+    setWidth(element.current.offsetWidth);
+    setHeight(element.current.offsetHeight);
+    setLeft(rect.left);
+    setTop(rect.top);
+  };
+
+  const reset = () => {
+    setStyle({
+      ...style,
+      transform: `perspective(${settings.perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
+    });
+  };
+
+  const handleMouseEnter = e => {
+    updateElementPosition();
+    setTransition();
+  };
+
+  // render
+  return (
+    <div
+      className="repultion"
+      ref={element}
+      style={style}
+      onMouseEnter={e => handleMouseEnter(e)}
+      onMouseMove={e => update()}
+      onMouseLeave={e => handleMouseLeave(e)}>
+      {props.children}
+    </div>
+  )
+};
 
 Repultion.propTypes = {
   cushion: PropTypes.number.isRequired,

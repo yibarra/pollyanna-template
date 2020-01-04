@@ -1,0 +1,28 @@
+/* --- GALLERY ITEM --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+.gallery-item {
+  @include box-display;
+  align-content: center;
+  align-items: center;
+  display: inline-flex;
+  float: left;
+  flex-flow: row nowrap;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  object-fit: contain;
+  object-position: 50% 50%;
+  position: relative;
+  width: 100%;
+
+  img {
+    @include box-display;
+    height: 100%;
+    float: left;
+    width: auto;
+    vertical-align: top;
+  }
+}
