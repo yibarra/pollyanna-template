@@ -7,5 +7,9 @@
 
   .wrapper {
     pointer-events: auto;
+
+    .text-scroll {
+      z-index: 6;
+    }
   }
 }

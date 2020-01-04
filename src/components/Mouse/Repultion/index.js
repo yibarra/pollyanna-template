@@ -124,10 +124,7 @@ const Repultion = props => {
 };
 
 Repultion.propTypes = {
-  cushion: PropTypes.number.isRequired,
-  length: PropTypes.number.isRequired,
-  mouse: PropTypes.object,
-  strength: PropTypes.number.isRequired,
+  options: PropTypes.object.isRequired,
 }
 
 export default Repultion;

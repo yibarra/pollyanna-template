@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "animejs": "^3.1.0",
     "d3": "^5.14.2",
     "firebase": "^7.6.0",
     "i18next": "^19.0.2",
@@ -18,7 +19,8 @@
     "react-dom": "^16.12.0",
     "react-i18next": "^11.2.6",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "react-use-mouse-move": "^1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

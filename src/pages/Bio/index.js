@@ -9,6 +9,8 @@ import GalleryMin from '../../components/GalleryMin';
 const Bio = () => {
   // current
   const [ current, setCurrent ] = useState(0);
+  // last
+  const [ last, setLast ] = useState(0);
 
   // props
   //const { page: { gallery } } = props;
@@ -16,19 +18,20 @@ const Bio = () => {
   const gallery = [
     {
       title: '1',
-      src: 'https://placeimg.com/640/480/any'
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery.jpg'
     }, {
       title: '2',
-      src: 'https://placeimg.com/640/480/nature'
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-2.jpg'
     }, {
       title: '3',
-      src: 'https://placeimg.com/640/480/tech'
+      src: 'https://placeimg.com/390/610/nature'
     }
   ];
 
   // on set item
   const onSetItem = (index) => {
     if (Number.isInteger(index) === true) {
+      setLast(current);
       setCurrent(index);
     }
   };
@@ -53,9 +56,11 @@ const Bio = () => {
       <div className="wrapper">
         <GalleryMin
           current={current}
+          last={last}
           onNextPrev={onNextPrev}
           setCurrent={setCurrent}
-          items={gallery} type={2} />
+          items={gallery}
+          type={2} />
 
         <TextScroll width={500} height={300} type={2}>
           <p>

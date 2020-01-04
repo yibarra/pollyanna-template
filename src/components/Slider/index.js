@@ -26,7 +26,7 @@ class Slider extends Component {
     this.state = {
       direction: 'next',
       current: 0,
-      last: 0,
+      last: null,
     };
 
     this.setCurrent = this.setCurrent.bind(this);
@@ -63,31 +63,29 @@ class Slider extends Component {
    */
   render() {
     const itemsChilds = React.Children.map(this.props.children, (child, index) => {
-      return <li className="slider--item" data-active={this.props.current === index} key={index}>{child}</li>
+      return <li
+        className="slider--item"
+        data-active={this.props.current === index}
+        data-last={this.state.last === index}
+        key={index}>{child}</li>
     });
 
     return (
       <div className="slider" data-direction={this.state.direction} data-type={this.props.type}>
         <ul className="slider--container">{itemsChilds}</ul>
 
-        {this.props.type === 4 && <NumberText current={this.props.current} last={this.state.last} type={1} />}
+        {(this.props.type === 1 || this.props.type === 4) && <NumberText current={this.props.current} last={this.state.last} type={1} />}
 
         {this.props.type === 1 && this.props.background === true &&
           <div className="slider--background">
             <Repultion options={{
               max: 10,
               perspective: 1000,
-              scale: 1.02,
+              scale: 1.03,
             }}>
               <img className="image" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
             </Repultion>
-            <Repultion options={{
-              max: 11,
-              perspective: 900,
-              scale: 1.01,
-            }}>
-              <img className="image" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
-            </Repultion>
+            <img className="image-ref" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
           </div>}
 
         <SliderControls

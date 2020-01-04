@@ -38,13 +38,14 @@
   &--item {
     @include box-display;
     float: left;
-    margin: 0 8px;
+    margin: 0 5px;
     position: relative;
 
     .lang {
       @include font($font-default, 12px, 600, $black-900);
       @extend %btn-clear;
       line-height: 1em;
+      letter-spacing: 0.04em;
       padding: 0 2px 5px;
       text-align: center;
       text-transform: uppercase;

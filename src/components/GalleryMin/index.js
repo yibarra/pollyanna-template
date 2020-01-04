@@ -24,7 +24,8 @@ const GalleryMin = props => {
     <div className="gallery-min">
       {props.items &&
         <Slider current={props.current} callback={callback} type={4}>
-          {props.items.map((item, index) => <GalleryItem {...item} key={index} />)}
+          {props.items.map((item, index) => 
+            <GalleryItem current={props.current} last={props.last} {...item} index={index} key={index} />)}
         </Slider>}
     </div>
   );

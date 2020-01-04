@@ -31,7 +31,7 @@ const NumberText = props => {
       animateText(current, {translateY: [-85, 0], delay: 100, duration: 400});
       animateText(last, {translateY: [0, 85], delay: 150, duration: 300});
     } else {
-      animateText(current, {translateY: [85, 0], delay: 100, duration: 400});
+      animateText(current, {translateY: [85, 0], delay: 100, duration: 300});
       animateText(last, {translateY: [0, -85], delay: 150, duration: 300});
     }
   };
