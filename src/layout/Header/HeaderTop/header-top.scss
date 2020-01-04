@@ -33,12 +33,12 @@
   
       .link {
         @include box-display;
-        @include font($font-default, 18px, 400, $black-900);
-        letter-spacing: -0.025em;
+        @include font($font-default, 17px, 600, $black-900);
+        letter-spacing: 0.04em;
         line-height: 1em;
         float: left;
         margin: 0;
-        padding: 14px 20px;
+        padding: 14px 30px;
         text-transform: uppercase;
         text-decoration: none;
 

@@ -24,7 +24,8 @@
       position: relative;
 
       .description,
-      .link {
+      .link,
+      .title {
         float: left;
         margin: 0;
         position: relative;
@@ -33,7 +34,7 @@
       .description {
         @extend %text;
         line-height: 1.7em;
-        padding: 15px 0 0 20px;
+        padding: 0 0 0 20px;
       }
 
       .link {
@@ -41,6 +42,11 @@
         bottom: -60px;
         right: 20px;
         position: absolute;
+      }
+
+      .title {
+        @extend %title-block-1;
+        margin: 0 0 20px;
       }
     }
   }

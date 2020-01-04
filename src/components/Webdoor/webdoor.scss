@@ -55,6 +55,18 @@
       height: 100vh;
       float: right;
       width: calc(320px + 20px);
+
+      &:before {
+        @include box-display;
+        background-color: $black-900;
+        content: '';
+        height: 100vh;
+        left: -50px;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 1px;
+      }
     }
   }
 }

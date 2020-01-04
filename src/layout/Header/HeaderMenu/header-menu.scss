@@ -5,10 +5,12 @@
 .header {
   &--menu {
     @include box-display;
+    @include noise();
     animation: slide-in-left 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    background-color: $yellow-900;
+    background-color: $brown-900;
+    height: 100vh;
     position: relative;
-    width: 30vw;
+    width: 100vw;
 
     &--item,
     &--list,
@@ -24,7 +26,7 @@
 
       .link {
         @include box-display;
-        @include font($font-default, 21px, 400, $black-900);
+        @include font($font-default, 14px, 400, $black-900);
         background-color: transparent;
         max-width: 180px;
         padding: 15px 50px;
@@ -61,7 +63,8 @@
         }
 
         &.active {
-          color: $yellow-900;
+          color: $brown-900;
+          font-weight: 600;
 
           &:after {
             width: 100%;
@@ -81,11 +84,26 @@
       float: left;
       justify-content: center;
       flex-flow: column wrap;
-      height: 100vh;
+      height: auto;
+      left: 0;
       list-style: none;
       padding: 0;
-      position: relative;
-      width: 100%;
+      position: fixed;
+      top: 90px;
+      width: 400px;
+      z-index: 2;
+    }
+
+    &--guitar {
+      left: 0;
+      height: 100vh;
+      opacity: 0.5;
+      position: absolute;
+      top: 0;
+      transform: scale(1.2);
+      transform-origin: bottom center;
+      width: 100vw;
+      z-index: 1;
     }
   }
 }

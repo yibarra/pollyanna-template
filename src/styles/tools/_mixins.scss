@@ -80,3 +80,18 @@
     background-color: $bg-bar-color;
   }
 }
+
+/* -- NOISE --- */
+@mixin noise() {
+  &:before {
+    @include box-display;
+    background-image: url(/images/noise.png);
+    background-repeat: repeat;
+    content: '';
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

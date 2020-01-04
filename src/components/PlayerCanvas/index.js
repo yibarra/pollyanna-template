@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
+
 import { PlayerContext } from '../../providers/PlayerProvider';
 
 // Player Canvas
@@ -14,8 +15,7 @@ const PlayerCanvas = props => {
   // ctx
   const ctx = useRef();
   // play
-  const { item, width, height } = props;
-  const color = props['--background-color'];
+  const { item, width, height, color } = props;
 
   // code
   const code = useCallback(bufferAudio => {

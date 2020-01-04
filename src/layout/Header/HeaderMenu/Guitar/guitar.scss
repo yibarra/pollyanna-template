@@ -1,0 +1,100 @@
+/* --- GUITAR --- */
+@import '../../../../styles/settings/settings';
+@import '../../../../styles/tools/mixins';
+
+.guitar {
+  @include box-display;
+  bottom: 10vh;
+  height: 310px;
+  right: -20vw;
+  position: absolute;
+  vertical-align: top;
+  width: 100vw;
+
+  &--center,
+  &--ropers {
+    @include box-display;
+    left: 50%;
+    position: absolute;
+    width: 100%;
+  }
+
+  &--center {
+    bottom: 50%;
+    left: 30vw;
+    transform: translate(0, -50%);
+    width: 350px;
+
+    .border,
+    .center,
+    .out {
+      @include box-display;
+      border-radius: 100%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .border,
+    .out {
+      background-color: transparent;
+      border: 1px solid $black-900;
+    }
+
+    .border {
+      height: 360px;
+      width: 360px;
+    }
+
+    .out {
+      height: 400px;
+      width: 400px;
+    }
+
+    .center {
+      background-color: $black-900;
+      height: 300px;
+      width: 300px;
+    }
+  }
+
+  &--ropers {
+    border: none;
+    border-left: 1px solid $black-900;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    height: 100%;
+    left: initial;
+    right: 0;
+    padding: 20px 0 20px 40px;
+    width: calc(100vw - 90px);
+
+    .rope {
+      @include box-display;
+      background-color: $black-900;
+      height: 1px;
+      float: left;
+      position: relative;
+      width: 100vw;
+
+      &:before,
+      &:after {
+        @include box-display;
+        content: '';
+      }
+
+      &:before {
+        background-color: $black-900;
+        height: 40px;
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 120px;
+      }
+    }
+  }
+}

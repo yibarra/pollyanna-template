@@ -1,0 +1,62 @@
+/* --- TEXT SCROLL --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.text-scroll {
+  @include box-display;
+  align-items: center;
+  display: inline-flex;
+  float: left;
+  height: 100vh;
+  position: relative;
+  text-align: right;
+  width: 50%;
+
+  > div {
+    > div {
+      &:last-child {
+        left: initial;
+        right: 0;
+      }
+    }
+  }
+
+  &[data-type="2"] {
+    float: right;
+    text-align: left;
+    
+    > div {
+      width: 100%;
+      
+      > div {
+        &:first-child {
+          padding: 0 0 0 40px;
+        }
+
+        &:last-child {
+          background-color: transparent;
+          left: 0px;
+          right: initial;
+          width: 9px !important;
+
+          > div {
+            background-color: $black-900 !important;
+            border-radius: 0 !important;
+          }
+        }
+      }
+    }
+
+    &:before {
+      @include box-display;
+      background-color: $black-900;
+      content: '';
+      height: 100vh;
+      left: 4px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 1px;
+    }
+  }
+}

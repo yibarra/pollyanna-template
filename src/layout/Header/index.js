@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 import { MainContext } from '../../providers/MainProvider';
 
-import HeaderAlbum from './HeaderAlbum';
-import HeaderBio from './HeaderBio';
-import HeaderEvents from './HeaderEvents';
-import HeaderGallery from './HeaderGallery';
 import HeaderMenu from './HeaderMenu';
 import HeaderTop from './HeaderTop';
 
@@ -40,12 +36,7 @@ const Header = props => {
   return (
     <header className="header" data-active={active}>
       <HeaderTop active={active} onActive={onToggleActive} />
-
       <HeaderMenu pages={pages} />
-      <HeaderBio />
-      <HeaderEvents />
-      <HeaderGallery />
-      <HeaderAlbum />
     </header>
   );
 };

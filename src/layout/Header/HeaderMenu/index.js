@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { NavLink } from 'react-router-dom';
 
+import Guitar from './Guitar';
+
 import './header-menu.scss';
 
 // Header Menu
@@ -16,6 +18,10 @@ const HeaderMenu = props => {
             <NavLink className="link" exact={item.slug === '/'} activeClassName="active" to={item.slug}>{item.name}</NavLink>
           </li>)}
       </ul>
+
+      <div className="header--menu--guitar">
+        <Guitar />
+      </div>
     </div>
   );
 };

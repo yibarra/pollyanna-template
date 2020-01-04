@@ -1,0 +1,11 @@
+/* --- BIO --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.bio {
+  text-align: center;
+
+  .wrapper {
+    pointer-events: auto;
+  }
+}

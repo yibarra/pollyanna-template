@@ -49,8 +49,8 @@
     }
   
     .to {
-      @include font($font-default, 11px, 400, $black-900);
-      letter-spacing: -0.02em;
+      @include font($font-default, 12px, 400, $black-900);
+      letter-spacing: 0.07em;
       margin: 0 0 0 15px;
       text-decoration: none;
     }

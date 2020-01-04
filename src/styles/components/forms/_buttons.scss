@@ -19,7 +19,8 @@
   cursor: pointer;
   letter-spacing: 0.025em;
   margin: 0;
-  padding: 10px 15px;
+  padding: 10px 0 10px 20px;
+  text-align: left;
   text-decoration: none;
   text-transform: uppercase;
 
@@ -32,6 +33,16 @@
     left: -30px;
     position: absolute;
     width: 30px;
+  }
+
+  &.r {
+    padding: 10px 20px 10px 0;
+    text-align: right;
+
+    &:before {
+      left: initial;
+      right: -30px;
+    }
   }
 }
 
