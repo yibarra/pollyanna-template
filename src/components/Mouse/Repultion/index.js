@@ -1,10 +1,11 @@
-import React, { useRef, useState, useCallback } from 'react';
+/*import React, { useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import { useMouseMove } from 'react-use-mouse-move';
 
 import './repultion.scss';
 
+// settings
 const defaultSettings = {
   reverse: false,
   max: 35,
@@ -41,6 +42,7 @@ const Repultion = props => {
   // element
   const element = useRef(false);
 
+  // get values
   const getValues = useCallback(() => {
     const x = (mouse.x - left) / width;
     const y = (mouse.y - top) / height;
@@ -62,6 +64,7 @@ const Repultion = props => {
     }
   }, [ settings, left, top, mouse, reverse, height, width ]);
 
+  // set transition
   const setTransition = () => {
     setStyle({
       ...style,
@@ -69,6 +72,7 @@ const Repultion = props => {
     });
   };
 
+  // mouse leave
   const handleMouseLeave = () => {
     setTransition();
 
@@ -77,6 +81,7 @@ const Repultion = props => {
     }
   };
 
+  // update
   const update = useCallback(e => {
     const values = getValues(e);
 
@@ -86,6 +91,7 @@ const Repultion = props => {
     });
   }, [style, setStyle, settings, getValues]);
 
+  // update element
   const updateElementPosition = () => {
     if (element.current instanceof Object === false) return false;
 
@@ -97,6 +103,7 @@ const Repultion = props => {
     setTop(rect.top);
   };
 
+  // reset
   const reset = () => {
     setStyle({
       ...style,
@@ -104,6 +111,7 @@ const Repultion = props => {
     });
   };
 
+  // mouse enter
   const handleMouseEnter = e => {
     updateElementPosition();
     setTransition();
@@ -126,5 +134,49 @@ const Repultion = props => {
 Repultion.propTypes = {
   options: PropTypes.object.isRequired,
 }
+
+export default Repultion;
+*/
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { useMouseMove } from 'react-use-mouse-move';
+
+import RepultionItem from './RepultionItem';
+
+import './repultion.scss';
+
+// settings
+const defaultSettings = {
+  reverse: false,
+  max: 35,
+  perspective: 1000,
+  easing: 'cubic-bezier(.03,.98,.52,.99)',
+  scale: '1.1',
+  speed: '1000',
+  transition: true,
+  axis: null,
+  reset: true
+};
+
+// repulsion
+const Repultion = props => {
+  // mouse
+  const mouse = useMouseMove(1);
+
+  // items
+  const items = React.Children.map(props.children, (child, index) => {
+    return <RepultionItem defaultSettings={{ ...defaultSettings, ...props.options }} mouse={mouse} key={index}>{child}</RepultionItem>
+  });
+
+  // render
+  return (
+    <div className="repultion">{items}</div>
+  )
+};
+
+Repultion.propTypes = {
+  options: PropTypes.object.isRequired,
+};
 
 export default Repultion;

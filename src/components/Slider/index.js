@@ -83,9 +83,10 @@ class Slider extends Component {
               perspective: 1000,
               scale: 1.03,
             }}>
-              <img className="image" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
+              <img className="image" src={`${process.env.PUBLIC_URL}/images/path-1.png`} alt={'Pollyanna Ferrari'} />
+              <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2.png`} alt={'Pollyanna Ferrari'} />
+              <img className="image" src={`${process.env.PUBLIC_URL}/images/path-3.png`} alt={'Pollyanna Ferrari'} />
             </Repultion>
-            <img className="image-ref" src={`${process.env.PUBLIC_URL}/images/polly.png`} alt={'Pollyanna Ferrari'} />
           </div>}
 
         <SliderControls

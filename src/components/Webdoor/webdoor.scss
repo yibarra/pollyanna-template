@@ -39,4 +39,17 @@
       }
     }
   }
+
+  &:before {
+    @include box-display;
+    background-image: url(/images/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: '';
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+  }
 }
