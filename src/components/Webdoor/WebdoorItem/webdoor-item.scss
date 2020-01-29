@@ -25,7 +25,6 @@
       position: relative;
 
       .description,
-      .link,
       .title {
         float: left;
         margin: 0;
@@ -37,8 +36,7 @@
         padding: 0 0 0 20px;
       }
 
-      .link {
-        @extend %btn-more;
+      .btn-more {
         bottom: -60px;
         right: 20px;
         pointer-events: auto;
@@ -49,6 +47,7 @@
       .title {
         @extend %title-block-1;
         margin: 0 0 20px;
+        text-transform: uppercase;
       }
     }
   }

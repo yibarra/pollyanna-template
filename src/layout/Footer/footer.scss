@@ -9,24 +9,24 @@
   padding: 10px 0 20px 20px;
   position: fixed;
   width: 100%;
-  z-index: 17;
+  z-index: 100;
   
   .copy,
   .to,
   &--info,
+  &--networks,
   &--social {
     @include box-display;
     float: left;
     position: relative;
+    vertical-align: top;
   }
   
   &--info {
     align-items: center;
     display: inline-flex;
-    justify-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-flow: row wrap;
-    width: 50%;
 
     .copy,
     .to {
@@ -52,6 +52,67 @@
       @include font($font-default, 10px, 400, $black-900);
       letter-spacing: 0.04em;
       margin: 0 0 0 15px;
+      text-decoration: none;
+    }
+  }
+
+  &--networks {
+    float: left;
+    width: auto;
+
+    &--list,
+    &--item {
+      @include box-display;
+      float: left;
+      position: relative;
+      vertical-align: top;
+    }
+    
+    &--list {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+    
+    &--item {
+      margin: 0 12px;
+
+      .link {
+        @include box-display;
+        @include font($font-default, 12px, 500, $black-900);
+        float: left;
+        line-height: 1em;
+        position: relative;
+        text-decoration: none;
+        text-transform: uppercase;
+        vertical-align: top;
+      }
+
+      &:before {
+        @include box-display;
+        background-color: $black-900;
+        border: 1px solid transparent;
+        border-top: none;
+        border-bottom: none;
+        border-right: none;
+        content: '';
+        height: 100%;
+        right: -12px;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 0;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        &:before {
+          display: none;
+        }
+      }
     }
   }
 }

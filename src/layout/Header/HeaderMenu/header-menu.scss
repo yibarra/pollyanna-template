@@ -97,13 +97,27 @@
     &--guitar {
       left: 0;
       height: 100vh;
-      opacity: 0.5;
+      opacity: 1;
       position: absolute;
       top: 0;
       transform: scale(1.2);
       transform-origin: bottom center;
       width: 100vw;
       z-index: 1;
+    }
+
+    &:before {
+      @include box-display;
+      background-image: url(/images/bg-menu.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
+      height: 100vh;
+      left: 0;
+      mix-blend-mode: multiply;
+      position: absolute;
+      top: 0;
+      width: 100vw;
     }
   }
 }

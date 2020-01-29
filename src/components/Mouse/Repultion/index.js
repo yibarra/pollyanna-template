@@ -166,7 +166,7 @@ const Repultion = props => {
 
   // items
   const items = React.Children.map(props.children, (child, index) => {
-    return <RepultionItem defaultSettings={{ ...defaultSettings, ...props.options }} mouse={mouse} key={index}>{child}</RepultionItem>
+    return <RepultionItem defaultSettings={{ ...defaultSettings, ...props.items[index] }} mouse={mouse} key={index}>{child}</RepultionItem>
   });
 
   // render
@@ -176,7 +176,7 @@ const Repultion = props => {
 };
 
 Repultion.propTypes = {
-  options: PropTypes.object.isRequired,
+  any: PropTypes.any,
 };
 
 export default Repultion;

@@ -74,18 +74,22 @@ class Slider extends Component {
       <div className="slider" data-direction={this.state.direction} data-type={this.props.type}>
         <ul className="slider--container">{itemsChilds}</ul>
 
-        {(this.props.type === 1 || this.props.type === 4) && <NumberText current={this.props.current} last={this.state.last} type={1} />}
+        {(this.props.type === 1 || this.props.type === 4) && 
+          <NumberText current={this.props.current} last={this.state.last} type={1} />}
 
         {this.props.type === 1 && this.props.background === true &&
           <div className="slider--background">
-            <Repultion options={{
+            <Repultion items={[{
+              max: 20,
+              perspective: 3000,
+              scale: 1,
+            }, {
               max: 10,
               perspective: 1000,
-              scale: 1.03,
-            }}>
+              scale: 1.01,
+            }]}>
               <img className="image" src={`${process.env.PUBLIC_URL}/images/path-1.png`} alt={'Pollyanna Ferrari'} />
               <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2.png`} alt={'Pollyanna Ferrari'} />
-              <img className="image" src={`${process.env.PUBLIC_URL}/images/path-3.png`} alt={'Pollyanna Ferrari'} />
             </Repultion>
           </div>}
 

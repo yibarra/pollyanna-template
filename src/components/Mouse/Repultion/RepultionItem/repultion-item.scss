@@ -1,0 +1,12 @@
+/* --- REPULTION ITEM --- */
+@import '../../../../styles/settings/settings';
+@import '../../../../styles/tools/mixins';
+
+.repultion--item {
+  @include box-display;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  position: absolute;
+  width: auto;
+}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
+import './repultion-item.scss';
 
 // repultion
 const RepultionItem = props => {
@@ -73,7 +74,7 @@ const RepultionItem = props => {
 
   return (
     <div
-      className=""
+      className="repultion--item"
       ref={element}
       style={style}>
       {props.children}

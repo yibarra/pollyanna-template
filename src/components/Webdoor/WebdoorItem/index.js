@@ -20,7 +20,7 @@ const WebdoorItem = (props) => {
     <div className="webdoor--item--content">
       <p className="title">{props.name}</p>
       <p className="description">{props.description}</p>
-      <a className="link r" href={props.linkUrl}>{props.linkText}</a>
+      <a className="btn-more r" href={props.linkUrl}>{props.linkText}</a>
     </div>
   );
 };

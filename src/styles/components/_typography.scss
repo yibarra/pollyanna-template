@@ -2,11 +2,12 @@
 @import './../settings/settings';
 @import './../tools/mixins';
 
+.title-main,
 %title-block-1 {
   @include box-display;
-  @include font($font-default, 21px, 700, $black-900);
+  @include font($font-default, 18px, 700, $black-900);
   line-height: 1.4em;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   outline: none;
   margin: 0 0 20px;
   padding: 0;

@@ -10,33 +10,49 @@
   position: relative;
 }
 
+.btn-more,
 %btn-more {
   @extend %btn-clear;
   @include font($font-default, 12px, 600, $black-900);
   background-color: transparent;
   border: none;
-  border-bottom: 9px solid $black-900;
   cursor: pointer;
   letter-spacing: 0.025em;
   margin: 0;
-  padding: 10px 0 10px 20px;
+  padding: 10px 20px 20px;
   text-align: left;
   text-decoration: none;
   text-transform: uppercase;
 
+  &:after,
   &:before {
     @include box-display;
     background-color: $black-900;
-    bottom: -5px;
     content: '';
-    height: 1px;
-    left: -30px;
     position: absolute;
+  }
+
+  &:before {
+    border: 1px solid transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    bottom: 4px;
+    height: 0;
+    left: -30px;
     width: 30px;
   }
 
+  &:after {
+    border-radius: 0;
+    bottom: 0;
+    left: 0;
+    height: 9px;
+    width: 100%;
+  }
+
   &.r {
-    padding: 10px 20px 10px 0;
+    padding: 10px 20px 20px;
     text-align: right;
 
     &:before {
@@ -87,6 +103,7 @@
   &:before {
     @include box-display;
     background-color: $black-900;
+    border-radius: 0;
     content: '';
     position: absolute;
   }

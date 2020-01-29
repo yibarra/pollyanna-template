@@ -22,8 +22,8 @@ const PlayerCanvas = props => {
     // define canvas
     const draw = () => {
       // get values directly from form
-      let Vp = 1;
-      let Vmax = 4.5;
+      let Vp = 0.8;
+      let Vmax = 4.1;
       let Tmax = 0.001;
       let N = bufferAudio.length + 1;
 
@@ -51,7 +51,7 @@ const PlayerCanvas = props => {
        // create function 
       for (let i = 0; i < bufferAudio.length; i++) {
         x[i] = tstart + i*dt;
-        y[i] = Vp * Math.sin(2 * 3.1415 * 1 * x[i] + bufferAudio[i] * 3.1415/i) ;
+        y[i] = Math.sin(Vp * Math.sin(2 * 3.1415 * 1 * x[i] + bufferAudio[i] * 3.1415/i));
       }
 
       ctx.current.beginPath();
