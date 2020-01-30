@@ -11,6 +11,8 @@
     float: right;
     justify-content: center;
     flex-flow: row nowrap;
+    margin: 0 20px 0 0;
+    text-align: left;
     top: -2px;
     width: 65px;
     z-index: 3;
@@ -29,7 +31,10 @@
       }
 
       &-play {
+        margin-left: 0;
+
         i {
+          @include rem('font-size', 18px);
           display: none;
         }
 

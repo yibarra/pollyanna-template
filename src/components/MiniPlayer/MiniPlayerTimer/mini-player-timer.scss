@@ -1,0 +1,90 @@
+/* --- MINI PLAYER TIMER --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+.mini-player-timer {
+  @include box-display;
+  float: left;
+  height: 9px;
+  margin: 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+  vertical-align: top;
+
+  &--time {
+    @include box-display;
+    float: right;
+    margin: 5px 0 0;
+    position: relative;
+    width: calc(100% - 20px);
+
+    .current,
+    .total {
+      @include box-display;
+      @include font($font-default, 12px, 500, $black-900);
+      position: relative;
+      letter-spacing: -0.02em;
+      vertical-align: top;
+    }
+
+    .current {
+      float: left;
+    }
+
+    .total {
+      float: right;
+    }
+  }
+
+  .percent,
+  .progress {
+    @include box-display;
+    float: left;
+    position: relative;
+    width: 100%;
+  }
+
+  .percent {
+    appearance: none;
+    background-color: transparent;
+    height: 1px;
+    right: 0;
+    position: absolute;
+    transform: scaleX(-1);
+    top: 0;
+    width: 100%;
+
+    &::-webkit-progress-bar {
+      border-radius: 12px;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    &::-webkit-progress-value {
+      background-color: $black-900;
+    }
+
+    &[value] {
+      appearance: none;
+      color: $black-900;
+    }
+
+    &:before {
+      @include box-display;
+      border: 3px solid $black-900;
+      content: '';
+      height: 9px;
+      right: -9px;
+      position: absolute;
+      top: -4px;
+      width: 9px;
+    }
+  }
+
+  .progress {
+    height: 9px;
+    left: 20px;
+    width: calc(100% + 20px);
+  }
+}

@@ -97,8 +97,11 @@ const PlayerCanvas = props => {
 
   // on animation
   const onAnimation = useCallback((bufferArray, audio) => {
-    if (bufferArray && bufferArray.length) {      
+    if (bufferArray && bufferArray.length) {
       code(bufferArray);
+      
+      //props.setTotalTime(audio.duration);
+      //props.setPercentTime((audio.currentTime / audio.duration) * 100);
     }
   }, [ code ]);
 

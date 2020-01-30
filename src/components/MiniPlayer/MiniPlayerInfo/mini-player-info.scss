@@ -8,11 +8,12 @@
     display: inline-flex;
     justify-content: center;
     flex-flow: row nowrap;
-    margin: 0 15px 0 0;
+    margin: 0;
     height: 15px;
     padding: 0;
     text-align: left;
-    width: calc(100% - (15px + 65px));
+    top: 2px;
+    width: calc(100% - (20px + 65px));
     z-index: 2;
     
     .name {
