@@ -7,7 +7,7 @@
   float: left;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: auto;
   vertical-align: top;
 
   .current,
@@ -28,16 +28,18 @@
       letter-spacing: -0.04em;
       line-height: 1em;
     }
-
+    
     .last {
       left: 0;
       position: absolute;
       top: 0;
       transform: translateY(-100%);
+      transition: translateY 300ms cubic-bezier(0.64, 0.63, 0.17, 0.92);
     }
-
+    
     .current {
       transform: translateY(100%);
+      transition: translateY 300ms cubic-bezier(0.42,-0.07, 0.37, 0.38);
     }
   }
 

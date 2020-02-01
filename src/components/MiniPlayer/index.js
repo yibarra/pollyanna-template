@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { PlayerContext } from '../../providers/PlayerProvider';
 
 import MiniPlayerControls from './MiniPlayerControls';
-import MiniPlayerInfo from './MiniPlayerInfo';
 import MiniPlayerTimer from './MiniPlayerTimer';
 
 import './mini-player.scss';
@@ -75,13 +74,12 @@ const MiniPlayer = () => {
             onPlay={onPlayAudio}
             paused={paused} />
 
-          <MiniPlayerInfo {...item} />
-
           <MiniPlayerTimer
             color={'#222'}
-            height={9}
-            width={320}
+            height={60}
             item={item}
+            width={310}
+            paused={paused}
             onSetAudio={onSetAudio} />
         </Fragment>}
     </div>

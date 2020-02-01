@@ -6,35 +6,35 @@
 
 .mini-player {
   &--controls {
-    align-items: center;
-    display: inline-flex;
-    float: right;
-    justify-content: center;
-    flex-flow: row nowrap;
-    margin: 0 20px 0 0;
+    @include box-display;
+    bottom: -6px;
+    left: 25px;
+    margin: 0;
     text-align: left;
-    top: -2px;
-    width: 65px;
+    position: absolute;
+    text-align: center;
+    width: auto;
     z-index: 3;
 
     .btn {
       @extend %btn-clear;
+      float: none;
       margin: 0 3px;
       position: relative;
       padding: 0;
 
       i {
         @include box-display;
-        @include rem('font-size', 16px);
+        @include rem('font-size', 14px);
         color: $black-900;
         pointer-events: none;
       }
 
       &-play {
-        margin-left: 0;
+        top: 1px;
 
         i {
-          @include rem('font-size', 18px);
+          @include rem('font-size', 16px);
           display: none;
         }
 

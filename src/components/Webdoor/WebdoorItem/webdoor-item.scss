@@ -55,7 +55,17 @@
   .slider {
     &--item {
       &[data-active="true"] {
-        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: slide-in-right 500ms cubic-bezier(0.075, 0.82, 0.165, 1) both;
+
+        .webdoor {
+          &--item {
+            &--content {
+              .btn-more {
+                animation: slide-in-right 500ms cubic-bezier(0.075, 0.82, 0.165, 1) 100ms both;
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -13,7 +13,7 @@
 .btn-more,
 %btn-more {
   @extend %btn-clear;
-  @include font($font-default, 12px, 600, $black-900);
+  @include font($font-default, 11px, 600, $black-900);
   background-color: transparent;
   border: none;
   cursor: pointer;

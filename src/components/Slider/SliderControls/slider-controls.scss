@@ -51,10 +51,10 @@
             border-top: none;
             content: '';
             height: 0;
-            left: 0;
+            right: 0;
             position: absolute;
             top: 4px;
-            transition: all 400ms cubic-bezier(0.51, 0.79, 0.61, 1.13);
+            transition: all 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
             width: 0;
           }
         }
@@ -63,7 +63,7 @@
           .item {
             &:before {
               background-color: $black-900;
-              left: -100%;
+              right: 100%;
               width: 30px;
             }
           }

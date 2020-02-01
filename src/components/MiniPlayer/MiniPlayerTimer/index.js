@@ -1,15 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import './mini-player-timer.scss';
 
 // Mini player timer
 const MiniPlayerTimer = props => {
-  // state
-  const [ time, setTime ] = useState(0);
-  // total
-  const [ total, setTotal ] = useState(0);
-
   // canvas
   const canvas = useRef();
   // ctx
@@ -20,44 +15,63 @@ const MiniPlayerTimer = props => {
   // decimal
   const decimal = numb => numb < 10 ? `0${numb}` : numb;
 
-  // seconds to minutes
-  const minutesAndSeconds = secs => {
-    const minutes = Math.floor(secs / 60);
-    const seconds = ((secs % 60)).toFixed(0);
-
-    return `${decimal(minutes)}:${decimal(seconds)}`;
-  };
-
   // code
   const code = useCallback((buff, currentTime, duration) => {
+    // seconds to minutes
+    const minutesAndSeconds = secs => {
+      const minutes = Math.floor(secs / 60);
+      const seconds = ((secs % 60)).toFixed(0);
+
+      return `${decimal(minutes)}:${decimal(seconds)}`;
+    };
+
+    // marquee
+    const marquee = (text) => {
+      ctx.current.font = '14px Inria Serif';
+      
+      const txt = text;
+      ctx.current.fillText(txt, 0, 20);
+    };
+
+    // time
+    const time = (current, duration) => {
+      ctx.current.font = '10px Roboto Mono';
+      const time = minutesAndSeconds(current);
+      ctx.current.fillText(time, 70, height);
+      
+      ctx.current.font = '800 10px Roboto Mono';
+      const total = minutesAndSeconds(duration);
+
+      ctx.current.fillText(total, width - (ctx.current.measureText(total).width + 20), height);
+    };
+
     // define canvas
     const draw = () => {
       const current = (currentTime * 100) / duration;
-      const total = (current / 100) * width;
+      const total = (current / 100) * (width - 20);
 
       ctx.current.beginPath();
       ctx.current.clearRect(0, 0, width, height);
+      
+      ctx.current.fillStyle = color;
+      ctx.current.fillRect(0, Math.floor(height / 2) + 2, width, 1);
+      ctx.current.fillRect(0, Math.floor(height / 2), total, 5);
 
-      ctx.current.strokeStyle = color;
-      ctx.current.moveTo(0, height / 2);
-      ctx.current.lineTo(total, height / 2);
-      ctx.current.stroke();
-    }
+      marquee(item.name);
+      time(currentTime, duration);
+    };
 
     draw();
-  }, [ width, height, color ]);
+  }, [ width, height, item, color ]);
 
   // on animation
   const onAnimation = useCallback((bufferArray, audio) => {
     if (bufferArray && bufferArray.length) {
       if (audio instanceof Object) {
-        setTotal(audio.duration);
-        setTime(audio.currentTime);
-
         code(bufferArray, audio.currentTime, audio.duration);
       }
     }
-  }, [ code, setTotal, setTime ]);
+  }, [ code ]);
 
   // use effect
   useEffect(() => {
@@ -72,10 +86,6 @@ const MiniPlayerTimer = props => {
     <div className="mini-player-timer">
       <div className="progress">
         <canvas height={props.height} width={props.width} ref={canvas} />
-      </div>
-      <div className="mini-player-timer--time">
-        <span className="current">{minutesAndSeconds(time)}</span>
-        <span className="total">{minutesAndSeconds(total)}</span>
       </div>
     </div>
   );

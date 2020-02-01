@@ -79,7 +79,7 @@
 
       .link {
         @include box-display;
-        @include font($font-default, 12px, 500, $black-900);
+        @include font($font-default, 11px, 500, $black-900);
         float: left;
         line-height: 1em;
         position: relative;

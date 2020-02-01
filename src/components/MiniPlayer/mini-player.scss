@@ -9,29 +9,9 @@
   background-color: transparent;
   bottom: 20px;
   right: 20px;
-  padding: 0 0 20px;
+  padding: 0;
   position: absolute;
   text-align: right;
   width: 320px;
   z-index: 1001;
-
-  &--controls,
-  &--info,
-  canvas {
-    @include box-display;
-    float: left;
-    position: relative;
-    vertical-align: top;
-  }
-
-  &--controls {
-    float: left;
-  }
-
-  canvas {
-    left: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-  }
 }
