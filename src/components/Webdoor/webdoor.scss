@@ -28,7 +28,7 @@
 
       &:before {
         @include box-display;
-        background-color: $black-900;
+        background-color: var(--text-color);
         content: '';
         height: 100vh;
         left: -50px;
@@ -36,6 +36,18 @@
         top: 50%;
         transform: translate(0, -50%);
         width: 1px;
+      }
+    }
+  }
+}
+
+/* --- QUERIES --- */
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .webdoor {
+    .slider {
+      &--background {
+        display: none;
       }
     }
   }

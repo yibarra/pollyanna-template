@@ -31,7 +31,7 @@
     
     .title {
       @include box-display;
-      @include font($font-secondary, 120px, 700, $black-900);
+      @include font($font-secondary, 120px, 700, var(--text-color));
       line-height: 1em;
       letter-spacing: -0.10em;
       margin: 0;

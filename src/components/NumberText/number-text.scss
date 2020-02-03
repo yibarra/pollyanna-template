@@ -24,7 +24,7 @@
 
     .current,
     .last {
-      @include font($font-default, 85px, 400, $black-900);
+      @include font($font-default, 85px, 400, var(--text-color));
       letter-spacing: -0.04em;
       line-height: 1em;
     }

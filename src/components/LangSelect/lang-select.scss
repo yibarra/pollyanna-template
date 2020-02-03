@@ -25,7 +25,7 @@
 
     i {
       @include rem('font-size', 17px);
-      color: $black-900;
+      color: var(--text-color);
     }
   }
 
@@ -36,7 +36,7 @@
 
     &:before {
       @include box-display;
-      background-color: $black-900;
+      background-color: var(--text-color);
       border: 1px solid transparent;
       border-left: none;
       border-right: none;
@@ -58,7 +58,7 @@
     position: relative;
 
     .lang {
-      @include font($font-default, 12px, 600, $black-900);
+      @include font($font-default, 12px, 400, var(--text-color));
       @extend %btn-clear;
       line-height: 1em;
       letter-spacing: 0.04em;
@@ -68,10 +68,10 @@
 
       &:before {
         @include box-display;
-        background-color: $black-900;
-        bottom: -9px;
+        background-color: var(--text-color);
+        bottom: -10px;
         content: '';
-        height: 7px;
+        height: 9px;
         right: 0;
         position: absolute;
         width: 0;

@@ -36,7 +36,7 @@
         
         .item {
           @extend %btn-clear;
-          background-color: $black-900;
+          background-color: var(--text-color);
           height: 100%;
           padding: 0;
           position: relative;
@@ -62,7 +62,7 @@
         &[data-current="true"] {
           .item {
             &:before {
-              background-color: $black-900;
+              background-color: var(--text-color);
               right: 100%;
               width: 30px;
             }

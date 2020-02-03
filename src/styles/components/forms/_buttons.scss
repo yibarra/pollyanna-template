@@ -13,7 +13,7 @@
 .btn-more,
 %btn-more {
   @extend %btn-clear;
-  @include font($font-default, 11px, 600, $black-900);
+  @include font($font-default, 11px, 600, var(--text-color));
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -27,7 +27,7 @@
   &:after,
   &:before {
     @include box-display;
-    background-color: $black-900;
+    background-color: var(--text-color);
     content: '';
     position: absolute;
   }
@@ -102,7 +102,7 @@
   &:after,
   &:before {
     @include box-display;
-    background-color: $black-900;
+    background-color: var(--text-color);
     border-radius: 0;
     content: '';
     position: absolute;

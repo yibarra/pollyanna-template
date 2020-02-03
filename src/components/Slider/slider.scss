@@ -177,6 +177,25 @@
   }
 }
 
+/* --- QUERIES --- */
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .slider {
+    &[data-type="1"] {
+      .slider {
+        &--container {
+          max-width: 400px;
+          width: 100%;
+
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
 @keyframes slider-anime-type-four-in {
   0% {
     transform: translateX(100%);

@@ -37,6 +37,7 @@ body {
   }
 }
 
+#root,
 .page {
   @include box-display;
   float: left;

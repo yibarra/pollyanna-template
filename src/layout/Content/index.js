@@ -11,6 +11,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 
 import Bio from '../../pages/Bio';
+import Contact from '../../pages/Contact';
 import Events from '../../pages/Events';
 import Home from '../../pages/Home';
 
@@ -39,6 +40,7 @@ const Content = props => {
           <Route path="/" exact render={() => <Home {...props} page={page} />} />
           <Route path="/bio" component={Bio} />
           <Route path="/events" component={Events} />
+          <Route path="/contact" component={Contact} />
         </Switch>
 
         <Footer />

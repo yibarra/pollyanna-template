@@ -7,7 +7,7 @@
   bottom: 0;
   left: 0;
   padding: 10px 0 20px 20px;
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 100;
   
@@ -44,12 +44,12 @@
       i {
         @include box-display;
         @include rem('font-size', 12px);
-        color: $black-900;
+        color: var(--text-color);
       }
     }
   
     .to {
-      @include font($font-default, 10px, 400, $black-900);
+      @include font($font-default, 10px, 400, var(--text-color));
       letter-spacing: 0.04em;
       margin: 0 0 0 15px;
       text-decoration: none;
@@ -79,7 +79,7 @@
 
       .link {
         @include box-display;
-        @include font($font-default, 11px, 500, $black-900);
+        @include font($font-default, 11px, 500, var(--text-color));
         float: left;
         line-height: 1em;
         position: relative;
@@ -90,7 +90,7 @@
 
       &:before {
         @include box-display;
-        background-color: $black-900;
+        background-color: var(--text-color);
         border: 1px solid transparent;
         border-top: none;
         border-bottom: none;

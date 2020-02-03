@@ -1,7 +1,10 @@
-import React, { Fragment, useCallback, useEffect, useContext, useState } from 'react';
+import React, { useCallback, useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import Anime from "@mollycule/react-anime";
+
 import { PlayerContext } from '../../providers/PlayerProvider';
+import { ThemeContext } from '../../providers/ThemeProvider';
 
 import MiniPlayerControls from './MiniPlayerControls';
 import MiniPlayerTimer from './MiniPlayerTimer';
@@ -12,6 +15,9 @@ import './mini-player.scss';
 const MiniPlayer = () => {
   // player context
   const playerContext = useContext(PlayerContext);
+  // theme context
+  const themeContext = useContext(ThemeContext);
+
   // on set audio
   const { onSetAudio } = playerContext;
 
@@ -65,9 +71,16 @@ const MiniPlayer = () => {
 
   // redner
   return (
-    <div className="mini-player">
+    <Anime
+      in
+      appear
+      duration={1000}
+      onEntering={{ translateX: [100, 0], opacity: [0, 1] }}
+      onExiting={{ translateX: -100, opacity: 0 }}
+      easing="cubicBezier(0.075, 0.82, 0.165, 1)"
+      delay={300}>
       {item instanceof Object && 
-        <Fragment>
+        <div className="mini-player">
           <MiniPlayerControls 
             audio={audio}
             onNextPrev={onNextPrev}
@@ -75,14 +88,14 @@ const MiniPlayer = () => {
             paused={paused} />
 
           <MiniPlayerTimer
-            color={'#222'}
+            color={themeContext instanceof Object && themeContext.theme ? themeContext.theme['--text-color'] : '#222'}
             height={60}
             item={item}
             width={310}
             paused={paused}
             onSetAudio={onSetAudio} />
-        </Fragment>}
-    </div>
+        </div>}
+    </Anime>
   );
 };
 

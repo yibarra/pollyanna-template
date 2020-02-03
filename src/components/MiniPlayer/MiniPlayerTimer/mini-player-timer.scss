@@ -31,7 +31,7 @@
 
     &[value] {
       appearance: none;
-      color: $black-900;
+      color: var(--text-color);
     }
   }
 
@@ -49,7 +49,7 @@
 
     &:after {
       @include box-display;
-      background-color: $black-900;
+      background-color: var(--text-color);
       content: '';
       position: absolute;
       top: 3px;

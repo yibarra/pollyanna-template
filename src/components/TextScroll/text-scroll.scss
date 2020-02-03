@@ -42,7 +42,7 @@
       vertical-align: top;
 
       .link {
-        @include font($font-text, 14px, 600, $black-900);
+        @include font($font-text, 14px, 600, var(--text-color));
         line-height: 1.4em;
       }
     }
@@ -74,7 +74,7 @@
           width: 9px !important;
 
           > div {
-            background-color: $black-900 !important;
+            background-color: var(--text-color) !important;
             border-radius: 0 !important;
           }
         }
@@ -83,7 +83,7 @@
 
     &:before {
       @include box-display;
-      background-color: $black-900;
+      background-color: var(--text-color);
       content: '';
       height: 100vh;
       left: 4px;

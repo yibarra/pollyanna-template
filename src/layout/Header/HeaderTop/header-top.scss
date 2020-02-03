@@ -33,7 +33,7 @@
   
       .link {
         @include box-display;
-        @include font($font-default, 17px, 600, $black-900);
+        @include font($font-default, 17px, 600, var(--text-color));
         letter-spacing: 0.04em;
         line-height: 1em;
         float: left;
@@ -50,7 +50,7 @@
         }
 
         &[data-last="true"] {
-          @include font($font-default, 14px, 400, $black-900);
+          @include font($font-default, 14px, 400, var(--text-color));
           background-color: transparent;
           letter-spacing: -0.025em;
           text-transform: capitalize;
@@ -66,19 +66,6 @@
       align-items: center;
       display: inline-flex;
       justify-content: center;
-
-      .btn-open {
-        @extend %btn-clear;
-        float: left;
-        margin: 0 0 0 15px;
-        padding: 1px 0 0;
-
-        .material-icons {
-          @include box-display;
-          @include rem('font-size', 24px);
-          color: $black-900;
-        }
-      }
     }
   }
 
