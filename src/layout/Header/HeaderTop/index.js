@@ -12,10 +12,17 @@ import './header-top.scss';
  * 
  * @param {*} props 
  */
-const HeaderTop = () => {
+const HeaderTop = props => {
+  // props
+  const { active, onActive } = props;
+
   // return
   return (
     <div className="header--top">
+      <button className="header--top--btn" onClick={() => onActive(active)}>
+        <i className="material-icons">menu</i>
+      </button>
+
       <LangSelect />
     </div>
   );

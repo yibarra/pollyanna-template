@@ -99,3 +99,16 @@
     }
   }
 }
+
+/* --- QUERIES --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .header {
+    &--menu {
+      display: none;
+
+      &--list {
+      }
+    }
+  }
+}

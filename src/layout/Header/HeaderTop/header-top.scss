@@ -19,53 +19,26 @@
     width: 100%;
     z-index: 2;
 
-    &--current,
     &--info {
       @include box-display;
       position: relative;
-    }
-    
-    &--current {
-      float: left;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-  
-      .link {
-        @include box-display;
-        @include font($font-default, 17px, 600, var(--text-color));
-        letter-spacing: 0.04em;
-        line-height: 1em;
-        float: left;
-        margin: 0;
-        padding: 12px 30px 14px;
-        text-transform: uppercase;
-        text-decoration: none;
-
-        i {
-          @include box-display;
-          @include rem('font-size', 9px);
-          display: none;
-          margin: 0 10px 0 0;
-        }
-
-        &[data-last="true"] {
-          @include font($font-default, 14px, 400, var(--text-color));
-          background-color: transparent;
-          letter-spacing: -0.025em;
-          text-transform: capitalize;
-
-          i {
-            display: inline-block;
-          }
-        }
-      }
     }
 
     &--info {
       align-items: center;
       display: inline-flex;
       justify-content: center;
+    }
+
+    &--btn {
+      @extend %btn-clear;
+      display: none;
+
+      i {
+        @include box-display;
+        @include rem('font-size', 22px);
+        color: var(--text-color);
+      }
     }
   }
 
@@ -74,5 +47,19 @@
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
+  }
+}
+
+/* --- QUERIES --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .header {
+    &--top {
+      position: relative;
+
+      &--btn {
+        display: inline-block;
+      }
+    }
   }
 }

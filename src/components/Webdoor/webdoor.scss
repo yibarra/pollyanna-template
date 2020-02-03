@@ -17,7 +17,7 @@
 
   .slider {
     height: 100vh;
-    margin: 0 50px 0 0;
+    margin: 0;
     width: 100%;
     z-index: 4;
 
@@ -49,6 +49,18 @@
       &--background {
         display: none;
       }
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .webdoor {
+    height: auto;
+
+    .slider {
+      height: calc(100vh - (70px + 55px));
+      margin: 0;
     }
   }
 }

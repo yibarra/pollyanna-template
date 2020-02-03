@@ -114,3 +114,51 @@
     }
   }
 }
+
+/* --- QUEREIS --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .slider--controls {
+    &[data-type="1"] {
+      border-top: 1px solid var(--text-color);
+      bottom: 0;
+      left: 0;
+      padding: 0 20px;
+      text-align: center;
+      top: initial;
+      transform: translate(0, 0);
+      width: 100%;
+
+      .slider--controls {
+        &--item {
+          float: none;
+          height: auto;
+          margin: 0;
+          padding: 20px 2px 0;
+          width: auto;
+
+          .item {
+            height: 30px;
+            width: 9px;
+
+            &:before {
+              height: 0;
+              left: 4px;
+              top: 0;
+              width: 1px !important;
+            }
+          }
+
+          &[data-current="true"] {
+            .item {
+              &:before {
+                height: 20px;
+                top: -20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

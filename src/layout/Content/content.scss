@@ -31,3 +31,12 @@
     }
   }
 }
+
+/* --- QUERIES --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .content {
+    min-height: auto;
+    height: auto;
+  }
+}
