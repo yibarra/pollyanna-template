@@ -33,11 +33,30 @@
     &--btn {
       @extend %btn-clear;
       display: none;
+      padding: 0;
 
       i {
         @include box-display;
         @include rem('font-size', 22px);
         color: var(--text-color);
+        display: none;
+        float: left;
+        padding: 0;
+        vertical-align: top;
+
+        &.play {
+          display: inline-block;
+        }
+      }
+
+      &[data-active="true"] {
+        i {
+          display: inline-block;
+
+          &.play {
+            display: none;
+          }
+        }
       }
     }
   }

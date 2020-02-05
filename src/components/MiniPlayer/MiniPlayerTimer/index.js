@@ -10,7 +10,7 @@ const MiniPlayerTimer = props => {
   // ctx
   const ctx = useRef();
   // play
-  const { item, width, height, color, onSetAudio } = props;
+  const { color, height, item, onSetAudio, width } = props;
 
   // decimal
   const decimal = numb => numb < 10 ? `0${numb}` : numb;
@@ -26,21 +26,28 @@ const MiniPlayerTimer = props => {
     };
 
     // marquee
-    const marquee = (text) => {
+    const marquee = text => {
       ctx.current.font = '14px Inria Serif';
       
       const txt = text;
       ctx.current.fillText(txt, 0, 20);
     };
 
+    const loading = () => {
+      ctx.current.font = '14px Inria Serif';
+      
+      const txt = 'loading...';
+      ctx.current.fillText(txt, 0, 20);
+    };
+
     // time
     const time = (current, duration) => {
       ctx.current.font = '10px Roboto Mono';
-      const time = minutesAndSeconds(current);
+      const time = current >= 0 ? minutesAndSeconds(current) : minutesAndSeconds(0);
       ctx.current.fillText(time, 70, height);
       
       ctx.current.font = '800 10px Roboto Mono';
-      const total = minutesAndSeconds(duration);
+      const total = duration >= 0 ? minutesAndSeconds(duration) : minutesAndSeconds(0);
 
       ctx.current.fillText(total, width - (ctx.current.measureText(total).width + 20), height);
     };
@@ -50,19 +57,23 @@ const MiniPlayerTimer = props => {
       const current = (currentTime * 100) / duration;
       const total = (current / 100) * (width - 20);
 
-      ctx.current.beginPath();
-      ctx.current.clearRect(0, 0, width, height);
-      
-      ctx.current.fillStyle = color;
-      ctx.current.fillRect(0, Math.floor(height / 2) + 2, width, 1);
-      ctx.current.fillRect(0, Math.floor(height / 2), total, 5);
+      if (current >= 0) {
+        ctx.current.beginPath();
+        ctx.current.clearRect(0, 0, width, height);
+        
+        ctx.current.fillStyle = color;
+        ctx.current.fillRect(0, Math.floor(height / 2) + 2, width, 1);
+        ctx.current.fillRect(0, Math.floor(height / 2), total, 5);
 
-      marquee(item.name);
-      time(currentTime, duration);
+        marquee(item.name);
+        time(currentTime, duration);
+      } else {
+        loading();
+      }
     };
 
     draw();
-  }, [ width, height, item, color ]);
+  }, [  color, height, item, width ]);
 
   // on animation
   const onAnimation = useCallback((bufferArray, audio) => {
@@ -82,6 +93,7 @@ const MiniPlayerTimer = props => {
     onSetAudio(item, onAnimation);
   }, [ onAnimation, onSetAudio, item, code ]);
 
+  // render
   return (
     <div className="mini-player-timer">
       <div className="progress">
@@ -92,8 +104,10 @@ const MiniPlayerTimer = props => {
 };
 
 MiniPlayerTimer.propTypes = {
+  height: PropTypes.number,
   item: PropTypes.any,
   onSetAudio: PropTypes.func.isRequired,
+  width: PropTypes.number,
 };
 
 export default MiniPlayerTimer;

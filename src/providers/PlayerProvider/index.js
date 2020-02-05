@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import React, { Component, createContext, createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import 'firebase/firestore';
@@ -41,9 +41,11 @@ class PlayerProvider extends Component {
       dataArray: null,
       source: null,
       paused: false,
+      progress: 0,
     };
 
     this.analyser = null;
+    this.audioRef = createRef();
     this.callbackAnimation = () => {};
     this.refAnimation = null;
 
@@ -71,32 +73,42 @@ class PlayerProvider extends Component {
     }
   }
 
-  /**
-   * on load audio
-   *
-   * @memberof PlayerProvider
-   */
-  onLoadAudio() {
-    this.setState({
-      audio: new Audio(this.state.audioData.url),
-    }, () => {
-      const { audio } = this.state;
+  // on load audio
+  onLoadAudio(audio) {
+    if (!audio.url) return false;
 
-      try {
-        audio.onloadeddata = (e) => this.onLoadAudioComplete(e);
-      } catch (e) {
-        console.log('Error: ', e);
-      } 
-    });
+    const request = new XMLHttpRequest();
+    request.open('GET', audio.url, true);
+
+    request.onprogress = e => {
+      const progress = Math.floor((e.loaded / e.total) * 100);
+
+      if (isNaN(progress) === false) {
+        this.setState({ progress });
+      }
+    };
+    
+    request.onload = (e) => {
+      this.audioRef.current.src = audio.url;
+      this.audioRef.current.load();
+
+      this.setState({
+        audio: new Audio(this.state.audioData.url),
+      }, () => {
+        const { audio } = this.state;
+  
+        try {
+          audio.onloadeddata = (e) => this.onLoadAudioComplete(e);
+        } catch (e) {
+          console.log('Error: ', e);
+        } 
+      });
+    };
+
+    request.send();
   }
   
-  /**
-   * on load audio complete
-   *
-   * @param {*} event
-   * @returns
-   * @memberof PlayerProvider
-   */
+  // on load audio complete
   onLoadAudioComplete(event) {
     if (event instanceof Object === false || !event) return false;
 
@@ -125,13 +137,7 @@ class PlayerProvider extends Component {
     });
   }
 
-  /**
-   * on play audio
-   *
-   * @param {*} value
-   * @returns
-   * @memberof PlayerProvider
-   */
+  // on play audio
   onPlayAudio(value) {
     if (!this.state.audio) {
       return false;
@@ -162,13 +168,7 @@ class PlayerProvider extends Component {
     return false;
   }
 
-  /**
-   * on set audio
-   *
-   * @param {*} audio
-   * @param {*} callback
-   * @memberof PlayerProvider
-   */
+  // on set audio
   onSetAudio(audio, callback) {
     if (audio instanceof Object) {
       this.onPlayAudio();
@@ -177,28 +177,23 @@ class PlayerProvider extends Component {
         audioData: audio,
       }, () => {
         this.callbackAnimation = callback;
-        this.onLoadAudio();
+        this.onLoadAudio(this.state.audioData);
       });
     }
   }
 
-  /**
-   * render
-   *
-   * @returns
-   * @memberof PlayerProvider
-   */
+  // render
   render() {
     return (
       <FirestoreProvider firebase={firebase} {...config}>
         <FirestoreCollection path="audios/" orderByValue={"created_on"}>
-          {({ value }) => {
-            return <PlayerContext.Provider value={
+          {({ value }) => <PlayerContext.Provider value={
               { audio: this.state, audios: value, onPlayAudio: this.onPlayAudio, onSetAudio: this.onSetAudio, }
             }>
-          {this.props.children}
-        </PlayerContext.Provider>
-        }}
+            <audio crossOrigin="anonymous" ref={this.audioRef} />
+            {this.props.children}
+          </PlayerContext.Provider>
+          }
         </FirestoreCollection>
       </FirestoreProvider>
     )
@@ -207,7 +202,7 @@ class PlayerProvider extends Component {
 
 PlayerProvider.propTypes = {
   any: PropTypes.any,
-}
+};
 
 export { PlayerContext, PlayerProvider };
 export default PlayerProvider;

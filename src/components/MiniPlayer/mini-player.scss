@@ -11,9 +11,10 @@
   right: 20px;
   padding: 0;
   position: absolute;
+  pointer-events: auto;
   text-align: right;
   width: 320px;
-  z-index: 1001;
+  z-index: 1003;
 }
 
 /* --- QUERIES --- */

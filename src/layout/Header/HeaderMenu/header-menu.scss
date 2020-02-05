@@ -107,7 +107,16 @@
     &--menu {
       display: none;
 
-      &--list {
+      &--item {
+        text-align: center;
+
+        .link {
+          width: auto;
+
+          &.active {
+            margin: 0 0 10px;
+          }
+        }
       }
     }
   }

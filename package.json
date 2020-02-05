@@ -6,6 +6,7 @@
     "@mollycule/react-anime": "^0.0.7",
     "@react-firebase/database": "^0.3.10",
     "@react-firebase/firestore": "^0.5.4",
+    "@react-hook/window-size": "^1.0.12",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",

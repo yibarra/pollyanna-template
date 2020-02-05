@@ -19,8 +19,9 @@ const HeaderTop = props => {
   // return
   return (
     <div className="header--top">
-      <button className="header--top--btn" onClick={() => onActive(active)}>
-        <i className="material-icons">menu</i>
+      <button className="header--top--btn" onClick={() => onActive(active)} data-active={active}>
+        <i className="material-icons play">menu</i>
+        <i className="material-icons">close</i>
       </button>
 
       <LangSelect />

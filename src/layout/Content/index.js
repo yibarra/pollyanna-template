@@ -40,7 +40,7 @@ const Content = props => {
           <Route path="/" exact render={() => <Home {...props} page={page} />} />
           <Route path="/bio" component={Bio} />
           <Route path="/events" component={Events} />
-          <Route path="/contact" component={Contact} />
+          <Route path="/contact" render={() => <Contact {...props} page={page} />} />
         </Switch>
 
         <Footer />

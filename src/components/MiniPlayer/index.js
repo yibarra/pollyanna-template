@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Anime from "@mollycule/react-anime";
+import { useWindowSize } from '@react-hook/window-size';
 
 import { PlayerContext } from '../../providers/PlayerProvider';
 import { ThemeContext } from '../../providers/ThemeProvider';
@@ -17,12 +18,11 @@ const MiniPlayer = () => {
   const playerContext = useContext(PlayerContext);
   // theme context
   const themeContext = useContext(ThemeContext);
-
-  // on set audio
-  const { onSetAudio } = playerContext;
+  // width
+  const [ width ] = useWindowSize();
 
   // audios
-  const { audios, audio, onPlayAudio, audio: { paused } } = playerContext;
+  const { audios, audio, onSetAudio, onPlayAudio, audio: { paused } } = playerContext;
   // item
   const [ item, setItem ] = useState({});
   // current
@@ -67,7 +67,11 @@ const MiniPlayer = () => {
     if (audios) {
       onSetItem(0);
     }
-  }, [ audios, onSetItem ]);
+
+    if (width < 768) {
+      onPlayAudio(false);
+    }
+  }, [ audios, onSetItem, onPlayAudio, width ]);
 
   // redner
   return (
@@ -79,7 +83,7 @@ const MiniPlayer = () => {
       onExiting={{ translateX: -100, opacity: 0 }}
       easing="cubicBezier(0.075, 0.82, 0.165, 1)"
       delay={300}>
-      {item instanceof Object && 
+      {item instanceof Object && width >= 768 &&
         <div className="mini-player">
           <MiniPlayerControls 
             audio={audio}
@@ -91,8 +95,8 @@ const MiniPlayer = () => {
             color={themeContext instanceof Object && themeContext.theme ? themeContext.theme['--text-color'] : '#222'}
             height={60}
             item={item}
-            width={310}
             paused={paused}
+            width={310}
             onSetAudio={onSetAudio} />
         </div>}
     </Anime>
