@@ -19,7 +19,7 @@
   cursor: pointer;
   letter-spacing: 0.025em;
   margin: 0;
-  padding: 10px 20px 20px;
+  padding: 20px 40px 29px;
   text-align: left;
   text-decoration: none;
   text-transform: uppercase;
@@ -39,8 +39,8 @@
     border-top: none;
     bottom: 4px;
     height: 0;
-    left: -30px;
-    width: 30px;
+    left: -20px;
+    width: 20px;
   }
 
   &:after {
@@ -57,7 +57,7 @@
 
     &:before {
       left: initial;
-      right: -30px;
+      right: -20px;
     }
   }
 }

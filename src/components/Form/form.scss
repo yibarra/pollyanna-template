@@ -1,0 +1,20 @@
+/* --- FORM --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.form {
+  @include box-display;
+  float: left;
+  padding: 20px 20px 0 20px;
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+
+  .btn-more {
+    float: right;
+
+    &:before {
+      left: 100%;
+    }
+  }
+}

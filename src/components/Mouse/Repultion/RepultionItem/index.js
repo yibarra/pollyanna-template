@@ -1,19 +1,21 @@
 import React, { useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useMouseMove } from 'react-use-mouse-move';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
 import './repultion-item.scss';
 
 // repultion
 const RepultionItem = props => {
+  // mouse
+  const mouse = useMouseMove(1);
+
   // element
   const element = useRef(false);
   // settings
   const settings = { ...props.defaultSettings, ...props.options };
 
-  // mouse
-  const { mouse } = props;
   // style
   const [ style, setStyle ] = useState({});
   // reverse
@@ -70,7 +72,7 @@ const RepultionItem = props => {
   // use previous
   useDeepCompareEffect(() => {
     updateElementPosition();
-  }, [ mouse ],);
+  }, [ mouse ]);
 
   return (
     <div

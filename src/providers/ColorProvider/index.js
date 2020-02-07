@@ -25,7 +25,7 @@ const ColorProvider = (props) => {
     setColor(newColor());
 
     return color;
-  }
+  };
 
   // return
   return (

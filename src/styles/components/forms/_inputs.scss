@@ -2,5 +2,19 @@
 @import './../../settings/settings';
 @import './../../tools/mixins';
 
-input {
+%input-clear {
+  @include box-display;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  float: left;
+  outline: none;
+  position: relative;
+  vertical-align: top;
+}
+
+%input-default {
+  @extend %input-clear;
+  @include font($font-default, 12px, 400, var(--text-color));
+  padding: 10px 20px;
 }

@@ -1,11 +1,11 @@
-/* --- INPUT --- */
+/* --- TEXTAREA --- */
 @import '../../styles/settings/settings';
 @import '../../styles/tools/mixins';
 
 @import '../../styles/components/forms/inputs';
 @import '../../styles/components/typography';
 
-.input {
+.text-area {
   @include box-display;
   float: left;
   margin: 0 0 20px;
@@ -14,7 +14,6 @@
   width: 100%;
   vertical-align: top;
 
-  &--error,
   &--input,
   &--label {
     @include box-display;
@@ -22,19 +21,6 @@
     position: relative;
     text-align: left;
     width: 100%;
-  }
-
-  &--error {
-    @include font($font-default, 11px, 400, $red-900);
-    display: none;
-    float: left;
-    margin: 0 0 0 10px;
-    text-transform: none;
-    width: auto;
-
-    &:before {
-      content: '* ';
-    }
   }
 
   &--label {
@@ -49,40 +35,26 @@
     width: calc(100% - 20px);
     white-space: nowrap;
     z-index: 1;
-
-    .text {
-      @include box-display;
-      float: left;
-      position: relative;
-    }
   }
 
   &--input {
     @extend %input-default;
     border: none;
     border-bottom: 9px solid var(--text-color);
+    resize: none;
     z-index: 2;
 
     &:focus,
-    &:placeholder-shown,
-    &:not(:placeholder-shown) {
-      & + .input {
+    &:placeholder-shown {
+      & + .text-area {
         &--label {
-          top: -15px;
+          top: -17px;
         }
       }
     }
+
+    &[data-error="true"] {
+      color: $red-900;
+    } 
   }
-
-  &[data-error="true"] {
-    .input {
-      &--input {
-        color: $red-900;
-      }
-
-      &--error {
-        display: inline-block;
-      }
-    }
-  } 
 }

@@ -1,0 +1,161 @@
+/* --- CONTACT --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.contact {
+  @include box-display;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  float: left;
+  height: 100vh;
+  position: relative;
+  text-align: center;
+  vertical-align: top;
+  width: 100%;
+  z-index: 16;
+
+  &--form,
+  &--info {
+    @include box-display;
+    float: left;
+    pointer-events: auto;
+    position: relative;
+    vertical-align: top;
+    width: 50%;
+  }
+
+  &--form {
+    .title-main {
+      float: left;
+      text-align: left;
+      width: 100%;
+    }
+
+    &:before {
+      @include box-display;
+      background-color: var(--text-color);
+      border: none;
+      border-left: 1px solid transparent;
+      content: '';
+      height: 100vh;
+      right: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 1px;
+    }
+  }
+
+  &--info {
+    &--container,
+    &--item,
+    &--list {
+      @include box-display;
+      float: left;
+      position: relative;
+      width: 100%;
+      vertical-align: top;
+    }
+
+    &--container {
+      margin: 0 0 20px;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    &--item {
+      .text {
+        @include box-display;
+        float: left;
+        margin: 0 0 15px;
+        position: relative;
+        vertical-align: top;
+        width: 100%;
+
+        .title,
+        .value {
+          @include box-display;
+          margin: 0;
+          position: relative;
+          vertical-align: top;
+        }
+
+        .title {
+          @include font($font-default, 12px, 800, var(--text-color));
+          margin: 0 10px 0 0;
+          letter-spacing: 0.07em;
+          padding: 0;
+          text-transform: none;
+        }
+
+        .value {
+          @include font($font-default, 12px, 400, var(--text-color));
+          margin: 10px;
+          padding: 0 5px 0 0;
+          letter-spacing: 0.02em;
+          width: 100%;
+
+          .material-icons {
+            @include box-display;
+            @include rem('font-size', 18px);
+            float: left;
+            margin: 0 5px 0 0;
+            position: relative;
+            top: 0px;
+          }
+        }
+      }
+    }
+
+    &--list {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 20px;
+
+      &.credits {
+        .contact--info--item {
+          background-color: var(--text-color);
+          float: left;
+          margin: 0 0 1px;
+          padding: 10px 20px;
+          width: auto;
+          vertical-align: top;
+
+          .text {
+            margin: 0;
+            width: auto;
+
+            .material-icons {
+              margin: 0 10px;
+            }
+
+            .title,
+            .value {
+              color: var(--background-color);
+              float: none;
+              width: auto;
+            }
+
+            .title {
+              margin: 0;
+            }
+
+            .value {
+              margin: 0 0 0 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > .wrapper {
+    align-items: flex-start;
+    display: inline-flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    min-height: initial;
+  }
+}
