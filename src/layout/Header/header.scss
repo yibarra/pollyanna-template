@@ -4,6 +4,7 @@
 
 .header {
   @include box-display;
+  @include noise;
   float: left;
   height: auto;
   left: 0;
@@ -15,6 +16,29 @@
 
   &--top {
     pointer-events: auto;
+    z-index: 2;
+  }
+
+  &:after {
+    @include box-display;
+    background-color: var(--background-color);
+    content: '';
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    vertical-align: top;
+  }
+  
+  &:before {
+    display: none;
+    z-index: 2;
+  }
+  
+  &:after {
+    z-index: 1;
   }
 }
 
@@ -53,6 +77,11 @@
       .lang-select {
         display: inline-block;
       }
+    }
+
+    &:before,
+    &:after {
+      display: inline-block;
     }
   }
 }

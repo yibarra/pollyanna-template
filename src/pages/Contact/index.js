@@ -14,10 +14,7 @@ const Contact = props => {
   return (
     <div className="contact">
       <div className="wrapper">
-        <div className="contact--form">
-          <h1 className="title-main">Mensagem</h1>
-          <Form form={form} />
-        </div>
+        
         <div className="contact--info">
           <div className="contact--info--container">
             <h1 className="title-main">contatos</h1>
@@ -69,6 +66,11 @@ const Contact = props => {
               </li>
             </ul>
           </div>
+        </div>
+
+        <div className="contact--form">
+          <h1 className="title-main">Mensagem</h1>
+          <Form form={form} />
         </div>
       </div>
     </div>

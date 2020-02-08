@@ -32,7 +32,7 @@ const RepultionItem = props => {
     const _y = Math.min(Math.max(y, 0), 1);
 
     const tiltX = (reverse * (settings.max / 2 - _x * settings.max)).toFixed(2);
-    const tiltY = (reverse * (_y * settings.max -   settings.max / 2)).toFixed(2);
+    const tiltY = (reverse * (_y * settings.max - settings.max / 2)).toFixed(2);
 
     const percentageX = _x * 100;
     const percentageY = _y * 100;

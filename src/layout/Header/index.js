@@ -10,15 +10,15 @@ import './header.scss';
 
 // Header
 const Header = props => {
-  // active
-  const [ active, setActive ] = useState(false);
-
   // main context
   const mainContext = useContext(MainContext);
   // pages
   const pages = mainContext.pages;
   // location
   const location = props.location;
+
+  // active
+  const [ active, setActive ] = useState(false);
 
   // on open menu
   const onToggleActive = () => {

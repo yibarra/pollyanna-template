@@ -1,19 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useTranslation } from 'react-i18next';
+
 import { NavLink } from 'react-router-dom';
 
 import './header-menu.scss';
 
 // Header Menu
 const HeaderMenu = props => {
+  // translate
+  const { t } = useTranslation();
+
+  // props
+  const { pages } = props;
+
   // render
   return (
     <div className="header--menu">
       <ul className="header--menu--list">
-        {Array.isArray(props.pages) && props.pages.map((item, index) => 
-          <li className="header--menu--item" key={index} style={{order: item.index}}>
-            <NavLink className="link" exact={item.slug === '/'} activeClassName="active" to={item.slug}>{item.name}</NavLink>
+        {Array.isArray(pages) && pages.map((item, index) => 
+          <li
+            className="header--menu--item"
+            key={index}
+            style={{order: item.index}}>
+            <NavLink
+              activeClassName="active"
+              className="link"
+              exact={item.slug === '/'}
+              to={item.slug}>{t(item.name)}</NavLink>
           </li>)}
       </ul>
     </div>
@@ -21,7 +36,7 @@ const HeaderMenu = props => {
 };
 
 HeaderMenu.propTypes = {
-  props: PropTypes.any,
+  pages: PropTypes.array,
 };
 
 export default HeaderMenu;

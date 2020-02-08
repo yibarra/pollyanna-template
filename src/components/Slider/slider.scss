@@ -149,10 +149,6 @@
               }
             }
           }
-
-          &[data-last="true"] {
-            animation: slider-anime-type-four-out 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 200ms both;
-          }
         }
       }
     }
@@ -166,10 +162,6 @@
                 animation: slider-anime-type-four-in-left 0.5s cubic-bezier(0.02, 0.76, 0.35, 1.03) both;
               }
             }
-          }
-
-          &[data-last="true"] {
-            animation: slider-anime-type-four-out-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 200ms both;
           }
         }
       }
@@ -191,6 +183,49 @@
             display: none;
           }
         }
+      }
+    }
+
+    &[data-type="4"] {
+      height: 350px !important;
+
+      .slider {
+        &--container {
+          align-items: flex-start;
+          float: right;
+          height: 100%;
+          margin: 0;
+          overflow: hidden;
+          position: relative;
+          top: 0;
+          transform: translate(0, 0);
+          width: auto;
+        }
+
+        &--controls {
+          left: -20px;
+        }
+
+        &--item {
+          height: auto;
+          width: 100%;
+
+          .gallery {
+            &-item {
+              display: inline-block;
+
+              img {
+                height: auto;
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      .number-text {
+        bottom: -5px;
+        left: 0;
       }
     }
   }
@@ -218,7 +253,7 @@
       }
 
       .number-text {
-        bottom: 30px;
+        bottom: 55px;
         left: 17px;
       }
     }

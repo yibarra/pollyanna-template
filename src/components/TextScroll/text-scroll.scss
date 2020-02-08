@@ -94,3 +94,33 @@
     }
   }
 }
+
+/* --- QUERIES --- */
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .text-scroll {
+    &[data-type="2"] {
+      padding: 40px 0 0;
+
+      .text-scroll {
+        &--info {
+          padding: 0;
+
+          & + div {
+            width: 100% !important;
+
+            div {
+              &:first-child {
+                padding: 0 0 0 20px;
+              }
+            }
+          }
+        }
+      }
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+}

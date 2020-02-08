@@ -66,6 +66,8 @@
 @media only screen and (max-width : 640px) {
   .number-text {
     &[data-type="1"] {
+      height: 55px;
+      
       .current,
       .last {
         @include rem('font-size', 50px);

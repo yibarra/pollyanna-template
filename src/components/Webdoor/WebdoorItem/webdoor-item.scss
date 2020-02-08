@@ -33,11 +33,12 @@
 
       .description {
         @extend %text;
+        margin: 0 0 20px;
         padding: 0 0 0 20px;
       }
 
       .btn-more {
-        bottom: -60px;
+        bottom: -80px;
         right: 20px;
         pointer-events: auto;
         position: absolute;
