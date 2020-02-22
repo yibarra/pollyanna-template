@@ -28,12 +28,23 @@
     @include font($font-default, 11px, 400, $red-900);
     display: none;
     float: left;
+    letter-spacing: -0.02em;
     margin: 0 0 0 10px;
+    padding: 0 0 0 10px;
     text-transform: none;
     width: auto;
 
     &:before {
-      content: '* ';
+      @include box-display;
+      background-color: $red-900;
+      border-radius: 100%;
+      content: '';
+      height: 4px;
+      left: 0;
+      position: absolute;
+      top: calc(50% + 1px);
+      transform: translate(0, -50%);
+      width: 4px;
     }
   }
 
@@ -60,7 +71,7 @@
   &--input {
     @extend %input-default;
     border: none;
-    border-bottom: 9px solid var(--text-color);
+    border-bottom: 4px solid var(--text-color);
     z-index: 2;
 
     &:focus,

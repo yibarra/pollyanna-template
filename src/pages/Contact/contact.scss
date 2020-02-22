@@ -27,7 +27,17 @@
   }
 
   &--form {
-    padding-left: 20px;
+    padding-left: 40px;
+
+    .form {
+      padding-right: 0;
+
+      .btn-more {
+        &:before {
+          width: calc(50vw - 40px);
+        }
+      }
+    }
 
     .title-main {
       float: left;
@@ -203,6 +213,10 @@
 
     &--form {
       padding: 0;
+
+      .form {
+        padding: 20px 0 0 10px;
+      }
     }
 
     &--info {
@@ -212,6 +226,11 @@
 
       &--list {
         padding-left: 0;
+
+        .contact--info--item,
+        &.credits .contact--info--item {
+          padding: 10px 10px 0;
+        }
       }
     }
 

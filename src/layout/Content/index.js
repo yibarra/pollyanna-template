@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Route, Switch } from 'react-router-dom';
 
-import BackgroundProvider from '../../providers/BackgroundProvider';
 import { PageContext } from '../../providers/PageProvider';
+import PlayerProvider from '../../providers/PlayerProvider';
 
-import BackgroundText from '../../components/BackgroundText';
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -14,10 +13,9 @@ import Bio from '../../pages/Bio';
 import Contact from '../../pages/Contact';
 import Events from '../../pages/Events';
 import Home from '../../pages/Home';
+import MiniPlayer from '../../components/MiniPlayer';
 
 import './content.scss';
-import PlayerProvider from '../../providers/PlayerProvider';
-import MiniPlayer from '../../components/MiniPlayer';
 
 // Content
 const Content = props => {
@@ -30,10 +28,6 @@ const Content = props => {
   return (
     <Fragment>
       <div className="content">
-        <BackgroundProvider>
-          <BackgroundText />
-        </BackgroundProvider>
-
         <Header location={props.location} />
 
         <Switch>

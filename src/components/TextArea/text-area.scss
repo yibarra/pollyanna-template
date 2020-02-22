@@ -40,16 +40,15 @@
   &--input {
     @extend %input-default;
     border: none;
-    border-bottom: 9px solid var(--text-color);
+    border-bottom: 4px solid var(--text-color);
     resize: none;
     z-index: 2;
 
     &:focus,
-    &:placeholder-shown {
-      & + .text-area {
-        &--label {
-          top: -17px;
-        }
+    &:placeholder-shown,
+    &:not(:placeholder-shown) {
+      & + .text-area--label {
+        top: -17px;
       }
     }
 

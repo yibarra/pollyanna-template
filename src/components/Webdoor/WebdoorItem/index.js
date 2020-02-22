@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import './webdoor-item.scss';
 
 /**
@@ -10,6 +13,9 @@ import './webdoor-item.scss';
  * @extends {Component}
  */
 const WebdoorItem = (props) => {
+  // translate
+  const { t } = useTranslation();
+  
   /**
    * render
    *
@@ -18,9 +24,10 @@ const WebdoorItem = (props) => {
    */
   return (
     <div className="webdoor--item--content">
-      <p className="title">{props.name}</p>
-      <p className="description">{props.description}</p>
-      <a className="btn-more r" href={props.linkUrl}>{props.linkText}</a>
+      <p className="title">{t(props.name)}</p>
+      <p className="description">{t(props.description)}</p>
+
+      <NavLink className="btn-more r" to={props.linkUrl}>{t(props.linkText)}</NavLink>
     </div>
   );
 };

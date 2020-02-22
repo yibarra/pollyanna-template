@@ -23,8 +23,32 @@ const Bio = () => {
       title: '2',
       src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-2.jpg'
     }, {
-      title: '3',
-      src: 'https://placeimg.com/390/610/nature'
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-3.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-4.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-5.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-6.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-7.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-8.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-9.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-10.jpg'
+    }, {
+      title: '2',
+      src: process.env.PUBLIC_URL + '/images/pollyanna-bio-gallery-11.jpg'
     }
   ];
 

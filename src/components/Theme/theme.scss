@@ -4,6 +4,7 @@
 
 .theme {
   @include box-display;
+  @include noise();
   background-color: var(--background-color);
   min-height: 100vh;
   overflow: hidden;
