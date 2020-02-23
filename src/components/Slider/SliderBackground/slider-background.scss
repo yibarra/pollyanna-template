@@ -1,0 +1,52 @@
+/* --- SLIDER BACKGROUND --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+.slider {
+  &--background {
+    @include box-display;
+    height: 100vh;
+    left: 0;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+
+    &--icon,
+    .repultion {
+      @include box-display;
+      position: absolute;
+    }
+
+    &--icon {
+      height: 100vh;
+      left: 70%;
+    }
+
+    .repultion {
+      align-items: center;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      width: 100vw;
+
+      .image {
+        @include box-display;
+        height: auto;
+        max-width: 70vw;
+        pointer-events: none;
+        position: relative;
+        transform-origin: center;
+        vertical-align: top;
+      }
+
+      .image {
+        z-index: 2;
+      }
+    }
+  }
+}

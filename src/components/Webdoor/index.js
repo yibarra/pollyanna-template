@@ -8,25 +8,27 @@ import './webdoor.scss';
 
 // Webdoor
 const Webdoor = props => {
+  // props
+  const { items, current, setCurrent } = props;
 
   // callback set current
   const callback = (current) => {
     if (Number.isInteger(current) === false) return false;
 
-    const item = props.items[current];
+    const item = items[current];
 
     if (item instanceof Object) {
-      props.setCurrent(current);
+      setCurrent(current);
     }
   };
 
   // render  
   return (
     <section className="webdoor">
-      {props.items &&
+      {items &&
         <Fragment>
-          <Slider current={props.current} callback={callback} type={1} background={true}>
-            {props.items.map((item, index) => <WebdoorItem {...item} key={index} />)}
+          <Slider current={current} callback={callback} type={1} background={true}>
+            {items.map((item, index) => <WebdoorItem {...item} key={index} />)}
           </Slider>
         </Fragment>}
     </section>
@@ -34,7 +36,9 @@ const Webdoor = props => {
 };
 
 Webdoor.propTypes = {
-  any: PropTypes.any,
+  current: PropTypes.number,
+  items: PropTypes.array,
+  setCurrent: PropTypes.func.isRequired,
 }
 
 export default Webdoor;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useSwipeable } from 'react-swipeable';
+
 import Webdoor from '../../components/Webdoor';
 
 import './home.scss';
@@ -34,9 +36,19 @@ const Home = props => {
     onSetItem(index);
   };
 
+  // handlers
+  const handlers = useSwipeable({
+    onSwipedLeft: () => onNextPrev('next'),
+    onSwipedRight: () => onNextPrev('prev'),
+    onSwipedDown: () => onNextPrev('prev'),
+    onSwipedUp: () => onNextPrev('next'),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   // return
   return (
-    <div className="page home">
+    <div className="page home" {...handlers}>
       <Webdoor
         current={current}
         items={webdoor}

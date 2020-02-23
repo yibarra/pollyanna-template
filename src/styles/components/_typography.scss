@@ -16,8 +16,50 @@
   vertical-align: top;
 }
 
+.scroll-icon {
+  @include box-display;
+  border: none;
+  border-radius: 0;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 40px;
+
+  .scroll-icon__wheel-outer,
+  .scroll-icon__wheel-inner {
+    @include box-display;
+  }
+
+  .scroll-icon__wheel-outer {
+    height: calc(100% - 2px);
+    right: 1px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 2px;
+  }
+
+  .scroll-icon__wheel-inner {
+    animation: scroll_1 4s cubic-bezier(0.02, 0.76, 0.35, 1.03) infinite;
+    background-color: var(--text-color);
+    height: 100%;
+    width: 100%;
+  }
+}
+
 %text {
   @include font($font-text, 13px, 400, var(--text-color));
   line-height: 1.7em;
   letter-spacing: 0.02em;
+}
+
+// Example 1
+@keyframes scroll_1 {
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(-90%); }
+  50%  { transform: translateY(0); }
+  75%  { transform: translateY(90%); }
+  100% { transform: translateY(0); }
 }

@@ -1,111 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Repultion from '../Mouse/Repultion';
 import NumberText from '../NumberText';
 import SliderControls from './SliderControls';
+import SliderList from './SliderList';
 
 import './slider.scss';
+import SliderBackground from './SliderBackground';
 
-/**
- * Slider
- *
- * @class Slider
- * @extends {Component}
- */
-class Slider extends Component {
-  /**
-   * Creates an instance of Slider.
-   * 
-   * @param {*} props
-   * @memberof Slider
-   */
-  constructor(props) {
-    super(props);
+// Slider
+const Slider = ({ background, callback, current, children, type }) => { 
+  // state
+  const [ direction, setDirection ] = useState('next');
+  const [ last, setLast ] = useState(null);
 
-    this.state = {
-      direction: 'next',
-      current: 0,
-      last: null,
-    };
-
-    this.setCurrent = this.setCurrent.bind(this);
-  }
-
-  /**
-   * set current
-   *
-   * @param {*} index
-   * @returns
-   * @memberof Slider
-   */
-  setCurrent(index) {
+  // set current
+  const setCurrent = index => {
     if (Number.isInteger(index) === false) return false;
 
-    this.setState((prevState) => {
-      return {
-        direction: index > prevState.current ? 'next' : 'prev',
-        last: prevState.current,
-        current: index,
-      };
-    }, () => {
-      if (typeof this.props.callback === 'function') {
-        this.props.callback(index);
-      }
-    });
-  }
+    if (typeof callback === 'function') {
+      setDirection(index > current ? 'next' : 'prev');
+      setLast(current);
 
-  /**
-   * render
-   *
-   * @returns
-   * @memberof Slider
-   */
-  render() {
-    const itemsChilds = React.Children.map(this.props.children, (child, index) => {
-      return <li
-        className="slider--item"
-        data-active={this.props.current === index}
-        data-last={this.state.last === index}
-        key={index}>{child}</li>
-    });
+      callback(index);
+    }
+  };
 
-    return (
-      <div className="slider" data-direction={this.state.direction} data-type={this.props.type}>
-        <ul className="slider--container">{itemsChilds}</ul>
+  // render
+  return (
+    <div className="slider" data-direction={direction} data-type={type}>
+      <SliderList children={children} current={current} last={last} />
 
-        {(this.props.type === 1 || this.props.type === 4) && 
-          <NumberText current={this.props.current} last={this.state.last} type={1} />}
+      {(type === 1 || type === 4) && 
+        <NumberText current={current} last={last} type={1} />}
 
-        {this.props.type === 1 && this.props.background === true &&
-          <div className="slider--background">
-            <Repultion items={[{
-              max: 20,
-              perspective: 3000,
-              scale: 1,
-            }, {
-              max: 10,
-              perspective: 1000,
-              scale: 1.01,
-            }]}>
-              <img className="image" src={`${process.env.PUBLIC_URL}/images/path-1.png`} alt={'Pollyanna Ferrari'} />
-              <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2.png`} alt={'Pollyanna Ferrari'} />
-            </Repultion>
-          </div>}
+      {type === 1 && background === true &&
+        <SliderBackground />}
 
-        <SliderControls
-          current={this.props.current}
-          type={this.props.type}
-          setCurrent={this.setCurrent}
-          length={React.Children.count(this.props.children)} />
-      </div>
-    )
-  }
-}
+      <SliderControls
+        current={current}
+        type={type}
+        setCurrent={setCurrent}
+        length={React.Children.count(children)} />
+    </div>
+  )
+};
 
 Slider.propTypes = {
-  any: PropTypes.any,
-  callback: PropTypes.func,
+  current: PropTypes.number,
+  callback: PropTypes.func.isRequired,
   type: PropTypes.number,
 }
 
