@@ -1,9 +1,11 @@
 {
   "name": "pollyanna-template",
+  "homepage": "https://yibarra.github.io/pollyanna-template",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@mollycule/react-anime": "^0.0.7",
+    "@n8tb1t/use-scroll-position": "^1.0.43",
     "@react-firebase/database": "^0.3.10",
     "@react-firebase/firestore": "^0.5.4",
     "@react-hook/window-size": "^1.0.12",
@@ -17,6 +19,7 @@
     "d3": "^5.14.2",
     "emailjs-com": "^2.4.1",
     "firebase": "^7.6.0",
+    "gh-pages": "^2.2.0",
     "i18next": "^19.0.2",
     "moment": "^2.24.0",
     "node-sass": "^4.13.0",
@@ -28,6 +31,7 @@
     "react-i18next": "^11.2.6",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-swipeable": "^5.5.1",
     "react-transition-group": "^4.3.0",
     "react-use-mouse-move": "^1.0.4",
     "smtp-client": "^0.3.1",
@@ -37,7 +41,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
