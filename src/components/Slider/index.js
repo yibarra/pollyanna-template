@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import NumberText from '../NumberText';
+import SliderBackground from './SliderBackground';
 import SliderControls from './SliderControls';
 import SliderList from './SliderList';
 
 import './slider.scss';
-import SliderBackground from './SliderBackground';
 
 // Slider
-const Slider = ({ background, callback, current, children, type }) => { 
+const Slider = ({ background, callback, current, children, items, type }) => { 
   // state
   const [ direction, setDirection ] = useState('next');
   const [ last, setLast ] = useState(null);
@@ -35,7 +35,7 @@ const Slider = ({ background, callback, current, children, type }) => {
         <NumberText current={current} last={last} type={1} />}
 
       {type === 1 && background === true &&
-        <SliderBackground />}
+        <SliderBackground item={items[0]} />}
 
       <SliderControls
         current={current}
@@ -49,6 +49,7 @@ const Slider = ({ background, callback, current, children, type }) => {
 Slider.propTypes = {
   current: PropTypes.number,
   callback: PropTypes.func.isRequired,
+  items: PropTypes.array,
   type: PropTypes.number,
 }
 

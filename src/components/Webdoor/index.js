@@ -7,10 +7,7 @@ import WebdoorItem from './WebdoorItem';
 import './webdoor.scss';
 
 // Webdoor
-const Webdoor = props => {
-  // props
-  const { items, current, setCurrent } = props;
-
+const Webdoor = ({ items, current, setCurrent }) => {
   // callback set current
   const callback = (current) => {
     if (Number.isInteger(current) === false) return false;
@@ -27,7 +24,7 @@ const Webdoor = props => {
     <section className="webdoor">
       {items &&
         <Fragment>
-          <Slider current={current} callback={callback} type={1} background={true}>
+          <Slider current={current} callback={callback} items={items} type={1} background={true}>
             {items.map((item, index) => <WebdoorItem {...item} key={index} />)}
           </Slider>
         </Fragment>}

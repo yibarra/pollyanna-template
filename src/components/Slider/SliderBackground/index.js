@@ -6,7 +6,8 @@ import Repultion from '../../Mouse/Repultion';
 import './slider-background.scss';
 
 // Slider background
-const SliderBackground = () => {
+const SliderBackground = ({ item }) => {
+  // render
   return (
     <div className="slider--background">
       <Repultion items={[{
@@ -22,14 +23,12 @@ const SliderBackground = () => {
         perspective: 3000,
         scale: 1,
       }, {
-        max: 15,
+        max: 13,
         perspective: 3000,
         scale: 1,
       }]}>
-        <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2-1.png`} alt={'Pollyanna Ferrari'} />
-        <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2-2.png`} alt={'Pollyanna Ferrari'} />
-        <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2-3.png`} alt={'Pollyanna Ferrari'} />
-        <img className="image" src={`${process.env.PUBLIC_URL}/images/path-2-4.png`} alt={'Pollyanna Ferrari'} />
+        {item.backgroundItems && item.backgroundItems.map(({ name, url }, index) =>
+          <img className="image" src={`${process.env.PUBLIC_URL}${url}`} alt={name} key={index} />)}
       </Repultion>
     
       <div className="slider--background--icon">
@@ -44,7 +43,7 @@ const SliderBackground = () => {
 };
 
 SliderBackground.propTypes = {
-  any: PropTypes.any,
+  items: PropTypes.array,
 };
 
 export default SliderBackground;

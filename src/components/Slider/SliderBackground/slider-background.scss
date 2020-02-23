@@ -7,6 +7,7 @@
     @include box-display;
     height: 100vh;
     left: 0;
+    max-width: calc(100vw - 375px);
     pointer-events: auto;
     position: absolute;
     top: 0;
@@ -21,7 +22,8 @@
 
     &--icon {
       height: 100vh;
-      left: 70%;
+      right: 0;
+      width: 50px;
     }
 
     .repultion {
@@ -30,14 +32,16 @@
       flex-flow: row nowrap;
       justify-content: center;
       height: 100vh;
-      left: 0;
+      overflow: hidden;
+      max-width: calc(100% - 120px);
+      left: 50%;
+      transform: translate(-50%, 0);
       top: 0;
-      width: 100vw;
+      width: 100%;
 
       .image {
         @include box-display;
         height: auto;
-        max-width: 70vw;
         pointer-events: none;
         position: relative;
         transform-origin: center;
