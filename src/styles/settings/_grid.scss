@@ -63,7 +63,7 @@ body {
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 640px) {
   .page {
-    min-height: auto;
+    min-height: calc(100vh - 110px);
     height: auto;
     padding: 70px 0 0;
   }

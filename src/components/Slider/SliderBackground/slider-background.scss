@@ -7,7 +7,7 @@
     @include box-display;
     height: 100vh;
     left: 0;
-    max-width: calc(100vw - 390px);
+    max-width: 65vw;
     pointer-events: auto;
     position: absolute;
     top: 0;
@@ -32,12 +32,22 @@
       flex-flow: row nowrap;
       justify-content: center;
       height: 100vh;
+      left: initial;
       overflow: hidden;
-      max-width: calc(100% - 120px);
-      left: 50%;
-      transform: translate(-50%, 0);
+      max-width: calc(70vw - 180px);
+      right: 40px;
+      transform: translate(0, 0);
       top: 0;
       width: 100%;
+
+      &--item {
+        left: initial;
+        max-width: calc(100% - 65px);
+        height: auto;
+        overflow: hidden;
+        right: 0;
+        width: auto;
+      }
 
       .image {
         @include box-display;
@@ -50,6 +60,40 @@
 
       .image {
         z-index: 2;
+      }
+    }
+  }
+}
+
+/* --- QUERIES --- */
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .slider {
+    &--background {
+      height: auto;
+
+      .repultion {
+        height: auto;
+        right: 0;
+        padding: 0 20px;
+        position: relative;
+        max-width: initial;
+
+        &--item {
+          display: none;
+          max-width: initial;
+          height: auto;
+          width: 100%;
+
+          .image {
+            width: 100%;
+          }
+
+          &:first-child {
+            display: inline-block;
+            position: relative;
+          }
+        }
       }
     }
   }

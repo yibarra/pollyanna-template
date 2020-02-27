@@ -2,18 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
-
 import { NavLink } from 'react-router-dom';
 
 import './header-menu.scss';
 
 // Header Menu
-const HeaderMenu = props => {
+const HeaderMenu = ({ pages }) => {
   // translate
   const { t } = useTranslation();
-
-  // props
-  const { pages } = props;
 
   // render
   return (

@@ -24,18 +24,19 @@
     &--container {
       height: 100vh;
       float: right;
-      width: calc(320px + 20px);
+      width: 100%;
 
       &:before {
         @include box-display;
-        background-color: var(--text-color);
+        border: none;
+        border-left: 1px solid var(--text-color);
         content: '';
         height: 100vh;
-        left: -50px;
+        left: 0;
         position: absolute;
         top: 50%;
         transform: translate(0, -50%);
-        width: 1px;
+        width: 0;
       }
     }
   }
@@ -45,9 +46,16 @@
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
   .webdoor {
+    height: auto;
+    
     .slider {
+      height: auto;
+      padding-bottom: 90px;
+
       &--background {
-        display: none;
+        max-width: initial;
+        padding: 70px 0 0;
+        width: 100%;
       }
     }
   }
@@ -56,11 +64,10 @@
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 640px) {
   .webdoor {
-    height: auto;
-
     .slider {
-      height: calc(100vh - (70px + 55px));
-      margin: 0;
+      &--background {
+        padding: 0;
+      }
     }
   }
 }

@@ -39,12 +39,16 @@
     .slider {
       &--container {
         height: 100%;
-        right: 0;
+        justify-content: flex-start;
+        left: 65vw;
+        padding: 0 0 0 40px;
         position: absolute;
         top: 0;
+        width: 100%;
       }
-
+      
       &--item {
+        max-width: 320px;
         width: 100%;
         
         &[data-last="true"] {
@@ -104,12 +108,22 @@
     &[data-type="1"] {
       .slider {
         &--container {
-          max-width: 400px;
+          left: 0;
+          height: auto;
+          max-width: initial;
+          padding: 0 20px;
+          position: relative;
           width: 100%;
 
           &:before {
             display: none;
           }
+        }
+
+        &--item {
+          float: right;
+          max-width: initial;
+          width: 100%;
         }
       }
     }
@@ -163,20 +177,9 @@
 @media only screen and (max-width : 640px) {
   .slider {
     &[data-type="1"] {
-      align-content: center;
-      display: inline-flex;
-      justify-content: center;
-      margin: 0 0 20px !important;
-      padding-bottom: 50px;
-
       .slider {
         &--container {
-          height: auto;
-          margin: 0;
-          right: initial;
-          padding: 0;
-          position: relative;
-          top: initial;
+          
         }
       }
 

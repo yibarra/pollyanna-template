@@ -44,6 +44,14 @@
         pointer-events: auto;
         position: absolute;
         z-index: 10;
+
+        &.r {
+          &:before {
+            left: 100%;
+            right: initial;
+            width: calc(35vw - 320px);
+          }
+        }
       }
 
       .title {
@@ -74,19 +82,26 @@
 }
 
 /* --- QUERIES --- */
-/* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 640px) {
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
   .webdoor {
     &--item {
       &--content {
-        padding: 0 20px;
+        margin: 0;
+        padding: 40px 0 90px;
 
         .btn-more {
           bottom: initial;
           float: right;
-          margin: 20px 0 0;
           right: 0;
           position: relative;
+
+          &.r {
+            &:before {
+              left: 100%;
+              width: 20px;
+            }
+          }
         }
       }
     }

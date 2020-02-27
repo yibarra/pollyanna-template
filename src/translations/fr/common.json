@@ -1,12 +1,12 @@
 {
   "home": "Accueil",
-  "bio": "Biox",
+  "bio": "Bio",
   "events": "Eventx",
-  "contact": "Contaxu",
+  "contact": "Contact",
   "Fotografo": "photographerx",
   "interview": "Elle a été interviewée",
   "webdoorOne": "Pollyanna est une chanteuse brésilienne de Rio de Janeiro. Elle est diplômée en musicothérapie au Conservatoire Brésilien de Musique, où elle a également étudié le chant classique et la guitare. Cependant, c'est dans la samba, la bossa nova et dans la musique brésilienne qu’elle s’est révélée artistiquement.",
-  "seeMore": "See morX",
+  "seeMore": "Voir plus",
   "webdoorTwo": "Elle a été interviewée pour le “Porto Canal”, le New York Times, “Canal Futura”, “Programa Estrelas” (Rede Globo), le documentaire Pollyanna Ferrari - Canto dos Cantos, Radio Multi Rio.",
 
   "name": "Nom",
@@ -21,5 +21,5 @@
   "message": "Message",
   "yourMessage": "Votre message",
   "successMessage": "Merci pour votre message. Nous vous contacterons bientôt.",
-  "send": "Send"
+  "send": "Envoyer"
 }
