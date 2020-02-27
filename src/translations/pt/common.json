@@ -22,6 +22,7 @@
   "yourPhone": "Seu telefone",
   "message": "Mensagem",
   "yourMessage": "Sua mensagem",
-  "successMessage": "Agradecemos sua mensagem. Entraremos em contato em breve."
+  "successMessage": "Agradecemos sua mensagem. Entraremos em contato em breve.",
+  "send": "Enviar"
   
 }

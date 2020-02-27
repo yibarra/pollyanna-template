@@ -15,13 +15,11 @@ const LangSelect = () => {
     if (i18n instanceof Object === false || !i18n) return false;
 
     if (Array.isArray(i18n.languages)) {
-      const orderLanguages = i18n.languages.sort();
-
-      return orderLanguages.map((item, index) => {
-        return <li className="lang-select--item" key={index}>
-            <button className="lang" onClick={() => onSelect(i18n, item, index)}>{item}</button>
-          </li>;
-      });
+      const languages = i18n.languages.sort((a, b) => a.localeCompare(b));
+      
+      return languages.reverse().map((item, index) => <li className="lang-select--item" key={index}>
+          <button className="lang" onClick={() => onSelect(i18n, item, index)}>{item}</button>
+        </li>);
     }
 
     return false;
@@ -36,9 +34,9 @@ const LangSelect = () => {
   };
 
   // position
-  const position = i18n => {
-    const left = (index / i18n.languages.length) * 100;
-    const width = parseInt(Math.floor(100 / i18n.languages.length));
+  const position = ({ languages }) => {
+    const left = (index / languages.length) * 100;
+    const width = parseInt(Math.floor(100 / languages.length));
 
     return { left: `${left}%`, width: `${width}%` };
   };

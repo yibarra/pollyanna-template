@@ -20,5 +20,6 @@
   "yourPhone": "Your phone",
   "message": "Message",
   "yourMessage": "Your message",
-  "successMessage": "Thank you for your message. We will contact you soon."
+  "successMessage": "Thank you for your message. We will contact you soon.",
+  "send": "Send"
 }

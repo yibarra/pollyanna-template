@@ -58,7 +58,7 @@ const Form = props => {
       {Array.isArray(form) && form.map((item, index) => 
         <FormTypes item={item} index={index} key={index} />)} 
 
-      <button className="btn btn-more">{t('enviar')}</button>
+      <button className="btn btn-more">{t('send')}</button>
     </form>
   );
 };

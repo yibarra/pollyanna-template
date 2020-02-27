@@ -23,7 +23,7 @@ const Contact = props => {
         <ContactInfo contacts={contacts} credits={credits} />
 
         <div className="contact--form">
-          <h1 className="title-main">{t('mensagem')}</h1>
+          <h1 className="title-main">{t('message')}</h1>
           <Form form={form} />
         </div>
       </div>
