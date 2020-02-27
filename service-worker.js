@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pollyanna-template/precache-manifest.aa754b787ea89a00108e52cd381eb837.js"
+  "/pollyanna-template/precache-manifest.4d7c4ba6a0d6b4263f53fe5af76d01ea.js"
 );
 
 self.addEventListener('message', (event) => {
