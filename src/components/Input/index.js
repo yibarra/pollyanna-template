@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useTranslation } from 'react-i18next';
+
 import './input.scss';
 
 // Input
-const Input = props => {
-  // props
-  const { error, name, required, placeholder, type } = props;
+const Input = ({ error, name, required, placeholder, type }) => {
+  // translate
+  const { t } = useTranslation();
 
   // state
   const [ valid, setValid ] = useState(true);
@@ -57,11 +59,11 @@ const Input = props => {
         onKeyUp={checkInput}
         ref={element}
         required={required}
-        placeholder={placeholder}
+        placeholder={t(placeholder)}
         type="text" />
       <label className="input--label">
-        <span className="text">{name}</span>
-        <label className="input--error">{error}</label>
+        <span className="text">{t(name)}</span>
+        <label className="input--error">{t(error)}</label>
       </label>
     </label>
   );

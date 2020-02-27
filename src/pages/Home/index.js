@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import { useSwipeable } from 'react-swipeable';
 
 import Webdoor from '../../components/Webdoor';
@@ -49,11 +50,15 @@ const Home = props => {
   // return
   return (
     <div className="page home" {...handlers}>
-      <Webdoor
-        current={current}
-        items={webdoor}
-        onNextPrev={onNextPrev}
-        setCurrent={setCurrent} />
+      <ReactScrollWheelHandler
+        upHandler={() => onNextPrev('next')}
+        downHandler={() => onNextPrev('prev')}>
+        <Webdoor
+          current={current}
+          items={webdoor}
+          onNextPrev={onNextPrev}
+          setCurrent={setCurrent} />
+      </ReactScrollWheelHandler>
     </div>
   );
 }
