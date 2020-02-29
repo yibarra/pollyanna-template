@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SliderItem from '../SliderItem';
+
 import './slider-list.scss';
 
 // Slider List
 const SliderList = ({ children, current, last }) => {
-  // items child
-  const itemsChilds = React.Children.map(children, (child, index) => {
-    return <li
-      className="slider--item"
-      data-active={current === index}
-      data-last={last === index}
-      key={index}>{child}</li>
-  });
-
   // render
   return (
-    <ul className="slider--container">{itemsChilds}</ul>
+    <ul className="slider--container">{React.Children.map(children, (child, index) =>
+      <SliderItem
+        active={current === index}
+        last={last === index}
+        key={index}>{child}</SliderItem>
+    )}</ul>
   );
 };
 

@@ -38,3 +38,28 @@
     }
   }
 }
+
+/* --- QUERIES --- */
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .gallery-min {
+    .slider {
+      &[data-type="4"] {
+        height: auto;
+        width: 100%;
+
+        .slider {
+          &--container {
+            height: auto;
+            width: 100%;
+          }
+
+          &--item {
+            float: left;
+            position: relative;
+          }
+        }
+      }
+    }
+  }
+}

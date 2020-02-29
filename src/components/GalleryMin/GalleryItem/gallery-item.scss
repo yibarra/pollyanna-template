@@ -2,26 +2,47 @@
 @import '../../../styles/settings/settings';
 @import '../../../styles/tools/mixins';
 
+@import '../../../styles/components/animations';
+
 .gallery-item {
   @include box-display;
   align-content: center;
   align-items: center;
+  display: flex;
   float: left;
   flex-flow: row nowrap;
   justify-content: center;
   height: 100%;
-  overflow: hidden;
-  text-align: center;
-  object-fit: contain;
-  object-position: 50% 50%;
   position: relative;
+  text-align: center;
+  transition: transform calc(#{$base-duration} / 4) #{$base-ease};
   width: 100%;
-
+  
   img {
     @include box-display;
-    height: 100%;
-    float: left;
-    width: auto;
-    vertical-align: top;
+    height: 110%;
+    left: -5%;
+    object-fit: cover;
+    pointer-events: none;
+    position: absolute;
+    top: -5%;
+    transition: transform calc(#{$base-duration} / 4) #{$base-ease};
+    user-select: none;
+    width: 110%;
+  }
+}
+
+/* --- QUERIES --- */
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .gallery-item {
+    height: 400px;
+
+    img {
+      left: initial;
+      float: left;
+      position: relative;
+      top: initial;
+    }
   }
 }

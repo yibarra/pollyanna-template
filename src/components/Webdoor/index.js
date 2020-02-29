@@ -19,7 +19,7 @@ const Webdoor = ({ items, current, setCurrent }) => {
     }
   };
 
-  // render  
+  // render
   return (
     <section className="webdoor">
       {items &&

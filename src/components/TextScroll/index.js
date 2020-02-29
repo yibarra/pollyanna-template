@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Scrollbars } from 'react-custom-scrollbars';
+import { useWindowSize } from '@react-hook/window-size';
 
 import './text-scroll.scss';
 
 // text scroll
-const TextScroll = props => {
-  // props
-  const { height, type, width } = props;
+const TextScroll = ({ children, height, type }) => {
+  // width
+  const [ width ] = useWindowSize();
   
   // render
   return (
@@ -18,9 +19,11 @@ const TextScroll = props => {
         <p>Rio de Janeiro Brasil</p>
       </div>
 
-      <Scrollbars style={{ width: width, height: height }}>
-        {props.children}
-      </Scrollbars>
+      {width > 768 && <Scrollbars style={{ height: height }}>
+        {children}
+      </Scrollbars>}
+
+      {width <= 768 && <div>{children}</div>}
     </div>
   )
 };
@@ -28,7 +31,6 @@ const TextScroll = props => {
 TextScroll.propTypes = {
   height: PropTypes.number,
   type: PropTypes.number.isRequired,
-  width: PropTypes.number,
 };
 
 export default TextScroll;

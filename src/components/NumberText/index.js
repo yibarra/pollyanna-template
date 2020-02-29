@@ -38,11 +38,11 @@ const NumberText = props => {
 
   // decimal
   const decimal = numb => {
-    if (numb < 10) {
+    if (numb < 9) {
       return `0${numb + 1}`;
     }
 
-    return numb;
+    return numb + 1;
   };
 
   // use effect

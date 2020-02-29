@@ -51,8 +51,8 @@ const Home = props => {
   return (
     <div className="page home" {...handlers}>
       <ReactScrollWheelHandler
-        upHandler={() => onNextPrev('next')}
-        downHandler={() => onNextPrev('prev')}>
+        upHandler={() => onNextPrev('prev')}
+        downHandler={() => onNextPrev('next')}>
         <Webdoor
           current={current}
           items={webdoor}

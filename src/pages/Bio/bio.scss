@@ -5,6 +5,13 @@
 .bio {
   text-align: center;
 
+  &--scroll {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
   .wrapper {
     pointer-events: auto;
 
@@ -33,7 +40,6 @@
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
   .bio {
-    
     .gallery-min,
     .text-scroll {
       height: auto;
@@ -46,6 +52,7 @@
     }
 
     .text-scroll {
+      
     }
   }
 }
