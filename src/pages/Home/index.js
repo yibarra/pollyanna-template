@@ -9,12 +9,9 @@ import Webdoor from '../../components/Webdoor';
 import './home.scss';
 
 // Home
-const Home = props => {
+const Home = ({ mobile, page: { webdoor }}) => {
   // current
   const [ current, setCurrent ] = useState(0);
-
-  // props
-  const { page: { webdoor } } = props;
 
   // on set item
   const onSetItem = (index) => {
@@ -37,12 +34,17 @@ const Home = props => {
     onSetItem(index);
   };
 
+  // handlder mobile
+  const handlerMobile = value => {
+    if (mobile.isMobile() !== true) {
+      onNextPrev(value);
+    }
+  };
+
   // handlers
   const handlers = useSwipeable({
     onSwipedLeft: () => onNextPrev('next'),
     onSwipedRight: () => onNextPrev('prev'),
-    onSwipedDown: () => onNextPrev('prev'),
-    onSwipedUp: () => onNextPrev('next'),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -51,8 +53,8 @@ const Home = props => {
   return (
     <div className="page home" {...handlers}>
       <ReactScrollWheelHandler
-        upHandler={() => onNextPrev('prev')}
-        downHandler={() => onNextPrev('next')}>
+        upHandler={() => handlerMobile('prev')}
+        downHandler={() => handlerMobile('next')}>
         <Webdoor
           current={current}
           items={webdoor}

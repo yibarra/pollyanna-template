@@ -199,8 +199,8 @@
 }
 
 /* --- QUERIES --- */
-/* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 640px) {
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
   .contact {
     height: auto;
     padding: 70px 0;

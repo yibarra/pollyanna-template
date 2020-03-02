@@ -1,7 +1,8 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import { PageContext } from '../../providers/PageProvider';
 import PlayerProvider from '../../providers/PlayerProvider';
@@ -19,6 +20,9 @@ import './content.scss';
 
 // Content
 const Content = props => {
+  // detect mobile
+  const detectMobile = useMobileDetect();
+
   // page context
   const pageContext = useContext(PageContext);
   // page
@@ -26,15 +30,15 @@ const Content = props => {
 
   // render
   return (
-    <Fragment>
+    <HashRouter basename='/'>
       <div className="content">
         <Header location={props.location} />
 
         <Switch>
-          <Route path="/" exact render={() => <Home {...props} page={page} />} />
-          <Route path="/bio" component={Bio} />
-          <Route path="/events" component={Events} />
-          <Route path="/contact" render={() => <Contact {...props} page={page} />} />
+          <Route path="/" exact render={() => <Home {...props} page={page} mobile={detectMobile} />} />
+          <Route path="/bio" render={() => <Bio {...props} page={page} mobile={detectMobile} />} />
+          <Route path="/events" render={() => <Events {...props} page={page} mobile={detectMobile} />} />
+          <Route path="/contact" render={() => <Contact {...props} page={page} mobile={detectMobile} />} />
         </Switch>
 
         <Footer />
@@ -43,7 +47,7 @@ const Content = props => {
       <PlayerProvider>
         <MiniPlayer />
       </PlayerProvider>
-    </Fragment>
+    </HashRouter>
   );
 };
 

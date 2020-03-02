@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
@@ -14,18 +14,18 @@ import Theme from '../../components/Theme';
 import './../../styles/main.scss';
 
 // Main
-const Main = props => {
+const Main = ({ location }) => {
   // render
   return (
     <Suspense fallback="loading...">
       <MainProvider>
         <MainContext.Consumer>
           {(context) =>
-            <PageProvider location={props.location} {...context}>
+            <PageProvider location={location} {...context}>
               <ThemeProvider {...context}>
                 <Theme>
                   <Loader />
-                  <Content location={props.location} />
+                  <Content location={location} />
                 </Theme>
               </ThemeProvider>
             </PageProvider>}

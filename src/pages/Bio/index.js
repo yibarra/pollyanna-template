@@ -9,7 +9,7 @@ import TextScroll from '../../components/TextScroll';
 
 import './bio.scss';
 
-const Bio = () => {
+const Bio = ({ mobile }) => {
   // current
   const [ current, setCurrent ] = useState(0);
   // last
@@ -68,12 +68,17 @@ const Bio = () => {
     onSetItem(index);
   };
 
+  // handlder mobile
+  const handlerMobile = value => {
+    if (mobile.isMobile() !== true) {
+      onNextPrev(value);
+    }
+  };
+
   // handlers
   const handlers = useSwipeable({
-    onSwipedLeft: () => onNextPrev('next'),
-    onSwipedRight: () => onNextPrev('prev'),
-    onSwipedDown: () => onNextPrev('prev'),
-    onSwipedUp: () => onNextPrev('next'),
+    onSwipedLeft: () => handlerMobile('next'),
+    onSwipedRight: () => handlerMobile('prev'),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -82,8 +87,8 @@ const Bio = () => {
   return (
     <div className="page bio" {...handlers}>
       <ReactScrollWheelHandler
-        upHandler={() => onNextPrev('prev')}
-        downHandler={() => onNextPrev('next')}>
+        upHandler={() => handlerMobile('prev')}
+        downHandler={() => handlerMobile('next')}>
           <div className="wrapper">
             <GalleryMin
               current={current}

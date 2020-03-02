@@ -8,12 +8,7 @@ const PageContext = createContext({
 });
 
 // Page provider
-const PageProvider = props => {
-  // location
-  const location = props.location;
-  // pages
-  const pages = props.pages;
-
+const PageProvider = ({ children, location, pages }) => {
   // page
   const [ page, setPage ] = useState({});
 
@@ -35,7 +30,7 @@ const PageProvider = props => {
   // Handle Location Change
   const handleLocationChange = useCallback(routeLocation => {
     if (routeLocation instanceof Object) {
-      const location = routeLocation.pathname.substring(1).split('/')[0];
+      const location = routeLocation.hash.replace(`#/`, ``);
 
       return setCurrentPage(location);
     }
@@ -52,7 +47,7 @@ const PageProvider = props => {
   return (
     <PageContext.Provider value={
       { page: page, setPage: setPage, }
-    }>{props.children}</PageContext.Provider>
+    }>{children}</PageContext.Provider>
   );
 };
 
