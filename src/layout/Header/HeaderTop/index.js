@@ -12,10 +12,7 @@ import './header-top.scss';
  * 
  * @param {*} props 
  */
-const HeaderTop = props => {
-  // props
-  const { active, onActive } = props;
-
+const HeaderTop = ({ active, onActive }) => {
   // return
   return (
     <div className="header--top">

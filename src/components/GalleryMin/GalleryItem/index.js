@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import './gallery-item.scss';
 
 // GalleryItem
-const GalleryItem = props => {
+const GalleryItem = ({ url, author }) => {
   // render  
   return (
     <div className="gallery-item">
-      <img src={props.src} alt={props.title} />
+      <img src={url} alt={author} />
     </div>
   );
 };

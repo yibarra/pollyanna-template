@@ -126,6 +126,17 @@
           width: 100%;
         }
       }
+
+      .number-text {
+        left: 40px;
+        bottom: initial;
+        top: 80px;
+        z-index: 9;
+
+        p {
+          color: var(--background-color);
+        }
+      }
     }
 
     &[data-type="4"] {

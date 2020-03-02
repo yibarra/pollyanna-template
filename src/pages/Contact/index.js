@@ -9,12 +9,9 @@ import Form from '../../components/Form';
 import './contact.scss';
 
 // contact
-const Contact = props => {
+const Contact = ({ page: { form, contacts, credits } }) => {
   // translate
   const { t } = useTranslation();
-
-  // props
-  const { page: { form, contacts, credits } } = props;
 
   // render
   return (

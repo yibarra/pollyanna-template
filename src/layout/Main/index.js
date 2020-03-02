@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';

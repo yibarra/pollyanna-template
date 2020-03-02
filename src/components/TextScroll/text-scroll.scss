@@ -61,6 +61,14 @@
     
     > div {
       width: 100%;
+
+      p {
+        @include font($font-text, 13px, 400, var(--text-color));
+        line-height: 1.7em;
+        position: relative;
+        vertical-align: top;
+        white-space: pre-line;
+      }
       
       > div {
         &:first-child {

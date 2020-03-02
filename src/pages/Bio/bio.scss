@@ -6,6 +6,8 @@
   text-align: center;
 
   &--scroll {
+    @include box-display;
+    float: left;
     left: 50%;
     position: absolute;
     top: 50%;
@@ -51,8 +53,15 @@
       position: relative;
     }
 
-    .text-scroll {
-      
+    &--scroll {
+      left: initial;
+      position: relative;
+      transform: initial;
+      top: initial;
+    }
+
+    &:before {
+      display: none;
     }
   }
 }
