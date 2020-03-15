@@ -12,7 +12,7 @@ import './webdoor-item.scss';
  * @class WebdoorItem
  * @extends {Component}
  */
-const WebdoorItem = (props) => {
+const WebdoorItem = ({ description, linkUrl, linkText, name }) => {
   // translate
   const { t } = useTranslation();
   
@@ -24,10 +24,10 @@ const WebdoorItem = (props) => {
    */
   return (
     <div className="webdoor--item--content">
-      <p className="title">{t(props.name)}</p>
-      <p className="description">{t(props.description)}</p>
+      <p className="title">{t(name)}</p>
+      <p className="description">{t(description)}</p>
 
-      <NavLink className="btn-more r" to={props.linkUrl}>{t(props.linkText)}</NavLink>
+      <NavLink className="btn-more r" to={linkUrl}>{t(linkText)}</NavLink>
     </div>
   );
 };

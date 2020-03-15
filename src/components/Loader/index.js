@@ -1,30 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import anime from 'animejs/lib/anime.es.js';
+
 import './loader.scss';
 
-// loader
-const Loader = props => {
-  // complete
-  const [ complete, setComplete ] = useState(false);
+// Loader 
+const Loader = () => {
+  // state
+  const [ loaded, setLoaded ] = useState(false);
+
+  // animate value
+  const animateValue = (start, end, duration) => {
+    const range = end - start;
+    let current = start;
+    let increment = end > start ? 1 : -1;
+    let stepTime = Math.abs(Math.floor(duration / range));
+    
+    const timer = setInterval(() => {
+      current += increment;
+    
+      if (current === end) {
+        clearInterval(timer);
+
+        anime.timeline({
+          easing: 'cubicBezier(.17,.67,.5,.87)',
+          duration: 400
+        }).add({
+          targets: '.loading--loader',
+          scale: [1, 0],
+          opacity: [1, 0],
+          duration: 300,
+        }).add({
+          targets: '.loading',
+          opacity: [1, 0],
+          complete: () => setLoaded(true),
+        });
+      }
+    }, stepTime);
+  };
 
   // use effect
   useEffect(() => {
-    window.addEventListener('load', () => setComplete(true), false);
+    const init = () => {
+      const perfData = window.performance.timing;
+      const EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
+      const time = parseInt((EstimatedTime/700)%50)*100;
 
-    return () => {
-      window.removeEventListener('load', () => {});
+      //function
+      animateValue(0, 100, time);
     };
-  }, []);
 
+    init();
+  });
+  
   // render
   return (
-    <div className="loader" data-complete={complete}>{props.children}</div>
+    <div className="loading" data-complete={loaded}>
+      <div className="loading--loader">
+        <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="logo" />
+      </div>
+    </div>
   );
 };
 
 Loader.propTypes = {
-  any: PropTypes.any,
+  any: PropTypes.any
 };
 
 export default Loader;

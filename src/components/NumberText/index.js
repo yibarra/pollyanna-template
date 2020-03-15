@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -7,12 +7,12 @@ import anime from 'animejs';
 import './number-text.scss';
 
 // number text
-const NumberText = props => {
+const NumberText = ({ last, current, type }) => {
   // element
   const element = useRef(false);
 
   // animate text
-  const animateText = (element, options) => {
+  const animateText = useCallback((element, options) => {
     if (element instanceof Object === false) return false;
 
     anime({
@@ -20,29 +20,27 @@ const NumberText = props => {
       easing: 'easeOutSine',
       ...options
     })
-  };
+  }, []);
 
   // animate
-  const animate = () => {
-    const last = ReactDOM.findDOMNode(element.current.querySelector('.last'));
-    const current = ReactDOM.findDOMNode(element.current.querySelector('.current'));
+  const animate = useCallback(() => {
+    const eLast = ReactDOM.findDOMNode(element.current.querySelector('.last'));
+    const eCurrent = ReactDOM.findDOMNode(element.current.querySelector('.current'));
 
-    if (props.last > props.current) {
-      animateText(current, {translateY: [-85, 0], delay: 100, duration: 400});
-      animateText(last, {translateY: [0, 85], delay: 150, duration: 300});
+    if (last > current) {
+      animateText(eCurrent, {translateY: [-85, 0], delay: 100, duration: 400});
+      animateText(eLast, {translateY: [0, 85], delay: 150, duration: 300});
     } else {
-      animateText(current, {translateY: [85, 0], delay: 100, duration: 300});
-      animateText(last, {translateY: [0, -85], delay: 150, duration: 300});
+      animateText(eCurrent, {translateY: [85, 0], delay: 100, duration: 300});
+      animateText(eLast, {translateY: [0, -85], delay: 150, duration: 300});
     }
-  };
+  }, [ animateText, last, current ]);
 
   // decimal
   const decimal = numb => {
-    if (numb < 9) {
-      return `0${numb + 1}`;
-    }
+    if (isNaN(numb)) return '00';
 
-    return numb + 1;
+    return (numb < 9) ? `0${numb + 1}` : numb + 1;
   };
 
   // use effect
@@ -52,20 +50,20 @@ const NumberText = props => {
     } else {
       animate();
     }
-  });
+  }, [ current, animate ]);
 
   // render
   return (
-    <div className="number-text" data-type={props.type} ref={element}>
-      <p className="last">{decimal(props.last)}</p>
-      <p className="current">{decimal(props.current)}</p>
+    <div className="number-text" data-type={type} ref={element}>
+      <p className="last">{decimal(last)}</p>
+      <p className="current">{decimal(current)}</p>
     </div>
   );
 };
 
 NumberText.propTypes = {
-  last: PropTypes.number,
   current: PropTypes.number,
+  last: PropTypes.number,
   type: PropTypes.number.isRequired,
 };
 

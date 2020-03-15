@@ -181,21 +181,6 @@
     transform: translate(-50%, -50%);
     width: 1px;
   }
-
-  &:before {
-    @include box-display;
-    background-image: url(/images/bg-menu.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    content: '';
-    height: 100vh;
-    left: 0;
-    opacity: .2;
-    mix-blend-mode: screen;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-  }
 }
 
 /* --- QUERIES --- */

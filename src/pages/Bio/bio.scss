@@ -21,21 +21,6 @@
       z-index: 6;
     }
   }
-
-  &:before {
-    @include box-display;
-    background-image: url(/images/bg-contact.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    content: '';
-    height: 100vh;
-    left: 0;
-    opacity: .4;
-    mix-blend-mode: screen;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-  }
 }
 
 /* --- QUERIES --- */
@@ -58,10 +43,6 @@
       position: relative;
       transform: initial;
       top: initial;
-    }
-
-    &:before {
-      display: none;
     }
   }
 }

@@ -12,10 +12,12 @@ import './home.scss';
 const Home = ({ mobile, page: { webdoor }}) => {
   // current
   const [ current, setCurrent ] = useState(0);
+  const [ last, setLast ] = useState(null);
 
   // on set item
   const onSetItem = (index) => {
     if (Number.isInteger(index) === true) {
+      setLast(current);
       setCurrent(index);
     }
   };
@@ -43,8 +45,8 @@ const Home = ({ mobile, page: { webdoor }}) => {
 
   // handlers
   const handlers = useSwipeable({
-    onSwipedLeft: () => onNextPrev('next'),
-    onSwipedRight: () => onNextPrev('prev'),
+    onSwipedLeft: () => setTimeout(() => onNextPrev('next'), 300),
+    onSwipedRight: () => setTimeout(() => onNextPrev('prev'), 300),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -58,8 +60,9 @@ const Home = ({ mobile, page: { webdoor }}) => {
         <Webdoor
           current={current}
           items={webdoor}
+          last={last}
           onNextPrev={onNextPrev}
-          setCurrent={setCurrent} />
+          setCurrent={onSetItem} />
       </ReactScrollWheelHandler>
     </div>
   );

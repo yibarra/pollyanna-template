@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { HashRouter, Route, Switch } from 'react-router-dom';
 import useMobileDetect from 'use-mobile-detect-hook';
 
 import { PageContext } from '../../providers/PageProvider';
@@ -12,7 +11,6 @@ import Footer from '../Footer';
 
 import Bio from '../../pages/Bio';
 import Contact from '../../pages/Contact';
-import Events from '../../pages/Events';
 import Home from '../../pages/Home';
 import MiniPlayer from '../../components/MiniPlayer';
 
@@ -26,28 +24,40 @@ const Content = props => {
   // page context
   const pageContext = useContext(PageContext);
   // page
-  const { page } = pageContext;
+  const { page, pages } = pageContext;
+
+  // types
+  const types = item => {
+    if (item instanceof Object === false) return false;
+
+    switch (item.type) {
+      case 'bio':
+        return <Bio {...props} page={item} mobile={detectMobile}  />;
+      case 'contact':
+        return <Contact {...props} page={item} mobile={detectMobile} />;
+      case 'home':
+        default:
+          return <Home {...props} page={item} mobile={detectMobile} />;
+    }
+  };
 
   // render
   return (
-    <HashRouter basename='/'>
+    <Fragment>
       <div className="content">
         <Header location={props.location} />
-
-        <Switch>
-          <Route path="/" exact render={() => <Home {...props} page={page} mobile={detectMobile} />} />
-          <Route path="/bio" render={() => <Bio {...props} page={page} mobile={detectMobile} />} />
-          <Route path="/events" render={() => <Events {...props} page={page} mobile={detectMobile} />} />
-          <Route path="/contact" render={() => <Contact {...props} page={page} mobile={detectMobile} />} />
-        </Switch>
-
+        
+        {pages && pages.map((item, index) =>
+          <section className="page-current" data-active={page === item} key={index}>
+            {types(item)}
+          </section>)}
         <Footer />
       </div>
 
       <PlayerProvider>
         <MiniPlayer />
       </PlayerProvider>
-    </HashRouter>
+    </Fragment>
   );
 };
 

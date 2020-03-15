@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 // page context
 const PageContext = createContext({
   page: {},
+  pages: {},
   setPage: () => {},
 });
 
@@ -14,25 +15,18 @@ const PageProvider = ({ children, location, pages }) => {
 
   // set theme
   const setCurrentPage = useCallback(location => {
-    if (Array.isArray(pages)) {
-      for (let element of pages) {
-        if (location === '' || location === '/') {
-          setPage(element);
-        } else {
-          if (element.slug === `/${location}`) {
-            setPage(element);
-          }
-        }
-      }
+    if (pages instanceof Object) {
+      const currentPage = pages.filter((item) => location === item.slug)[0];
+      setPage(currentPage);
     }
   }, [ pages, setPage ]);
 
   // Handle Location Change
   const handleLocationChange = useCallback(routeLocation => {
     if (routeLocation instanceof Object) {
-      const location = routeLocation.hash.replace(`#/`, ``);
+      const { pathname } = routeLocation;
 
-      return setCurrentPage(location);
+      return setCurrentPage(pathname);
     }
 
     return setCurrentPage('/');
@@ -46,7 +40,7 @@ const PageProvider = ({ children, location, pages }) => {
   // render
   return (
     <PageContext.Provider value={
-      { page: page, setPage: setPage, }
+      { page, pages, setPage }
     }>{children}</PageContext.Provider>
   );
 };

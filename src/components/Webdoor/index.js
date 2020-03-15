@@ -7,10 +7,10 @@ import WebdoorItem from './WebdoorItem';
 import './webdoor.scss';
 
 // Webdoor
-const Webdoor = ({ items, current, setCurrent }) => {
+const Webdoor = ({ items, current, last, setCurrent }) => {
   // callback set current
   const callback = (current) => {
-    if (Number.isInteger(current) === false) return false;
+    if (isNaN(current)) return false;
 
     const item = items[current];
 
@@ -24,7 +24,7 @@ const Webdoor = ({ items, current, setCurrent }) => {
     <section className="webdoor">
       {items &&
         <Fragment>
-          <Slider current={current} callback={callback} items={items} type={1} background={true}>
+          <Slider current={current} last={last} callback={callback} items={items} type={1} background={true}>
             {items.map((item, index) => <WebdoorItem {...item} key={index} />)}
           </Slider>
         </Fragment>}
@@ -34,6 +34,7 @@ const Webdoor = ({ items, current, setCurrent }) => {
 
 Webdoor.propTypes = {
   current: PropTypes.number,
+  last: PropTypes.number,
   items: PropTypes.array,
   setCurrent: PropTypes.func.isRequired,
 }

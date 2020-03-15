@@ -11,23 +11,32 @@
   width: 100%;
   vertical-align: top;
 
-  .background-text {
-    &--item {
-      &:nth-child(1) {
-        right: var(--background-text-one);
-      }
+  .page-current {
+    @include box-display;
+    display: none;
+    float: left;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    vertical-align: top;
 
-      &:nth-child(2) {
-        right: var(--background-text-two);
-      }
+    &[data-active="true"] {
+      display: inline-block;
+    }
 
-      &:nth-child(3) {
-        left: var(--background-text-three);
-      }
-
-      &:nth-child(4) {
-        left: var(--background-text-four);
-      }
+    &:before {
+      @include box-display;
+      background-image: url(/images/bg-menu.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
+      height: 100vh;
+      left: 0;
+      opacity: .5;
+      mix-blend-mode: screen;
+      position: absolute;
+      top: 0;
+      width: 100vw;
     }
   }
 }

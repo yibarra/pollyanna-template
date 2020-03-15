@@ -89,7 +89,7 @@ $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
  */
  @keyframes slide-in-right {
   0% {
-    transform: translateX(1000px);
+    transform: translateX(100%);
     opacity: 0;
   }
   100% {
@@ -100,7 +100,7 @@ $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
 
 @keyframes slide-in-right-x {
   0% {
-    transform: translateX(1000px);
+    transform: translateX(100%);
     opacity: 0;
   }
   100% {
@@ -116,7 +116,7 @@ $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
  */
  @keyframes slide-in-left {
   0% {
-    transform: translateX(-1000px);
+    transform: translateX(-100%);
     opacity: 0;
   }
   100% {
@@ -127,7 +127,7 @@ $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
 
 @keyframes slide-in-left-x {
   0% {
-    transform: translateX(-1000px);
+    transform: translateX(-100%);
     opacity: 0;
   }
   100% {

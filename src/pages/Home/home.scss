@@ -12,29 +12,6 @@
   position: relative;
   vertical-align: top;
   z-index: 16;
-
-  &:before {
-    @include box-display;
-    background-image: url(/images/bg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    content: '';
-    height: 100vh;
-    left: 0;
-    opacity: .5;
-    mix-blend-mode: screen;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-  }
 }
 
 /* --- QUERIES --- */
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
-  .home {
-    &:before {
-      display: none;
-    }
-  }
-}

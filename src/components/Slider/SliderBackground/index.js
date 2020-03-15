@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Repultion from '../../Mouse/Repultion';
+import { useTranslation } from 'react-i18next';
 
 import './slider-background.scss';
 
 // Slider background
 const SliderBackground = ({ item }) => {
+  // translate
+  const { t } = useTranslation();
+
   // render
   return (
     <div className="slider--background">
@@ -32,11 +36,7 @@ const SliderBackground = ({ item }) => {
       </Repultion>
     
       <div className="slider--background--icon">
-        <span className="scroll-icon">
-          <span className="scroll-icon__wheel-outer">
-            <span className="scroll-icon__wheel-inner"></span>
-          </span>
-        </span>
+        <span className="text">{t('scroll down')}</span>
       </div>
     </div>
   );

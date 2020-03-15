@@ -7,7 +7,7 @@
     @include box-display;
     height: 100vh;
     left: 0;
-    max-width: 65vw;
+    max-width: 70vw;
     pointer-events: auto;
     position: absolute;
     top: 0;
@@ -21,9 +21,39 @@
     }
 
     &--icon {
-      height: 100vh;
-      right: 0;
-      width: 50px;
+      @include font($font-default, 10px, 400, var(--background-color));
+      animation: spaceboots 0.8s infinite forwards;
+      background-color: var(--text-color);
+      bottom: 20px;
+      height: auto;
+      left: 50vw;
+      line-height: 1em;
+      right: initial;
+      padding: 4px 10px;
+      transform: translate(-50%, 0);
+      width: auto;
+
+      .text {
+        @include box-display;
+      }
+
+      &:before {
+        @include box-display;
+        background-color: var(--text-color);
+        border: none;
+        border-left: 1px solid transparent;
+        content: '';
+        height: 20px;
+        left: 50%;
+        line-height: 1em;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 100%;
+        transform: translate(-50%, 0);
+        width: 1px;
+        vertical-align: top;
+      }
     }
 
     .repultion {
