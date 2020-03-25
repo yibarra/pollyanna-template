@@ -58,7 +58,10 @@ const Slider = ({ background, callback, current, last, children, items, type }) 
         {type === 1 && background === true &&
           <SliderBackground item={items[0]} />}
         
-        <SliderList children={children} current={current} last={last} />
+        <SliderList
+          children={children}
+          current={current}
+          last={last} />
 
         {(type === 1 || type === 4) && 
           <NumberText current={current} last={last} type={1} />}

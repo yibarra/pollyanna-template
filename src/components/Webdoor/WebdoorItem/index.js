@@ -24,10 +24,12 @@ const WebdoorItem = ({ description, linkUrl, linkText, name }) => {
    */
   return (
     <div className="webdoor--item--content">
-      <p className="title">{t(name)}</p>
-      <p className="description">{t(description)}</p>
+      <div className="container">
+        <p className="title">{t(name)}</p>
+        <p className="description">{t(description)}</p>
 
-      <NavLink className="btn-more r" to={linkUrl}>{t(linkText)}</NavLink>
+        <NavLink className="btn-more r" to={linkUrl}>{t(linkText)}</NavLink>
+      </div>
     </div>
   );
 };

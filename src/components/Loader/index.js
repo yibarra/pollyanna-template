@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import anime from 'animejs/lib/anime.es.js';
@@ -6,10 +6,7 @@ import anime from 'animejs/lib/anime.es.js';
 import './loader.scss';
 
 // Loader 
-const Loader = () => {
-  // state
-  const [ loaded, setLoaded ] = useState(false);
-
+const Loader = ({ loading, setLoading }) => {
   // animate value
   const animateValue = (start, end, duration) => {
     const range = end - start;
@@ -34,7 +31,7 @@ const Loader = () => {
         }).add({
           targets: '.loading',
           opacity: [1, 0],
-          complete: () => setLoaded(true),
+          complete: () => setLoading(true),
         });
       }
     }, stepTime);
@@ -56,7 +53,7 @@ const Loader = () => {
   
   // render
   return (
-    <div className="loading" data-complete={loaded}>
+    <div className="loading" data-complete={loading}>
       <div className="loading--loader">
         <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="logo" />
       </div>
@@ -65,7 +62,8 @@ const Loader = () => {
 };
 
 Loader.propTypes = {
-  any: PropTypes.any
+  loading: PropTypes.bool,
+  setLoading: PropTypes.func.isRequired,
 };
 
 export default Loader;

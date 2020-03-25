@@ -23,8 +23,8 @@ const Main = ({ location }) => {
           <PageProvider location={location} {...context}>
             <ThemeProvider {...context}>
               <Theme>
-                <Loader />
-                <Content location={location} />
+                <Loader loading={context.loading} setLoading={context.setLoading} />
+                <Content loading={context.loading} location={location} />
               </Theme>
             </ThemeProvider>
           </PageProvider>}

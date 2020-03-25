@@ -9,7 +9,7 @@ import Webdoor from '../../components/Webdoor';
 import './home.scss';
 
 // Home
-const Home = ({ mobile, page: { webdoor }}) => {
+const Home = ({ mobile, page: { webdoor }, loading }) => {
   // current
   const [ current, setCurrent ] = useState(0);
   const [ last, setLast ] = useState(null);
@@ -53,7 +53,7 @@ const Home = ({ mobile, page: { webdoor }}) => {
 
   // return
   return (
-    <div className="page home" {...handlers}>
+    <div className="page home" {...handlers} data-active={loading}>
       <ReactScrollWheelHandler
         upHandler={() => handlerMobile('prev')}
         downHandler={() => handlerMobile('next')}>

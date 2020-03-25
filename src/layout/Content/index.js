@@ -23,7 +23,6 @@ const Content = props => {
 
   // page context
   const pageContext = useContext(PageContext);
-  // page
   const { page, pages } = pageContext;
 
   // types
@@ -32,19 +31,19 @@ const Content = props => {
 
     switch (item.type) {
       case 'bio':
-        return <Bio {...props} page={item} mobile={detectMobile}  />;
+        return <Bio {...props} loading={props.loading} page={item} mobile={detectMobile}  />;
       case 'contact':
-        return <Contact {...props} page={item} mobile={detectMobile} />;
+        return <Contact {...props} loading={props.loading} page={item} mobile={detectMobile} />;
       case 'home':
         default:
-          return <Home {...props} page={item} mobile={detectMobile} />;
+          return <Home {...props} loading={props.loading} page={item} mobile={detectMobile} />;
     }
   };
 
   // render
   return (
     <Fragment>
-      <div className="content">
+      <div className="content" data-loading={props.loading}>
         <Header location={props.location} />
         
         {pages && pages.map((item, index) =>

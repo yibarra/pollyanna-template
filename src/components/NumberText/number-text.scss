@@ -36,12 +36,12 @@
       position: absolute;
       top: 0;
       transform: translateY(-100%);
-      transition: translateY 300ms cubic-bezier(0.64, 0.63, 0.17, 0.92);
+      transition: translateY 300ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
     }
     
     .current {
       transform: translateY(100%);
-      transition: translateY 300ms cubic-bezier(0.42,-0.07, 0.37, 0.38);
+      transition: translateY 300ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
     }
   }
 
