@@ -21,12 +21,3 @@
   line-height: 1.7em;
   letter-spacing: 0.02em;
 }
-
-// Example 1
-@keyframes scroll_1 {
-  0%   { transform: translateY(0); }
-  25%  { transform: translateY(-90%); }
-  50%  { transform: translateY(0); }
-  75%  { transform: translateY(90%); }
-  100% { transform: translateY(0); }
-}

@@ -2,20 +2,21 @@
 @import '../../../styles/settings/settings';
 @import '../../../styles/tools/mixins';
 
+@import '../../../styles/components/animations';
+
 .slider {
   &--background {
     @include box-display;
     height: 100vh;
     left: 0;
     max-width: 70vw;
-    pointer-events: auto;
     position: absolute;
     top: 0;
     width: 100%;
     z-index: 4;
 
     &--icon,
-    .repultion {
+    &--image {
       @include box-display;
       position: absolute;
     }
@@ -50,13 +51,12 @@
         padding: 0;
         position: absolute;
         top: 100%;
-        transform: translate(-50%, 0);
-        width: 1px;
+        width: 0;
         vertical-align: top;
       }
     }
 
-    .repultion {
+    &--image {
       align-items: center;
       display: inline-flex;
       flex-flow: row nowrap;
@@ -64,32 +64,20 @@
       height: 100vh;
       left: initial;
       overflow: hidden;
+      pointer-events: auto;
       max-width: calc(70vw - 180px);
       right: 40px;
       transform: translate(0, 0);
       top: 0;
       width: 100%;
 
-      &--item {
-        left: initial;
-        max-width: calc(100% - 65px);
-        height: auto;
-        overflow: hidden;
-        right: 0;
-        width: auto;
-      }
-
       .image {
         @include box-display;
         height: auto;
         pointer-events: none;
-        position: relative;
+        position: absolute;
         transform-origin: center;
         vertical-align: top;
-      }
-
-      .image {
-        z-index: 2;
       }
     }
   }
@@ -102,28 +90,12 @@
     &--background {
       height: auto;
 
-      .repultion {
+      &--image {
         height: auto;
         right: 0;
         padding: 0 20px;
         position: relative;
         max-width: initial;
-
-        &--item {
-          display: none;
-          max-width: initial;
-          height: auto;
-          width: 100%;
-
-          .image {
-            width: 100%;
-          }
-
-          &:first-child {
-            display: inline-block;
-            position: relative;
-          }
-        }
       }
     }
   }

@@ -172,6 +172,7 @@ class PlayerProvider extends Component {
   onSetAudio(audio, callback) {
     if (audio instanceof Object) {
       this.onPlayAudio();
+      audio.volume = 0.2;
 
       this.setState({
         audioData: audio,

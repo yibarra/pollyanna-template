@@ -28,11 +28,11 @@ const NumberText = ({ last, current, type }) => {
     const eCurrent = ReactDOM.findDOMNode(element.current.querySelector('.current'));
 
     if (last > current) {
-      animateText(eCurrent, {translateY: [-85, 0], delay: 100, duration: 400});
-      animateText(eLast, {translateY: [0, 85], delay: 150, duration: 300});
+      animateText(eCurrent, {translateY: [-85, 0], delay: 100, duration: 400, opacity: [0, 1]});
+      animateText(eLast, {translateY: [0, 85], delay: 150, duration: 300, opacity: [1, 0]});
     } else {
-      animateText(eCurrent, {translateY: [85, 0], delay: 100, duration: 300});
-      animateText(eLast, {translateY: [0, -85], delay: 150, duration: 300});
+      animateText(eCurrent, {translateY: [85, 0], delay: 100, duration: 300, opacity: [0, 1]});
+      animateText(eLast, {translateY: [0, -85], delay: 150, duration: 300, opacity: [1, 0]});
     }
   }, [ animateText, last, current ]);
 

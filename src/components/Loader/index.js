@@ -1,62 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-
-import anime from 'animejs/lib/anime.es.js';
 
 import './loader.scss';
 
 // Loader 
 const Loader = ({ loading, setLoading }) => {
+  // element
+  const element = useRef(null);
+
   // animate value
-  const animateValue = (start, end, duration) => {
+  const animateValue = useCallback((start, end, duration) => {
     const range = end - start;
     let current = start;
     let increment = end > start ? 1 : -1;
     let stepTime = Math.abs(Math.floor(duration / range));
     
     const timer = setInterval(() => {
+      const bar = element.current.querySelector('.loading--bar');
       current += increment;
+
+      if (bar instanceof Object) {
+        bar.style.width = `${current}%`;
+      }
     
       if (current === end) {
         clearInterval(timer);
-
-        anime.timeline({
-          easing: 'cubicBezier(.17,.67,.5,.87)',
-          duration: 400
-        }).add({
-          targets: '.loading--loader',
-          scale: [1, 0],
-          opacity: [1, 0],
-          duration: 300,
-        }).add({
-          targets: '.loading',
-          opacity: [1, 0],
-          complete: () => setLoading(true),
-        });
+        setLoading(true);
       }
     }, stepTime);
-  };
+  }, [ setLoading ]);
 
   // use effect
   useEffect(() => {
-    const init = () => {
-      const perfData = window.performance.timing;
-      const EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
-      const time = parseInt((EstimatedTime/700)%50)*100;
+    if (loading === false) {
+      const init = () => {
+        const perfData = window.performance.timing;
+        const EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
+        const time = parseInt((EstimatedTime/700)%50)*100;
 
-      //function
-      animateValue(0, 100, time);
-    };
+        //function
+        animateValue(0, 100, time);
+      };
 
-    init();
-  });
+      init();
+    }
+  }, [ loading, animateValue ]);
   
   // render
   return (
-    <div className="loading" data-complete={loading}>
+    <div className="loading" data-complete={loading} ref={element}>
       <div className="loading--loader">
         <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="logo" />
       </div>
+      
+      <div className="loading--bar"></div>
     </div>
   );
 };

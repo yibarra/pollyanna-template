@@ -29,6 +29,7 @@
       @include font($font-default, 85px, 400, var(--text-color));
       letter-spacing: -0.04em;
       line-height: 1em;
+      transition: translateY 300ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
     }
     
     .last {
@@ -36,12 +37,10 @@
       position: absolute;
       top: 0;
       transform: translateY(-100%);
-      transition: translateY 300ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
     }
     
     .current {
       transform: translateY(100%);
-      transition: translateY 300ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
     }
   }
 

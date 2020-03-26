@@ -2,13 +2,7 @@
 @import '../../../styles/settings/settings';
 @import '../../../styles/tools/mixins';
 
-@import '../../../styles/components/animations';
-
 .slider {
-  --x: 0;
-  --y: 0;
-  --d: 50;
-
   &--container {
     z-index: 5;
   }
@@ -20,24 +14,7 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    transition: opacity calc(#{$base-duration} / 2) #{$base-ease}, transform calc(#{$base-duration} / 2) #{$base-ease};
     z-index: 1;
-
-    &:hover {
-      --d: 30;
-        transform: 
-          scale(1.025) translate(
-            calc(var(--x) / var(--d) * 1px),
-            calc(var(--y) / var(--d) * 1px)
-          );
-
-      .gallery-item {
-        img {
-          --d: 20;
-          transform: translate(calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px));
-        }
-      }
-    }
 
     &[data-active="true"] {
       display: flex;
