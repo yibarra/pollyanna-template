@@ -53,9 +53,9 @@
   }
 
   &[data-complete="true"] {
-    //opacity: 0;
+    opacity: 0;
     transition: all 400ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
-    transition-delay: 400ms;
+    transition-delay: 900ms;
 
     .loading {
       &--loader {
@@ -63,7 +63,7 @@
       }
       
       &--bar {
-        width: 0px;
+        width: 0 !important;
       }
     }
   }

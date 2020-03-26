@@ -26,22 +26,6 @@
     width: 100%;
     vertical-align: top;
 
-    &:before {
-      @include box-display;
-      background-image: url(/images/bg-menu.png);
-      background-repeat: no-repeat;
-      background-size: cover;
-      content: '';
-      height: 100vh;
-      left: 0;
-      opacity: 0;
-      mix-blend-mode: screen;
-      position: absolute;
-      top: 0;
-      transition: opacity 700ms cubic-bezier(.57, .21, .69, 1.25);
-      width: 100vw;
-    }
-
     &[data-active="true"] {
       display: inline-block;
     }
@@ -51,12 +35,6 @@
     .header,
     .footer {
       opacity: 1;
-    }
-
-    .page-current {
-      &:before {
-        opacity: .5;
-      }
     }
   }
 }

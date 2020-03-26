@@ -87,6 +87,7 @@
     @include box-display;
     background-image: url(/images/noise.png);
     background-repeat: repeat;
+    background-size: auto;
     content: '';
     left: 0;
     height: 100%;
