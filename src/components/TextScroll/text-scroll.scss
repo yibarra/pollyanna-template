@@ -92,13 +92,15 @@
     &:before {
       @include box-display;
       background-color: var(--text-color);
+      border: none;
+      border-left: 1px solid transparent;
       content: '';
       height: 100vh;
       left: 4px;
       position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
-      width: 1px;
+      top: 0;
+      transform: translate(0, 0);
+      width: 0;
     }
   }
 }

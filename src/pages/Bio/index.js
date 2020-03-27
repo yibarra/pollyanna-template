@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ReactScrollWheelHandler from "react-scroll-wheel-handler";
-import { useSwipeable } from 'react-swipeable';
 import { useTranslation } from 'react-i18next';
 
 import GalleryMin from '../../components/GalleryMin';
@@ -10,7 +8,7 @@ import TextScroll from '../../components/TextScroll';
 
 import './bio.scss';
 
-const Bio = ({ mobile, page: { gallery } }) => {
+const Bio = ({ loading, mobile, page: { gallery } }) => {
   // translate
   const { t } = useTranslation();
 
@@ -48,40 +46,21 @@ const Bio = ({ mobile, page: { gallery } }) => {
     }
   };
 
-  // handlers
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handlerMobile('next'),
-    onSwipedRight: () => handlerMobile('prev'),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-  });
-
   // return
   return (
-    <div className="page bio" {...handlers}>
-      <ReactScrollWheelHandler
-        upHandler={() => handlerMobile('prev')}
-        downHandler={() => handlerMobile('next')}>
-          <div className="wrapper">
-            <GalleryMin
-              current={current}
-              last={last}
-              onNextPrev={onNextPrev}
-              setCurrent={setCurrent}
-              items={gallery}
-              type={2} />
+    <div className="page bio" data-active={loading}>
+      <div className="wrapper">
+        <GalleryMin
+          current={current}
+          last={last}
+          handlerMobile={handlerMobile}
+          onNextPrev={onNextPrev}
+          setCurrent={setCurrent}
+          items={gallery}
+          type={2} />
 
-            <div className="bio--scroll">
-              <span className="scroll-icon">
-                <span className="scroll-icon__wheel-outer">
-                  <span className="scroll-icon__wheel-inner"></span>
-                </span>
-              </span>
-            </div>
-
-            <TextScroll height={300} type={2}><p>{t('bioRelease')}</p></TextScroll>
-          </div>
-      </ReactScrollWheelHandler>
+        <TextScroll height={300} type={2}><p>{t('bioRelease')}</p></TextScroll>
+      </div>
     </div>
   )
 };

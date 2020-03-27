@@ -78,12 +78,10 @@
     &:hover {
       .slider {
         &--background {
-
           &--image {
             --d: 10;
             transform: scale(1) translate(calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px));
           }
-          
         }
       }
     }
@@ -92,7 +90,13 @@
   &[data-type="4"] {
     .slider {
       &--item {
+        pointer-events: auto;
         overflow: hidden;
+
+        &[data-active="true"] {
+          transition: opacity calc(#{$base-duration} / 2) #{$base-ease}, transform calc(#{$base-duration} / 2) #{$base-ease};
+        }
+
 
         &[data-last="true"] {
           left: 0;
@@ -126,6 +130,15 @@
               }
             }
           }
+        }
+      }
+    }
+
+    &:hover {
+      .slider {
+        &--item {
+          --d: 10;
+          transform: scale(1) translate(calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px));
         }
       }
     }

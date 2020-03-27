@@ -3,8 +3,92 @@
 $base-duration: 600ms;
 $base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
 
-/* --- EVENT --- */
+/* --- HOME --- */
+@keyframes home-element-in {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes home-element-left {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes home-element-rigth {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* -- BIO --- */
+@keyframes bio-element-left {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(0, -50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+@keyframes text-scroll {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 102px;
+    opacity: 1;
+  }
+}
+
+@keyframes text-scroll-line {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 100vh;
+    opacity: 1;
+  }
+}
+
+
+/* --- EVENT --- */
 @keyframes event-next {
   0% {
     left: 650px;
