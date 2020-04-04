@@ -59,7 +59,7 @@ const Bio = ({ loading, mobile, page: { gallery } }) => {
           items={gallery}
           type={2} />
 
-        <TextScroll height={300} type={2}><p>{t('bioRelease')}</p></TextScroll>
+        <TextScroll height={310} type={2}><p>{t('bioRelease')}</p></TextScroll>
       </div>
     </div>
   )

@@ -62,16 +62,23 @@ const MiniPlayer = () => {
     }
   }, [ audios, setAudio ]);
 
+  const onEnded = useCallback(() => {
+    audio.onended = (e => {
+      console.log(e);
+    });
+  }, [ audio ]);
+
   // use effect
   useEffect(() => {
     if (audios) {
       onSetItem(0);
+      onEnded();
     }
 
     if (width < 768) {
       onPlayAudio(false);
     }
-  }, [ audios, onSetItem, onPlayAudio, width ]);
+  }, [ audios, onEnded, onSetItem, onPlayAudio, width ]);
 
   // redner
   return (

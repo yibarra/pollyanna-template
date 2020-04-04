@@ -20,11 +20,16 @@
   "emailError": "Email invalido",
   "yourEmail": "Seu e-mail",
   "phone": "Telefone",
+  "phones": "Telefones",
   "phoneError": "Número de telefone invalido",
   "yourPhone": "Seu telefone",
   "message": "Mensagem",
   "yourMessage": "Sua mensagem",
   "successMessage": "Agradecemos sua mensagem. Entraremos em contato em breve.",
-  "send": "Enviar"
+  "send": "Enviar",
   
+  "designer": "Designer",
+  "photographer": "Fotógrafo",
+  "recordings": "Gravações",
+  "web developer": "Desenvolvedor Web"
 }

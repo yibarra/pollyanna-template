@@ -18,10 +18,16 @@
   "emailError": "Invalid email",
   "yourEmail": "Your email",
   "phone": "Phone",
+  "phones": "Phones",
   "phoneError": "Invalid phone",
   "yourPhone": "Your phone",
   "message": "Message",
   "yourMessage": "Your message",
   "successMessage": "Thank you for your message. We will contact you soon.",
-  "send": "Send"
+  "send": "Send",
+
+  "designer": "Designer",
+  "photographer": "Photographer",
+  "recordings": "Recordings",
+  "web developer": "Web Developer"
 }

@@ -18,10 +18,16 @@
   "emailError": "E-mail incorrect",
   "yourEmail": "Votre email",
   "phone": "Téléphone",
+  "phones": "Téléphones",
   "phoneError": "Téléphone incorrect",
   "yourPhone": "Votre téléphone",
   "message": "Message",
   "yourMessage": "Votre message",
   "successMessage": "Merci pour votre message. Nous vous contacterons bientôt.",
-  "send": "Envoyer"
+  "send": "Envoyer",
+
+  "designer": "Designer",
+  "photographer": "Photographe",
+  "recordings": "Enregistrements",
+  "web developer": "Développeur Web"
 }
