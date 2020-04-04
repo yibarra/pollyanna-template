@@ -4,12 +4,9 @@ import PropType from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 // Contact Info
-const ContactInfo = props => {
+const ContactInfo = ({ contacts, credits }) => {
   // translate
   const { t } = useTranslation();
-
-  // props
-  const { contacts, credits } = props;
 
   // value element
   const valueElement = (icon, value, index) => {

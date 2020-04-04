@@ -2,6 +2,8 @@
 @import '../../styles/settings/settings';
 @import '../../styles/tools/mixins';
 
+@import '../../styles/components/animations';
+
 .contact {
   @include box-display;
   align-items: center;
@@ -20,14 +22,15 @@
   &--info {
     @include box-display;
     float: left;
+    opacity: 0;
     pointer-events: auto;
     position: relative;
     vertical-align: top;
-    width: 50%;
   }
 
   &--form {
     padding-left: 40px;
+    width: 55%;
 
     .form {
       padding-right: 0;
@@ -47,6 +50,8 @@
   }
 
   &--info {
+    width: 45%;
+
     &--container,
     &--item,
     &--list {
@@ -170,16 +175,28 @@
 
   &:after {
     @include box-display;
-    background-color: var(--text-color);
+    background-color: transparent;
     border: none;
-    border-left: 1px solid transparent;
+    border-left: 1px solid var(--text-color);
     content: '';
-    height: 100vh;
-    left: 50%;
+    height: 0;
+    left: calc(45% + 10px);
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 1px;
+    top: 0;
+    width: 0px;
+  }
+
+  &[data-active="true"] {
+    .contact {
+      &--form,
+      &--info {
+        animation: home-element-in 600ms cubic-bezier(0.75, 0.25, 0.25, 0.75) 0s both;
+      }
+    }
+
+    &:after {
+      animation: text-scroll-line 600ms cubic-bezier(0.75, 0.25, 0.25, 0.75) 0s both;
+    }
   }
 }
 

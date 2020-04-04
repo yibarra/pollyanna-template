@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import emailjs from 'emailjs-com';
@@ -9,13 +9,12 @@ import FormTypes from './FormTypes';
 import './form.scss';
 
 // Form
-const Form = props => {
+const Form = ({ form }) => {
   // translate
   const { t } = useTranslation();
 
-  // props
-  const { form } = props;
-
+  // state
+  const [ send, setSend ] = useState({ send: false, success: null });
   // element
   const element = useRef(null);
 
@@ -25,8 +24,8 @@ const Form = props => {
 
     emailjs.send('gmail', 'email_contact', data)
       .then(
-        (response) => console.log('SUCCESS!', response.status, response.text), 
-        (error) => console.log('FAILED...', error));
+        (response) => setSend({ success: true, send: true }),
+        (error) => setSend({ success: false, send: true }));
   };
 
   // on submit
@@ -54,11 +53,22 @@ const Form = props => {
 
   // render
   return (
-    <form className="form" onSubmit={onSubmit} autoComplete="off" ref={element}>
-      {Array.isArray(form) && form.map((item, index) => 
-        <FormTypes item={item} index={index} key={index} />)} 
+    <form
+      autoComplete="off"
+      className="form"
+      data-send={send.send}
+      onSubmit={onSubmit}
+      ref={element}>
+      
+      {Array.isArray(form) && 
+        <div className="form--inputs">
+          <h1 className="title-main">{t('message')}</h1>
+          {form.map((item, index) =>
+            <FormTypes item={item} index={index} key={index} />)}
+            <button className="btn btn-more">{t('send')}</button>
+        </div>}
 
-      <button className="btn btn-more">{t('send')}</button>
+      <h1 className="title-main" data-error={!send.success}>{send.success === true ? t('successMessage') : t('errorMessage')}</h1>
     </form>
   );
 };

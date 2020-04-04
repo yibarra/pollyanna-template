@@ -26,6 +26,7 @@
   "message": "Mensagem",
   "yourMessage": "Sua mensagem",
   "successMessage": "Agradecemos sua mensagem. Entraremos em contato em breve.",
+  "errorMessage": "Ocorreu um error,\npor favor tentei mais tarde",
   "send": "Enviar",
   
   "designer": "Designer",

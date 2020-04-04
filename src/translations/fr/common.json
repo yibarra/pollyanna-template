@@ -24,6 +24,7 @@
   "message": "Message",
   "yourMessage": "Votre message",
   "successMessage": "Merci pour votre message. Nous vous contacterons bientôt.",
+  "errorMessage": "Une erreur s'est produite,\nveuillez réessayer plus tard",
   "send": "Envoyer",
 
   "designer": "Designer",

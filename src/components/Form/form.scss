@@ -4,6 +4,10 @@
 
 .form {
   @include box-display;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  flex-flow: row wrap;
   float: left;
   padding: 20px 20px 0 20px;
   position: relative;
@@ -15,6 +19,40 @@
 
     &:before {
       left: 100%;
+    }
+  }
+
+  &--inputs,
+  .title-main {
+    margin: 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+
+    &[data-error="true"] {
+      color: $red-900;
+    }
+  }
+  
+  .title-main {
+    display: none;
+    white-space: pre-line;
+    width: 100%;
+  }
+
+  &[data-send="true"] {
+    height: 400px;
+    padding: 0;
+
+    .form {
+      &--inputs {
+        display: none;
+      }
+    }
+
+    .title-main {
+      display: inline-block;
     }
   }
 }

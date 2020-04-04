@@ -16,16 +16,18 @@ const Loader = ({ loading, setLoading }) => {
     let stepTime = Math.abs(Math.floor(duration / range));
     
     const timer = setInterval(() => {
-      const bar = element.current.querySelector('.loading--bar');
-      current += increment;
+      if (element.current instanceof Object) {
+        const bar = element.current.querySelector('.loading--bar');
+        current += increment;
 
-      if (bar instanceof Object) {
-        bar.style.width = `${current}%`;
-      }
-    
-      if (current === end) {
-        clearInterval(timer);
-        setLoading(true);
+        if (bar instanceof Object) {
+          bar.style.width = `${current}%`;
+        }
+      
+        if (current === end) {
+          clearInterval(timer);
+          setLoading(true);
+        }
       }
     }, stepTime);
   }, [ setLoading ]);
