@@ -88,9 +88,10 @@ const MiniPlayerTimer = props => {
   useEffect(() => {
     ctx.current = canvas.current.getContext("2d");
     ctx.current.fillStyle = 'transparent';
+    console.log('init')
 
     code([]);
-    onSetAudio(item, onAnimation);
+    onSetAudio(onAnimation);
   }, [ onAnimation, onSetAudio, item, code ]);
 
   // render

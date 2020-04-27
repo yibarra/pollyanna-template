@@ -24,7 +24,7 @@ const HeaderMenu = ({ pages }) => {
               activeClassName="active"
               className="link"
               exact={item.slug === '/'}
-              to={item.slug}>{t(item.name)}</NavLink>
+              to={`#${item.slug}`}>{t(item.name)}</NavLink>
           </li>)}
       </ul>
     </div>

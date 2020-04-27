@@ -1,4 +1,4 @@
-import React, { Component, createContext, createRef } from 'react';
+import React, { createContext, useCallback, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import 'firebase/firestore';
@@ -11,194 +11,107 @@ import { config } from '../../config';
  */
 const PlayerContext = createContext({
   audio: {},
-  audios: null,
-  onPlayAudio: () => {},
+  items: null,
   onSetAudio: () => {},
 });
 
-/**
- * Player Provider
- *
- * @class PlayerProvider
- * @extends {Component}
- */
-class PlayerProvider extends Component {
-  /**
-   * Creates an instance of PlayerProvider.
-   * 
-   * @param {*} props
-   * @memberof PlayerProvider
-   */
-  constructor(props) {
-    super(props);
+// Player Provider
+const PlayerProvider = ({ children }) => {
+  // state
+  const [ state, setState ] = useState({
+    buffer: null,
+    dataArray: null,
+  });
 
-    this.state = {
-      analyser: null,
-      audio: null,
-      audioData: '',
-      buffer: null,
-      context: null,
-      dataArray: null,
-      source: null,
-      paused: false,
-      progress: 0,
-    };
+  // settings
+  let analyser = useRef(null);
+  let audio = useRef(null);
+  let source = useRef(null);
 
-    this.analyser = null;
-    this.audioRef = createRef();
-    this.callbackAnimation = () => {};
-    this.refAnimation = null;
+  // on load audio complete
+  const onLoadAudioComplete = useCallback((event) => {
+    if (event instanceof Object === false || !event) return false;
 
-    this.animation = this.animation.bind(this);
-    this.onPlayAudio = this.onPlayAudio.bind(this);
-    this.onSetAudio = this.onSetAudio.bind(this);
-  }
+    const context = new AudioContext();
+    analyser.current = context.createAnalyser();
 
-  /**
-   * animation
-   *
-   * @memberof PlayerProvider
-   */
-  animation() {
-    if (typeof this.callbackAnimation === 'function') {
-      this.refAnimation = requestAnimationFrame(this.animation);
-
-      if (this.refAnimation !== null && this.analyser !== null && this.refAnimation > 0) {
-        this.analyser.getByteFrequencyData(this.state.dataArray);
-      }
-
-      this.callbackAnimation(this.state.dataArray, this.state.audio);
-    } else {
-      cancelAnimationFrame(this.refAnimation);
+    if (!source.current === true) {
+      source.current = context.createMediaElementSource(audio.current);
     }
-  }
+
+    if (analyser.current && source.current && context.current) {
+      source.current.connect(analyser.current);
+
+      analyser.current.connect(context.destination);
+      analyser.current.fftSize = 512;
+
+      setState({
+        buffer: analyser.current.frequencyBinCount,
+        dataArray: new Uint8Array(analyser.current.frequencyBinCount),
+      });
+    }
+  }, [ audio, setState ]);
 
   // on load audio
-  onLoadAudio(audio) {
-    if (!audio.url) return false;
+  const onLoadAudio = useCallback((audioData) => {
+    if (!audioData.url === true) return false;
 
     const request = new XMLHttpRequest();
-    request.open('GET', audio.url, true);
+    request.open('GET', audioData.url, true);
 
     request.onprogress = e => {
-      const progress = Math.floor((e.loaded / e.total) * 100);
+      const percentProgress = Math.floor((e.loaded / e.total) * 100);
 
-      if (isNaN(progress) === false) {
-        this.setState({ progress });
+      if (isNaN(percentProgress) === false) {
+        console.log(percentProgress);
       }
     };
     
     request.onload = (e) => {
-      this.audioRef.current.src = audio.url;
-      this.audioRef.current.load();
+      audio.current = new Audio(audioData.url);
+      audio.current.load();
 
-      this.setState({
-        audio: new Audio(this.state.audioData.url),
-      }, () => {
-        const { audio } = this.state;
-  
-        try {
-          audio.onloadeddata = (e) => this.onLoadAudioComplete(e);
-        } catch (e) {
-          console.log('Error: ', e);
-        } 
-      });
+      try {
+        audio.current.volume = 1;
+        audio.current.onloadeddata = (e) => onLoadAudioComplete(e);
+      } catch (e) {
+        console.log('Error: ', e);
+      } 
     };
 
     request.send();
-  }
-  
-  // on load audio complete
-  onLoadAudioComplete(event) {
-    if (event instanceof Object === false || !event) return false;
-
-    this.setState({
-      context: new AudioContext(), 
-    }, () => {
-      this.setState({
-        analyser: this.state.context.createAnalyser(),
-        source: this.state.context.createMediaElementSource(this.state.audio),
-      }, () => {
-        this.analyser = this.state.analyser;
-
-        this.state.source.connect(this.analyser);
-
-        this.analyser.connect(this.state.context.destination);
-        this.analyser.fftSize = 512;
-
-        this.setState({
-          buffer: this.analyser.frequencyBinCount,
-        }, () => {
-          this.setState({
-            dataArray: new Uint8Array(this.analyser.frequencyBinCount),
-          }, () => this.onPlayAudio(true));
-        });
-      });
-    });
-  }
-
-  // on play audio
-  onPlayAudio(value) {
-    if (!this.state.audio) {
-      return false;
-    } else {
-      if (this.state.audio instanceof Object === false) return false;
-
-      try {
-        if (value === true && this.state.audio.paused === true) {
-          this.state.audio.play();
-
-          this.setState({
-            paused: false,
-          }, () => this.animation(this.state.buffer));
-
-          return true;
-        } else {
-          this.state.audio.pause();
-
-          this.setState({
-            paused: true,
-          }, () => cancelAnimationFrame(this.refAnimation));
-        }
-      } catch (e) {
-        console.error('Error: ', e);
-      }
-    }
-
-    return false;
-  }
+  }, [ audio, onLoadAudioComplete ]);
 
   // on set audio
-  onSetAudio(audio, callback) {
-    if (audio instanceof Object) {
-      this.onPlayAudio();
-      audio.volume = 0.2;
-
-      this.setState({
-        audioData: audio,
-      }, () => {
-        this.callbackAnimation = callback;
-        this.onLoadAudio(this.state.audioData);
-      });
+  const onSetAudio = (audioData) => {
+    if (audioData instanceof Object) {
+      onLoadAudio(audioData);
     }
-  }
+  };
 
   // render
-  render() {
-    return (
-      <FirestoreProvider firebase={firebase} {...config}>
-        <FirestoreCollection path="audios/" orderByValue={"created_on"}>
-          {({ value }) => <PlayerContext.Provider value={
-              { audio: this.state, audios: value, onPlayAudio: this.onPlayAudio, onSetAudio: this.onSetAudio, }
-            }>
-            <audio crossOrigin="anonymous" ref={this.audioRef} />
-            {this.props.children}
-          </PlayerContext.Provider>
-          }
-        </FirestoreCollection>
-      </FirestoreProvider>
-    )
-  }
+  return (
+    <FirestoreProvider firebase={firebase} {...config}>
+      <FirestoreCollection path="audios/" orderByValue={"created_on"}>
+        {({ value }) =>
+        <PlayerContext.Provider value={
+            {
+              audio: {
+                audio,
+                analyser,
+                source,
+                ...state,
+              },
+              items: value,
+              onSetAudio: onSetAudio,
+            }
+          }>
+          {children}
+        </PlayerContext.Provider>
+        }
+      </FirestoreCollection>
+    </FirestoreProvider>
+  );
 }
 
 PlayerProvider.propTypes = {

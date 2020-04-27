@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Anime from "@mollycule/react-anime";
-import { useWindowSize } from '@react-hook/window-size';
+//import { useWindowSize } from '@react-hook/window-size';
 
 import { PlayerContext } from '../../providers/PlayerProvider';
 import { ThemeContext } from '../../providers/ThemeProvider';
+
+import SliderBase from '../Slider/Base';
 
 import MiniPlayerControls from './MiniPlayerControls';
 import MiniPlayerTimer from './MiniPlayerTimer';
@@ -13,72 +15,45 @@ import MiniPlayerTimer from './MiniPlayerTimer';
 import './mini-player.scss';
 
 // Mini Player
-const MiniPlayer = () => {
-  // player context
+const MiniPlayer = ({ current, onNextPrev, setCurrent }) => {
+  // player context && theme
   const playerContext = useContext(PlayerContext);
-  // theme context
   const themeContext = useContext(ThemeContext);
-  // width
-  const [ width ] = useWindowSize();
 
   // audios
-  const { audios, audio, onSetAudio, onPlayAudio, audio: { paused } } = playerContext;
-  // item
-  const [ item, setItem ] = useState({});
-  // current
-  const [ current, setCurrent ] = useState(0);
-  
-  // on next prev
-  const onNextPrev = (e = 'prev') => {
-    let index = 0;
-    const total = audios.length - 1;
+  const { items, onSetAudio, audio } = playerContext;
 
-    if (e === 'prev') {
-      index = (current - 1) < 0 ? total : current - 1;
-    } else if (e === 'next') {
-      index = (current + 1) > total ? 0 : (current + 1);
-    }
-
-    onSetItem(index);
+  const onPlay = () => {
+    console.log('play');
   };
 
-  // set audio
-  const setAudio = useCallback(audio => {
-    if (audio instanceof Object) {
-      setItem(audio);
-    }
-  }, [ setItem ]);
+  const setAudioPlay = useCallback(callback => {
+    if (!Array.isArray(items) || !items.length) return false;
 
-  // on set item
-  const onSetItem = useCallback(index => {
-    if (Number.isInteger(index) === true) {
-      const item = audios[index];
+    const item = items[current];
 
-      if (item instanceof Object) {
-        setAudio(item);
+    if (item instanceof Object) {
+      onSetAudio(item);
+
+      if (audio.audio.current instanceof Object) {
+        audio.audio.current.onended = (e => {
+          console.log(e, 'finish');
+        });
+
+        setTimeout(() => {
+          const promise = audio.audio.current.play();
+
+          if (promise !== undefined) {
+            promise.then(_ => {
+              console.log('animation');
+            }).catch(error => {
+              console.log('remove animation');
+            });
+          }
+        }, 1000);
       }
-
-      setCurrent(index);
     }
-  }, [ audios, setAudio ]);
-
-  const onEnded = useCallback(() => {
-    audio.onended = (e => {
-      console.log(e);
-    });
-  }, [ audio ]);
-
-  // use effect
-  useEffect(() => {
-    if (audios) {
-      onSetItem(0);
-      onEnded();
-    }
-
-    if (width < 768) {
-      onPlayAudio(false);
-    }
-  }, [ audios, onEnded, onSetItem, onPlayAudio, width ]);
+  }, [ audio, current, items, onSetAudio ]);
 
   // redner
   return (
@@ -90,21 +65,21 @@ const MiniPlayer = () => {
       onExiting={{ translateX: -100, opacity: 0 }}
       easing="cubicBezier(0.075, 0.82, 0.165, 1)"
       delay={300}>
-      {item instanceof Object && width >= 768 &&
+      {audio instanceof Object &&
         <div className="mini-player">
           <MiniPlayerControls 
-            audio={audio}
+            audio={audio.audio.current}
             onNextPrev={onNextPrev}
-            onPlay={onPlayAudio}
-            paused={paused} />
+            onPlay={onPlay}
+            paused={audio.current ? audio.current.paused : false} />
 
           <MiniPlayerTimer
-            color={themeContext instanceof Object && themeContext.theme ? themeContext.theme['--text-color'] : '#222'}
+            color={themeContext.theme ? themeContext.theme['--text-color'] : '#222'}
             height={60}
-            item={item}
-            paused={paused}
+            item={current}
+            paused={audio.current ? audio.current.paused : false}
             width={310}
-            onSetAudio={onSetAudio} />
+            onSetAudio={setAudioPlay} />
         </div>}
     </Anime>
   );
@@ -114,4 +89,4 @@ MiniPlayer.propTypes = {
   any: PropTypes.any,
 }
 
-export default MiniPlayer;
+export default SliderBase(MiniPlayer);

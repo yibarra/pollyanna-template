@@ -17,6 +17,7 @@ const PageProvider = ({ children, location, pages }) => {
   const setCurrentPage = useCallback(location => {
     if (pages instanceof Object) {
       const currentPage = pages.filter((item) => location === item.slug)[0];
+
       setPage(currentPage);
     }
   }, [ pages, setPage ]);
@@ -24,9 +25,13 @@ const PageProvider = ({ children, location, pages }) => {
   // Handle Location Change
   const handleLocationChange = useCallback(routeLocation => {
     if (routeLocation instanceof Object) {
-      const { pathname } = routeLocation;
+      const { hash } = routeLocation;
 
-      return setCurrentPage(pathname);
+      if (!hash) {
+        return setCurrentPage('/');
+      }
+
+      return setCurrentPage(hash.replace('#', ''));
     }
 
     return setCurrentPage('/');

@@ -35,11 +35,16 @@ body {
     background-color: $black-900;
     border-radius: 6px;
   }
+
+  & * {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 
 #root,
 .page {
-  @include box-display;
   float: left;
   min-height: 100vh;
   pointer-events: none;
@@ -49,8 +54,14 @@ body {
   z-index: 99;
 }
 
+.page {
+  > div {
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .wrapper {
-  @include box-display;
   min-height: 100%;
   margin: 0;
   max-width: $page-width;
