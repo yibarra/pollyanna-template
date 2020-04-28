@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import MainProvider, { MainContext } from '../../providers/MainProvider';
 import PageProvider from '../../providers/PageProvider';
 import ThemeProvider from '../../providers/ThemeProvider';
+import PlayerProvider from '../../providers/PlayerProvider';
 
 import Content from '../Content';
 import Loader from '../../components/Loader';
@@ -18,17 +19,19 @@ const Main = ({ location }) => {
   // render
   return (
     <MainProvider>
-      <MainContext.Consumer>
-        {(context) =>
-          <PageProvider location={location} {...context}>
-            <ThemeProvider {...context}>
-              <Theme>
-                <Loader loading={context.loading} setLoading={context.setLoading} />
-                <Content loading={context.loading} location={location} />
-              </Theme>
-            </ThemeProvider>
-          </PageProvider>}
-      </MainContext.Consumer>
+      <PlayerProvider>
+        <MainContext.Consumer>
+          {(context) =>
+            <PageProvider location={location} {...context}>
+              <ThemeProvider {...context}>
+                <Theme>
+                  <Loader loading={context.loading} setLoading={context.setLoading} />
+                  <Content loading={context.loading} location={location} />
+                </Theme>
+              </ThemeProvider>
+            </PageProvider>}
+        </MainContext.Consumer>
+      </PlayerProvider>
     </MainProvider>
   )
 };

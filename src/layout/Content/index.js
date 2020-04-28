@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useMobileDetect from 'use-mobile-detect-hook';
 
 import { PageContext } from '../../providers/PageProvider';
-import PlayerProvider from '../../providers/PlayerProvider';
+import { PlayerContext } from '../../providers/PlayerProvider';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -21,7 +21,8 @@ const Content = props => {
   // detect mobile
   const detectMobile = useMobileDetect();
 
-  // page context
+  // player && page
+  const playerContext = useContext(PlayerContext);
   const pageContext = useContext(PageContext);
   const { page, pages } = pageContext;
 
@@ -53,9 +54,7 @@ const Content = props => {
         <Footer />
       </div>
 
-      <PlayerProvider>
-        <MiniPlayer />
-      </PlayerProvider>
+      <MiniPlayer {...playerContext} />
     </Fragment>
   );
 };

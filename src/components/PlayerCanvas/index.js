@@ -111,7 +111,7 @@ const PlayerCanvas = props => {
     ctx.current.fillStyle = 'transparent';
 
     code([]);
-    onSetAudio(item, onAnimation);
+    //onSetAudio(item, onAnimation);
   }, [ onAnimation, onSetAudio, item, code ]);
 
   //render

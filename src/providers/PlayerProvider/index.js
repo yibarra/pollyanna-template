@@ -13,6 +13,7 @@ const PlayerContext = createContext({
   audio: {},
   items: null,
   onSetAudio: () => {},
+  onPlayAudio: () => {},
 });
 
 // Player Provider
@@ -25,23 +26,56 @@ const PlayerProvider = ({ children }) => {
 
   // settings
   let analyser = useRef(null);
-  let audio = useRef(null);
+  let element = useRef(null);
   let source = useRef(null);
+  let refAnimation = useRef(null);
+  let callbackAnimation = useRef(() => {});
+  let progress = useRef(0);
+
+  // animation
+  const animation = useCallback(() => {
+    if (typeof callbackAnimation.current === 'function') {
+      refAnimation.current = requestAnimationFrame(animation);
+
+      if (refAnimation.current !== null && analyser.current !== null) {
+        analyser.current.getByteFrequencyData(new Uint8Array(state.dataArray));
+      }
+
+      const anim = callbackAnimation.current;
+      anim(state.dataArray, element.current);
+    } else {
+      cancelAnimationFrame(refAnimation.current);
+    }
+  }, [ callbackAnimation, state, element ]);
+
+  // on play audio
+  const onPlayAudio = useCallback(() => {
+    if (!element.current) {
+      return false;
+    } else {
+      if (element.current.paused === true) {
+        element.current.play();
+        animation(state.buffer);
+      } else {
+        element.current.pause();
+        cancelAnimationFrame(refAnimation.current);
+      }
+
+      return true;
+    }
+  }, [ animation, state ]);
 
   // on load audio complete
   const onLoadAudioComplete = useCallback((event) => {
-    if (event instanceof Object === false || !event) return false;
+    if (event instanceof Object === false) return false;
 
     const context = new AudioContext();
-    analyser.current = context.createAnalyser();
+    
+    if (!source.current) {
+      analyser.current = context.createAnalyser();
+      source.current = context.createMediaElementSource(element.current);
 
-    if (!source.current === true) {
-      source.current = context.createMediaElementSource(audio.current);
-    }
-
-    if (analyser.current && source.current && context.current) {
       source.current.connect(analyser.current);
-
       analyser.current.connect(context.destination);
       analyser.current.fftSize = 512;
 
@@ -50,44 +84,55 @@ const PlayerProvider = ({ children }) => {
         dataArray: new Uint8Array(analyser.current.frequencyBinCount),
       });
     }
-  }, [ audio, setState ]);
+
+    return true;
+  }, [ element, analyser, source, setState ]);
 
   // on load audio
-  const onLoadAudio = useCallback((audioData) => {
-    if (!audioData.url === true) return false;
+  const onLoadAudio = useCallback((audioData, callback) => {
+    if (!audioData.url) return false;
 
     const request = new XMLHttpRequest();
     request.open('GET', audioData.url, true);
 
+    // on progress
     request.onprogress = e => {
       const percentProgress = Math.floor((e.loaded / e.total) * 100);
 
       if (isNaN(percentProgress) === false) {
-        console.log(percentProgress);
+        progress.current = percentProgress;
       }
     };
     
+    // on load
     request.onload = (e) => {
-      audio.current = new Audio(audioData.url);
-      audio.current.load();
+      element.current = new Audio(audioData.url);
+      element.current.load();
+
+      console.log(element.current);
 
       try {
-        audio.current.volume = 1;
-        audio.current.onloadeddata = (e) => onLoadAudioComplete(e);
+        callbackAnimation.current = callback;
+        element.current.volume = 0.4;
+        element.current.onloadeddata = (e) => onLoadAudioComplete(e);
       } catch (e) {
         console.log('Error: ', e);
       } 
     };
 
     request.send();
-  }, [ audio, onLoadAudioComplete ]);
+  }, [ element, progress, onLoadAudioComplete ]);
 
   // on set audio
-  const onSetAudio = (audioData) => {
+  const onSetAudio = useCallback((audioData, callback) => {
     if (audioData instanceof Object) {
-      onLoadAudio(audioData);
+      if (element.current) {
+        element.current.pause();
+      }
+
+      onLoadAudio(audioData, callback);
     }
-  };
+  }, [ onLoadAudio ]);
 
   // render
   return (
@@ -97,13 +142,15 @@ const PlayerProvider = ({ children }) => {
         <PlayerContext.Provider value={
             {
               audio: {
-                audio,
+                element,
                 analyser,
                 source,
+                progress,
                 ...state,
               },
               items: value,
               onSetAudio: onSetAudio,
+              onPlayAudio: onPlayAudio,
             }
           }>
           {children}

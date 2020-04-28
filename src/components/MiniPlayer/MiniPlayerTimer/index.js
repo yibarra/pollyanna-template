@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import './mini-player-timer.scss';
 
 // Mini player timer
-const MiniPlayerTimer = props => {
+const MiniPlayerTimer = ({ color, height, item, onSetAudio, width }) => {
   // canvas
   const canvas = useRef();
-  // ctx
   const ctx = useRef();
-  // play
-  const { color, height, item, onSetAudio, width } = props;
 
   // decimal
   const decimal = numb => numb < 10 ? `0${numb}` : numb;
@@ -88,7 +85,6 @@ const MiniPlayerTimer = props => {
   useEffect(() => {
     ctx.current = canvas.current.getContext("2d");
     ctx.current.fillStyle = 'transparent';
-    console.log('init')
 
     code([]);
     onSetAudio(onAnimation);
@@ -98,7 +94,7 @@ const MiniPlayerTimer = props => {
   return (
     <div className="mini-player-timer">
       <div className="progress">
-        <canvas height={props.height} width={props.width} ref={canvas} />
+        <canvas height={height} width={width} ref={canvas} />
       </div>
     </div>
   );
