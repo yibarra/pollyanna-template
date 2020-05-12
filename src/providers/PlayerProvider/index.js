@@ -1,17 +1,11 @@
-import React, { createContext, useCallback, useRef, useState } from 'react';
+import React, { createContext, useCallback, memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-
-import 'firebase/firestore';
-import firebase from 'firebase/app';
-import { FirestoreProvider, FirestoreCollection } from '@react-firebase/firestore';
-import { config } from '../../config';
 
 /**
  * Player Context
  */
 const PlayerContext = createContext({
   audio: {},
-  items: null,
   onSetAudio: () => {},
   onPlayAudio: () => {},
 });
@@ -55,6 +49,7 @@ const PlayerProvider = ({ children }) => {
     } else {
       if (element.current.paused === true) {
         element.current.play();
+
         animation(state.buffer);
       } else {
         element.current.pause();
@@ -88,6 +83,28 @@ const PlayerProvider = ({ children }) => {
     return true;
   }, [ element, analyser, source, setState ]);
 
+  // request on loaded
+  const requestOnLoad = useCallback((e, audioData, callback) => {
+    element.current = new Audio(audioData.url);
+    element.current.load();
+
+    element.current.addEventListener("canplaythrough", e => {
+      const { target } = e;
+
+      if (target instanceof Object) {
+        target.play();
+      }
+    });
+
+    try {
+      callbackAnimation.current = callback;
+      element.current.volume = 0.4;
+      element.current.onloadeddata = (e) => onLoadAudioComplete(e);
+    } catch (e) {
+      console.log('Error: ', e);
+    } 
+  }, [ element, onLoadAudioComplete ]);
+
   // on load audio
   const onLoadAudio = useCallback((audioData, callback) => {
     if (!audioData.url) return false;
@@ -103,25 +120,14 @@ const PlayerProvider = ({ children }) => {
         progress.current = percentProgress;
       }
     };
+
+    console.log('cangrando audio')
     
     // on load
-    request.onload = (e) => {
-      element.current = new Audio(audioData.url);
-      element.current.load();
-
-      console.log(element.current);
-
-      try {
-        callbackAnimation.current = callback;
-        element.current.volume = 0.4;
-        element.current.onloadeddata = (e) => onLoadAudioComplete(e);
-      } catch (e) {
-        console.log('Error: ', e);
-      } 
-    };
+    request.onload = e => requestOnLoad(e, audioData, callback);
 
     request.send();
-  }, [ element, progress, onLoadAudioComplete ]);
+  }, [ progress, requestOnLoad ]);
 
   // on set audio
   const onSetAudio = useCallback((audioData, callback) => {
@@ -130,34 +136,30 @@ const PlayerProvider = ({ children }) => {
         element.current.pause();
       }
 
+      console.log('on set audio')
       onLoadAudio(audioData, callback);
     }
   }, [ onLoadAudio ]);
 
+  console.log('player providers');
+
   // render
   return (
-    <FirestoreProvider firebase={firebase} {...config}>
-      <FirestoreCollection path="audios/" orderByValue={"created_on"}>
-        {({ value }) =>
-        <PlayerContext.Provider value={
-            {
-              audio: {
-                element,
-                analyser,
-                source,
-                progress,
-                ...state,
-              },
-              items: value,
-              onSetAudio: onSetAudio,
-              onPlayAudio: onPlayAudio,
-            }
-          }>
-          {children}
-        </PlayerContext.Provider>
+    <PlayerContext.Provider value={
+        {
+          audio: {
+            analyser,
+            element,
+            source,
+            progress,
+            ...state,
+          },
+          onSetAudio: onSetAudio,
+          onPlayAudio: onPlayAudio,
         }
-      </FirestoreCollection>
-    </FirestoreProvider>
+      }>
+      {children}
+    </PlayerContext.Provider>
   );
 }
 
@@ -166,4 +168,4 @@ PlayerProvider.propTypes = {
 };
 
 export { PlayerContext, PlayerProvider };
-export default PlayerProvider;
+export default memo(PlayerProvider);

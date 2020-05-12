@@ -5,6 +5,7 @@ import 'firebase/firestore';
 import firebase from 'firebase/app';
 import { FirestoreProvider, FirestoreCollection } from '@react-firebase/firestore';
 import { config } from '../../config';
+import PlayerProvider from '../PlayerProvider';
 
 // main context
 const MainContext = createContext({
@@ -13,7 +14,7 @@ const MainContext = createContext({
 });
 
 // Main provider
-const MainProvider = props => {
+const MainProvider = ({ children }) => {
   // state
   const [ loading, setLoading ] = useState(false);
 
@@ -21,16 +22,16 @@ const MainProvider = props => {
   return (
     <FirestoreProvider firebase={firebase} {...config}>
       <FirestoreCollection path="pages/" orderByValue={"created_on"}>
-        {({ value }) => {
-          return <MainContext.Provider
+        {({ value }) => <MainContext.Provider
             value={{
               pages: value,
               loading,
               setLoading,
             }}>
-            {props.children}
-          </MainContext.Provider>;
-        }}
+            <PlayerProvider>
+              {children}
+            </PlayerProvider>
+        </MainContext.Provider>}
       </FirestoreCollection>
     </FirestoreProvider>
   );

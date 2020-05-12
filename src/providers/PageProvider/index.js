@@ -1,5 +1,8 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, { createContext, memo, useCallback, useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import { MainContext } from '../MainProvider';
+import ThemeProvider from '../ThemeProvider';
 
 // page context
 const PageContext = createContext({
@@ -9,7 +12,11 @@ const PageContext = createContext({
 });
 
 // Page provider
-const PageProvider = ({ children, location, pages }) => {
+const PageProvider = ({ children, location }) => {
+  // main context
+  const mainContext = useContext(MainContext);
+  const { pages } = mainContext;
+
   // page
   const [ page, setPage ] = useState({});
 
@@ -23,9 +30,11 @@ const PageProvider = ({ children, location, pages }) => {
   }, [ pages, setPage ]);
 
   // Handle Location Change
-  const handleLocationChange = useCallback(routeLocation => {
-    if (routeLocation instanceof Object) {
-      const { hash } = routeLocation;
+  const handleLocationChange = useCallback(pages => {
+    if (!Array.isArray(pages) || !pages.length) return false;
+
+    if (location instanceof Object) {
+      const { hash } = location;
 
       if (!hash) {
         return setCurrentPage('/');
@@ -35,18 +44,18 @@ const PageProvider = ({ children, location, pages }) => {
     }
 
     return setCurrentPage('/');
-  }, [ setCurrentPage ]);
+  }, [ setCurrentPage, location ]);
 
   // use effect
   useEffect(() => {
-    handleLocationChange(location);
-  }, [ handleLocationChange, location ]);
+    handleLocationChange(pages);
+  }, [ handleLocationChange, pages ]);
 
   // render
   return (
-    <PageContext.Provider value={
-      { page, pages, setPage }
-    }>{children}</PageContext.Provider>
+    <PageContext.Provider value={{ page, pages, setPage }}>
+      <ThemeProvider page={page}>{children}</ThemeProvider>
+    </PageContext.Provider>
   );
 };
 
@@ -55,4 +64,4 @@ PageProvider.propTypes = {
 };
 
 export { PageProvider, PageContext };
-export default PageProvider;
+export default memo(PageProvider);

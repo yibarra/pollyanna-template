@@ -1,10 +1,16 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import { MainContext } from '../../providers/MainProvider';
 
 import './loader.scss';
 
 // Loader 
-const Loader = ({ loading, setLoading }) => {
+const Loader = () => {
+  // main context
+  const mainContext = useContext(MainContext);
+  const { loading, setLoading } = mainContext;
+
   // element
   const element = useRef(null);
 
@@ -61,8 +67,7 @@ const Loader = ({ loading, setLoading }) => {
 };
 
 Loader.propTypes = {
-  loading: PropTypes.bool,
-  setLoading: PropTypes.func.isRequired,
+  any: PropTypes.any,
 };
 
-export default Loader;
+export default memo(Loader);

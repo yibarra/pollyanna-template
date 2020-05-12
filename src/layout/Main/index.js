@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 
-import MainProvider, { MainContext } from '../../providers/MainProvider';
+import AudiosProvider from '../../providers/AudiosProvider';
+import MainProvider from '../../providers/MainProvider';
 import PageProvider from '../../providers/PageProvider';
-import ThemeProvider from '../../providers/ThemeProvider';
-import PlayerProvider from '../../providers/PlayerProvider';
 
 import Content from '../Content';
 import Loader from '../../components/Loader';
@@ -19,25 +18,20 @@ const Main = ({ location }) => {
   // render
   return (
     <MainProvider>
-      <PlayerProvider>
-        <MainContext.Consumer>
-          {(context) =>
-            <PageProvider location={location} {...context}>
-              <ThemeProvider {...context}>
-                <Theme>
-                  <Loader loading={context.loading} setLoading={context.setLoading} />
-                  <Content loading={context.loading} location={location} />
-                </Theme>
-              </ThemeProvider>
-            </PageProvider>}
-        </MainContext.Consumer>
-      </PlayerProvider>
-    </MainProvider>
-  )
+      <PageProvider location={location}>
+        <Theme>
+          <Loader />
+
+          <AudiosProvider>
+            <Content location={location} />
+          </AudiosProvider>
+        </Theme>
+      </PageProvider>
+    </MainProvider>)
 };
 
 Main.propTypes = {
   any: PropTypes.any,
 };
 
-export default withRouter(Main);
+export default memo(withRouter(Main));

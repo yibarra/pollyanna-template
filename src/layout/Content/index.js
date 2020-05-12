@@ -1,10 +1,9 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
 
-import useMobileDetect from 'use-mobile-detect-hook';
-
 import { PageContext } from '../../providers/PageProvider';
-import { PlayerContext } from '../../providers/PlayerProvider';
+
+import MiniPlayer from '../../components/MiniPlayer';
 
 import Header from '../Header';
 import Footer from '../Footer';
@@ -12,17 +11,12 @@ import Footer from '../Footer';
 import Bio from '../../pages/Bio';
 import Contact from '../../pages/Contact';
 import Home from '../../pages/Home';
-import MiniPlayer from '../../components/MiniPlayer';
 
 import './content.scss';
 
 // Content
 const Content = props => {
-  // detect mobile
-  const detectMobile = useMobileDetect();
-
   // player && page
-  const playerContext = useContext(PlayerContext);
   const pageContext = useContext(PageContext);
   const { page, pages } = pageContext;
 
@@ -32,14 +26,16 @@ const Content = props => {
 
     switch (item.type) {
       case 'bio':
-        return <Bio {...props} loading={props.loading} page={item} mobile={detectMobile}  />;
+        return <Bio {...props} loading={props.loading} page={item}  />;
       case 'contact':
-        return <Contact {...props} loading={props.loading} page={item} mobile={detectMobile} />;
+        return <Contact {...props} loading={props.loading} page={item} />;
       case 'home':
-        default:
-          return <Home {...props} loading={props.loading} page={item} mobile={detectMobile} />;
+      default:
+        return <Home {...props} loading={true} page={item} />;
     }
   };
+
+  console.log('content');
 
   // render
   return (
@@ -54,7 +50,7 @@ const Content = props => {
         <Footer />
       </div>
 
-      <MiniPlayer {...playerContext} />
+      <MiniPlayer />
     </Fragment>
   );
 };
@@ -63,4 +59,4 @@ Content.propTypes = {
   location: PropTypes.object,
 };
 
-export default Content;
+export default memo(Content);

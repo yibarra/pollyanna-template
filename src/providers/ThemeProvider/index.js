@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState, useContext } from 'react';
+import React, { createContext, memo, useCallback, useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { PageContext } from '../PageProvider';
@@ -10,14 +10,13 @@ const ThemeContext = createContext({
 });
 
 // Theme Provider
-const ThemeProvider = props => {
+const ThemeProvider = ({ children }) => {
   // theme
   const [ theme, setTheme ] = useState(null);
 
   // page context
   const pageContext = useContext(PageContext);
-  // current page
-  const page = pageContext.page;
+  const { page } = pageContext;
 
   // set theme
   const setThemeColorSelect = useCallback(() => {
@@ -27,7 +26,7 @@ const ThemeProvider = props => {
   }, [ page, setTheme ]);
 
   // set Theme Color
-  const setThemeColor = color => {
+  const setThemeColor = useCallback(color => {
     if (!!color) {
       const newTheme = theme;
 
@@ -41,7 +40,7 @@ const ThemeProvider = props => {
         document.documentElement.style.setProperty('--text-color', color);
       }
     }
-  };
+  }, [ theme, setTheme ]);
 
   // Handle Location Change
   const handleLocationChange = useCallback(page => {
@@ -59,7 +58,7 @@ const ThemeProvider = props => {
   return (
     <ThemeContext.Provider value={
       { theme: theme, setThemeColor: setThemeColor, }
-    }>{props.children}</ThemeContext.Provider>
+    }>{children}</ThemeContext.Provider>
   );
 }
 
@@ -68,4 +67,4 @@ ThemeProvider.propTypes = {
 }
 
 export { ThemeContext, ThemeProvider };
-export default ThemeProvider;
+export default memo(ThemeProvider);

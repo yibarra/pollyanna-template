@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import './mini-player-timer.scss';
@@ -87,7 +87,8 @@ const MiniPlayerTimer = ({ color, height, item, onSetAudio, width }) => {
     ctx.current.fillStyle = 'transparent';
 
     code([]);
-    onSetAudio(onAnimation);
+    console.log('este ne');
+    onSetAudio(onAnimation, item);
   }, [ onAnimation, onSetAudio, item, code ]);
 
   // render
@@ -107,4 +108,4 @@ MiniPlayerTimer.propTypes = {
   width: PropTypes.number,
 };
 
-export default MiniPlayerTimer;
+export default memo(MiniPlayerTimer);
