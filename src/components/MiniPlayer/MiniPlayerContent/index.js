@@ -1,53 +1,54 @@
-import React, { useCallback, Fragment, memo, useEffect } from 'react';
+import React, { useCallback, useContext, Fragment, memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import MiniPlayerControls from '../MiniPlayerControls';
+import { PlayerContext } from '../../../providers/PlayerProvider';
 
+import MiniPlayerControls from '../MiniPlayerControls';
+import MiniPlayerTimer from '../MiniPlayerTimer';
 import SliderBase from '../../Slider/Base';
 
 // Mini Player
-const MiniPlayerContent = ({ audio, current, onSetAudio, onPlayAudio, onPrevNext, items }) => {
-  // element
-  const { element } = audio;
+const MiniPlayerContent = ({ current, onPrevNext, items }) => {
+  // context
+  const playerContext = useContext(PlayerContext);
+  const { audio: { paused }, onSetAudio, onPlayAudio, setCallbackAnimation } = playerContext;
 
-  console.log(current, element);
+  // change item
+  const changeItem = useCallback((current) => {
+    if (Array.isArray(items) && items.length > 0) {
+      const item = items[current];
 
-  // finish change next
-  const onEndedAudio = useCallback(audio => {
-    const { element } = audio;
-
-    if (element.current instanceof Object) {
-      console.log('ended audio');
-      element.current.addEventListener('ended', () => onPrevNext('next'));
+      if (item instanceof Object) {
+        console.info(item, 'ades');
+        onSetAudio(item);
+      }
     }
-  }, [ onPrevNext ]);
+
+    return false;
+  }, [ items, onSetAudio ]);
 
   // use effect
   useEffect(() => {
-    onEndedAudio(audio);
-  }, [ audio, onEndedAudio ]);
+    changeItem(current);
+  }, [ current, changeItem ]);
 
   // render
   return (
     <Fragment>
       {Array.isArray(items) &&
         <Fragment>
-          <MiniPlayerControls onPlayAudio={onPlayAudio} onPrevNext={onPrevNext} />
+          <MiniPlayerControls paused={paused} onPlayAudio={onPlayAudio} onPrevNext={onPrevNext} />
+
+          <MiniPlayerTimer
+            color={'#222'}
+            height={60}
+            item={items[current]}
+            width={310}
+            setAnimation={setCallbackAnimation} />
         </Fragment>}
     </Fragment>
   );
 };
-
-/*
-<MiniPlayerControls onPrevNext={onPrevNext} />
-
-          <MiniPlayerTimer
-            color={themeContext.theme ? themeContext.theme['--text-color'] : '#222'}
-            height={60}
-            item={items[current]}
-            width={310}
-            onSetAudio={setAudioPlay} />
-            */
 
 MiniPlayerContent.propTypes = {
   any: PropTypes.any,

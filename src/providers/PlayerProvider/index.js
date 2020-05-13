@@ -13,10 +13,8 @@ const PlayerContext = createContext({
 // Player Provider
 const PlayerProvider = ({ children }) => {
   // state
-  const [ state, setState ] = useState({
-    buffer: null,
-    dataArray: null,
-  });
+  const [ state, setState ] = useState({ buffer: null, dataArray: null });
+  const [ paused, setPaused ] = useState(false);
 
   // settings
   let analyser = useRef(null);
@@ -44,12 +42,10 @@ const PlayerProvider = ({ children }) => {
 
   // on play audio
   const onPlayAudio = useCallback(() => {
-    if (!element.current) {
-      return false;
-    } else {
+    if (element.current instanceof Object) {
+      console.log('on play audio provider');
       if (element.current.paused === true) {
         element.current.play();
-
         animation(state.buffer);
       } else {
         element.current.pause();
@@ -58,6 +54,8 @@ const PlayerProvider = ({ children }) => {
 
       return true;
     }
+
+    return false;
   }, [ animation, state ]);
 
   // on load audio complete
@@ -84,29 +82,30 @@ const PlayerProvider = ({ children }) => {
   }, [ element, analyser, source, setState ]);
 
   // request on loaded
-  const requestOnLoad = useCallback((e, audioData, callback) => {
+  const requestOnLoad = useCallback((e, audioData) => {
+    console.log('requiest on load');
     element.current = new Audio(audioData.url);
     element.current.load();
 
-    element.current.addEventListener("canplaythrough", e => {
-      const { target } = e;
-
-      if (target instanceof Object) {
-        target.play();
-      }
-    });
-
     try {
-      callbackAnimation.current = callback;
       element.current.volume = 0.4;
       element.current.onloadeddata = (e) => onLoadAudioComplete(e);
+
+      element.current.addEventListener('canplaythrough', () => {
+        onPlayAudio();
+        console.log(element.current.paused);
+      });
+
+      element.current.addEventListener('play', () => setPaused(false));
+      element.current.addEventListener('pause', () => setPaused(true));
     } catch (e) {
       console.log('Error: ', e);
     } 
-  }, [ element, onLoadAudioComplete ]);
+  }, [ element, setPaused, onPlayAudio, onLoadAudioComplete ]);
 
   // on load audio
   const onLoadAudio = useCallback((audioData, callback) => {
+    console.log(audioData, callback, 'on load audio');
     if (!audioData.url) return false;
 
     const request = new XMLHttpRequest();
@@ -120,44 +119,48 @@ const PlayerProvider = ({ children }) => {
         progress.current = percentProgress;
       }
     };
-
-    console.log('cangrando audio')
     
     // on load
-    request.onload = e => requestOnLoad(e, audioData, callback);
-
+    request.onload = e => requestOnLoad(e, audioData);
     request.send();
   }, [ progress, requestOnLoad ]);
 
   // on set audio
-  const onSetAudio = useCallback((audioData, callback) => {
+  const onSetAudio = useCallback((audioData) => {
     if (audioData instanceof Object) {
       if (element.current) {
         element.current.pause();
       }
 
       console.log('on set audio')
-      onLoadAudio(audioData, callback);
+      onLoadAudio(audioData);
     }
   }, [ onLoadAudio ]);
+
+  // set callback animation
+  const setCallbackAnimation = useCallback(callback => {
+    if (typeof callback === 'function') {
+      callbackAnimation.current = callback;
+    }
+  }, []);
 
   console.log('player providers');
 
   // render
   return (
-    <PlayerContext.Provider value={
-        {
-          audio: {
-            analyser,
-            element,
-            source,
-            progress,
-            ...state,
-          },
-          onSetAudio: onSetAudio,
-          onPlayAudio: onPlayAudio,
-        }
-      }>
+    <PlayerContext.Provider value={{
+        audio: {
+          analyser,
+          element,
+          source,
+          progress,
+          paused,
+          ...state,
+        },
+        onSetAudio,
+        onPlayAudio,
+        setCallbackAnimation,
+      }}>
       {children}
     </PlayerContext.Provider>
   );

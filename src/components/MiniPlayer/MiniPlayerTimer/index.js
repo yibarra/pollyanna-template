@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './mini-player-timer.scss';
 
 // Mini player timer
-const MiniPlayerTimer = ({ color, height, item, onSetAudio, width }) => {
+const MiniPlayerTimer = ({ color, height, item, setAnimation, width }) => {
   // canvas
   const canvas = useRef();
   const ctx = useRef();
@@ -87,9 +87,8 @@ const MiniPlayerTimer = ({ color, height, item, onSetAudio, width }) => {
     ctx.current.fillStyle = 'transparent';
 
     code([]);
-    console.log('este ne');
-    onSetAudio(onAnimation, item);
-  }, [ onAnimation, onSetAudio, item, code ]);
+    setAnimation(onAnimation);
+  }, [ onAnimation, setAnimation, code ]);
 
   // render
   return (
@@ -104,7 +103,7 @@ const MiniPlayerTimer = ({ color, height, item, onSetAudio, width }) => {
 MiniPlayerTimer.propTypes = {
   height: PropTypes.number,
   item: PropTypes.any,
-  onSetAudio: PropTypes.func.isRequired,
+  setAnimation: PropTypes.func.isRequired,
   width: PropTypes.number,
 };
 
