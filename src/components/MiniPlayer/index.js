@@ -1,47 +1,30 @@
 import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 
-//import { useWindowSize } from '@react-hook/window-size';
-//import { ThemeContext } from '../../providers/ThemeProvider';
-
-import { AudiosContext } from '../../providers/AudiosProvider';
+import { ThemeContext } from '../../providers/ThemeProvider';
 
 import MiniPlayerContent from './MiniPlayerContent';
 
 import './mini-player.scss';
 
 // Mini Player
-const MiniPlayer = () => {
+const MiniPlayer = ({ items }) => {
   // context
-  const audiosContext = useContext(AudiosContext);
-  const { items } = audiosContext;
+  const themeContext = useContext(ThemeContext);
+  const { theme } = themeContext;
 
   // render
   return (
     <div className="mini-player">
-      <MiniPlayerContent items={items} />
+      <MiniPlayerContent
+        color={theme instanceof Object ? theme['--text-color'] : '#222'}
+        items={items} />
     </div>
   );
-
-  /*
-  const onEndedAudio = useCallback(audio => {
-    const { element } = audio;
-
-    if (element.current instanceof Object) {
-      console.log('ended audio');
-      element.current.addEventListener('ended', () => onPrevNext('next'));
-    }
-  }, [ onPrevNext ]);
-
-  // use effect
-  useEffect(() => {
-    onEndedAudio(audio);
-  }, [ audio, onEndedAudio ]);
-  */
 };
 
 MiniPlayer.propTypes = {
-  any: PropTypes.any,
+  items: PropTypes.array.isRequired,
 }
 
 export default memo(MiniPlayer);

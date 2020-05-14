@@ -1,6 +1,7 @@
-import React, { useContext, Fragment, memo } from 'react';
+import React, { useContext, Fragment, memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+import { AudiosContext } from '../../providers/AudiosProvider';
 import { PageContext } from '../../providers/PageProvider';
 
 import MiniPlayer from '../../components/MiniPlayer';
@@ -16,12 +17,15 @@ import './content.scss';
 
 // Content
 const Content = props => {
-  // player && page
+  // audio && page
+  const audiosContext = useContext(AudiosContext);
   const pageContext = useContext(PageContext);
+
+  const { items } = audiosContext;
   const { page, pages } = pageContext;
 
   // types
-  const types = item => {
+  const types = useCallback(item => {
     if (item instanceof Object === false) return false;
 
     switch (item.type) {
@@ -33,9 +37,7 @@ const Content = props => {
       default:
         return <Home {...props} loading={true} page={item} />;
     }
-  };
-
-  console.log('content');
+  }, [ props ]);
 
   // render
   return (
@@ -50,7 +52,7 @@ const Content = props => {
         <Footer />
       </div>
 
-      <MiniPlayer />
+      {items && <MiniPlayer items={items} />}
     </Fragment>
   );
 };

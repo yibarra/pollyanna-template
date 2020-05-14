@@ -43,7 +43,6 @@ const PlayerProvider = ({ children }) => {
   // on play audio
   const onPlayAudio = useCallback(() => {
     if (element.current instanceof Object) {
-      console.log('on play audio provider');
       if (element.current.paused === true) {
         element.current.play();
         animation(state.buffer);
@@ -82,7 +81,7 @@ const PlayerProvider = ({ children }) => {
   }, [ element, analyser, source, setState ]);
 
   // request on loaded
-  const requestOnLoad = useCallback((e, audioData) => {
+  const requestOnLoad = useCallback((e, audioData, callback) => {
     console.log('requiest on load');
     element.current = new Audio(audioData.url);
     element.current.load();
@@ -91,13 +90,12 @@ const PlayerProvider = ({ children }) => {
       element.current.volume = 0.4;
       element.current.onloadeddata = (e) => onLoadAudioComplete(e);
 
-      element.current.addEventListener('canplaythrough', () => {
-        onPlayAudio();
-        console.log(element.current.paused);
-      });
-
+      element.current.addEventListener('canplaythrough', () => onPlayAudio());
       element.current.addEventListener('play', () => setPaused(false));
       element.current.addEventListener('pause', () => setPaused(true));
+
+      if (typeof callback === 'function')
+        element.current.addEventListener('ended', () => callback());
     } catch (e) {
       console.log('Error: ', e);
     } 
@@ -105,7 +103,6 @@ const PlayerProvider = ({ children }) => {
 
   // on load audio
   const onLoadAudio = useCallback((audioData, callback) => {
-    console.log(audioData, callback, 'on load audio');
     if (!audioData.url) return false;
 
     const request = new XMLHttpRequest();
@@ -121,19 +118,19 @@ const PlayerProvider = ({ children }) => {
     };
     
     // on load
-    request.onload = e => requestOnLoad(e, audioData);
+    request.onload = e => requestOnLoad(e, audioData, callback);
     request.send();
   }, [ progress, requestOnLoad ]);
 
   // on set audio
-  const onSetAudio = useCallback((audioData) => {
+  const onSetAudio = useCallback((audioData, callback) => {
     if (audioData instanceof Object) {
       if (element.current) {
         element.current.pause();
       }
 
       console.log('on set audio')
-      onLoadAudio(audioData);
+      onLoadAudio(audioData, callback);
     }
   }, [ onLoadAudio ]);
 
@@ -143,8 +140,6 @@ const PlayerProvider = ({ children }) => {
       callbackAnimation.current = callback;
     }
   }, []);
-
-  console.log('player providers');
 
   // render
   return (

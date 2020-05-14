@@ -70,7 +70,7 @@ const MiniPlayerTimer = ({ color, height, item, setAnimation, width }) => {
     };
 
     draw();
-  }, [  color, height, item, width ]);
+  }, [ color, height, item, width ]);
 
   // on animation
   const onAnimation = useCallback((bufferArray, audio) => {

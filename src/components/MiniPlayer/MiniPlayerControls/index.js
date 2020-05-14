@@ -15,11 +15,11 @@ const MiniPlayerControls = ({ onPlayAudio, onPrevNext, paused }) => {
         <i className="material-icons">pause</i>
       </button>
 
-      <button className="btn" onClick={() => onPrevNext('prev')}>
+      <button className="btn prev-next" onClick={() => onPrevNext('prev')}>
         <i className="material-icons">skip_previous</i>
       </button>
 
-      <button className="btn" onClick={() => onPrevNext('next')}>
+      <button className="btn prev-next" onClick={() => onPrevNext('next')}>
         <i className="material-icons">skip_next</i>
       </button>
     </div>

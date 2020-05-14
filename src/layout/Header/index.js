@@ -9,13 +9,10 @@ import HeaderTop from './HeaderTop';
 import './header.scss';
 
 // Header
-const Header = props => {
+const Header = ({ location }) => {
   // main context
   const mainContext = useContext(MainContext);
-  // pages
-  const pages = mainContext.pages;
-  // location
-  const location = props.location;
+  const { pages } = mainContext;
 
   // active
   const [ active, setActive ] = useState(false);

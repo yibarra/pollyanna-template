@@ -8,7 +8,7 @@ import MiniPlayerTimer from '../MiniPlayerTimer';
 import SliderBase from '../../Slider/Base';
 
 // Mini Player
-const MiniPlayerContent = ({ current, onPrevNext, items }) => {
+const MiniPlayerContent = ({ color, current, onPrevNext, items }) => {
   // context
   const playerContext = useContext(PlayerContext);
   const { audio: { paused }, onSetAudio, onPlayAudio, setCallbackAnimation } = playerContext;
@@ -20,12 +20,12 @@ const MiniPlayerContent = ({ current, onPrevNext, items }) => {
 
       if (item instanceof Object) {
         console.info(item, 'ades');
-        onSetAudio(item);
+        onSetAudio(item, onPrevNext);
       }
     }
 
     return false;
-  }, [ items, onSetAudio ]);
+  }, [ items, onPrevNext, onSetAudio ]);
 
   // use effect
   useEffect(() => {
@@ -40,7 +40,7 @@ const MiniPlayerContent = ({ current, onPrevNext, items }) => {
           <MiniPlayerControls paused={paused} onPlayAudio={onPlayAudio} onPrevNext={onPrevNext} />
 
           <MiniPlayerTimer
-            color={'#222'}
+            color={color}
             height={60}
             item={items[current]}
             width={310}

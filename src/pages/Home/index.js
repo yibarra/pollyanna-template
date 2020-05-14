@@ -9,7 +9,7 @@ import Webdoor from '../../components/Webdoor';
 import './home.scss';
 
 // Home
-const Home = ({ mobile, page: { webdoor }, loading }) => {
+const Home = ({ page: { webdoor }, loading }) => {
   // current
   const [ current, setCurrent ] = useState(0);
   const [ last, setLast ] = useState(null);
@@ -38,9 +38,7 @@ const Home = ({ mobile, page: { webdoor }, loading }) => {
 
   // handlder mobile
   const handlerMobile = value => {
-    if (mobile.isMobile() !== true) {
-      onNextPrev(value);
-    }
+    onNextPrev(value);
   };
 
   // handlers
