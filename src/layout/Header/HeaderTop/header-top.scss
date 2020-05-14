@@ -6,7 +6,6 @@
 
 .header {
   &--top {
-    @include box-display;
     align-content: space-between;
     align-items: center;
     display: inline-flex;
@@ -18,16 +17,12 @@
     position: absolute;
     width: 100%;
     z-index: 2;
-
-    &--info {
-      @include box-display;
-      position: relative;
-    }
-
+    
     &--info {
       align-items: center;
       display: inline-flex;
       justify-content: center;
+      position: relative;
     }
 
     &--btn {
@@ -37,7 +32,6 @@
       pointer-events: auto;
 
       i {
-        @include box-display;
         @include rem('font-size', 22px);
         color: var(--text-color);
         display: none;
@@ -73,7 +67,7 @@
 
 /* --- QUERIES --- */
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 768px) {
   .header {
     &--top {
       position: relative;

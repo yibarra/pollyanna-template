@@ -1,0 +1,98 @@
+/* --- HEADER MENU --- */
+@import '../../../../styles/settings/settings';
+@import '../../../../styles/tools/mixins';
+
+@import '../../../../styles/components/animations';
+
+.header {
+  &--menu {
+    &--item {
+      margin: 0;
+      pointer-events: auto;
+      position: relative;
+      text-align: left;
+      width: 100%;
+
+      .link {
+        @include font($font-default, 14px, 400, var(--text-color));
+        background-color: transparent;
+        margin: 0;
+        padding: 0 20px 15px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        width: 100%;
+        z-index: 1;
+
+        .material-icons {
+          @include rem('font-size', 14px);
+          position: relative;
+          top: 4px;
+        }
+        
+        &:after {
+          background-color: transparent;
+          border: none;
+          bottom: -4px;
+          content: '';
+          height: 9px;
+          left: 0;
+          position: absolute;
+          transition: none;
+          width: 0;
+        }
+      }
+
+      &[data-active="true"] {
+        .link {
+          &:after {
+            background-color: var(--text-color);
+            transition: all 400ms $base-ease;
+            width: 100%;
+          }
+        }
+
+        &:before {
+          display: inline-block;
+          right: 100%;
+        }
+      }
+
+      &:before {
+        border: none;
+        border-top: 1px solid var(--text-color);
+        content: '';
+        bottom: 0;
+        display: none;
+        height: 0;
+        right: 90%;
+        position: absolute;
+        width: 700px;
+      }
+    }
+  }
+}
+
+/* --- QUERIES --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 768px) {
+  .header {
+    &--menu {
+      &--item {
+        text-align: center;
+
+        .link {
+          width: auto;
+        }
+
+        &[data-active="true"] {
+          &:before {
+            right: 50%;
+            width: calc(50% + 20px);
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@
 
   .header,
   .footer {
-    opacity: 0;
+    opacity: 1;
     transition: all 500ms cubic-bezier(0.75, 0.25, 0.25, 0.75);
   }
 
@@ -30,20 +30,17 @@
       display: inline-block;
     }
   }
-
-  &[data-loading="true"] {
-    .header,
-    .footer {
-      opacity: 1;
-    }
-  }
 }
 
 /* --- QUERIES --- */
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 768px) {
   .content {
     min-height: auto;
     height: auto;
+
+    .page-current {
+      min-height: calc(100vh - (110px + 80px));
+    }
   }
 }

@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 
 import { Translation } from 'react-i18next';
 
+import usePositionBlock from '../../helpers/usePositionBlock';
+
 import './lang-select.scss';
 
 //Lang Select
 const LangSelect = () => {
+  // use position block
+  const { position } = usePositionBlock();
+
   // state
   const [ index, setIndex ] = useState(0);
 
@@ -33,14 +38,6 @@ const LangSelect = () => {
     i18n.changeLanguage(item);
   };
 
-  // position
-  const position = ({ languages }) => {
-    const left = (index / languages.length) * 100;
-    const width = parseInt(Math.floor(100 / languages.length));
-
-    return { left: `${left}%`, width: `${width}%` };
-  };
-
   // render
   return (
     <div className="lang-select">
@@ -52,7 +49,7 @@ const LangSelect = () => {
         {(t, { i18n }) => 
           <Fragment>
             <ul className="lang-select--list">{getLanguages(i18n)}</ul>
-            <div className="lang-select--active" style={position(i18n)}></div>
+            <div className="lang-select--active" style={position(index, i18n.languages)}></div>
           </Fragment>}
       </Translation>
     </div>

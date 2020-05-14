@@ -3,6 +3,25 @@
 
 $page-width: 1064px;
 
+html,
+body,
+body * {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+}
+
+html,
+body {
+  @include box-display;
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  vertical-align: top;
+}
+
 html {
   :root {
     --background-color: $black-900;
@@ -36,10 +55,8 @@ body {
     border-radius: 6px;
   }
 
-  & * {
-    box-sizing: border-box;
-    display: inline-block;
-    vertical-align: top;
+  script {
+    display: none;
   }
 }
 
@@ -72,7 +89,7 @@ body {
 
 /* --- QUERIES --- */
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 768px) {
   .page {
     min-height: calc(100vh - 110px);
     height: auto;

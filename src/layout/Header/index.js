@@ -1,7 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
-
-import { MainContext } from '../../providers/MainProvider';
 
 import HeaderMenu from './HeaderMenu';
 import HeaderTop from './HeaderTop';
@@ -9,11 +7,7 @@ import HeaderTop from './HeaderTop';
 import './header.scss';
 
 // Header
-const Header = ({ location }) => {
-  // main context
-  const mainContext = useContext(MainContext);
-  const { pages } = mainContext;
-
+const Header = ({ page, pages }) => {
   // active
   const [ active, setActive ] = useState(false);
 
@@ -22,18 +16,11 @@ const Header = ({ location }) => {
     setActive(!active);
   };
 
-  // use effect
-  useEffect(() => {
-    if (location) {
-      setActive(false);
-    }
-  }, [ location ]);
-
   // render
   return (
     <header className="header" data-active={active}>
       <HeaderTop active={active} onActive={onToggleActive} />
-      <HeaderMenu pages={pages} />
+      <HeaderMenu active={active} page={page} pages={pages} />
     </header>
   );
 };
@@ -42,4 +29,4 @@ Headers.propTypes = {
   any: PropTypes.any,
 };
 
-export default Header;
+export default memo(Header);

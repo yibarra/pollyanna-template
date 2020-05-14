@@ -43,7 +43,7 @@ const Content = props => {
   return (
     <Fragment>
       <div className="content" data-loading={props.loading}>
-        <Header location={props.location} />
+        <Header page={page} pages={pages} />
         
         {pages && pages.map((item, index) =>
           <section className="page-current" data-active={page === item} key={index}>
