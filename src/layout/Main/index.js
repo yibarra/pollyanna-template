@@ -8,6 +8,8 @@ import MainProvider from '../../providers/MainProvider';
 import PageProvider from '../../providers/PageProvider';
 
 import Content from '../Content';
+
+import Background from '../../components/Background';
 import Loader from '../../components/Loader';
 import Theme from '../../components/Theme';
 
@@ -21,6 +23,7 @@ const Main = ({ location }) => {
       <PageProvider location={location}>
         <Theme>
           <Loader />
+          <Background items={[ '/images/bg.png', '/images/bg-menu.png', '/images/bg-contact.jpg' ]} location={location} />
 
           <AudiosProvider>
             <Content location={location} />

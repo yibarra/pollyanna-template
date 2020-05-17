@@ -1,0 +1,27 @@
+/* --- BACKGROUND --- */
+@import '../../styles/settings/settings';
+@import '../../styles/tools/mixins';
+
+.background {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  pointer-events: auto;
+  vertical-align: top;
+  z-index: 1;
+
+  &:after {
+    background-color: var(--background-color);
+    content: '';
+    height: 100%;
+    left: 0;
+    //mix-blend-mode: screen;
+    opacity: 0.4;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    width: 100%;
+  }
+}

@@ -30,9 +30,9 @@ const Content = props => {
 
     switch (item.type) {
       case 'bio':
-        return <Bio {...props} loading={props.loading} page={item}  />;
+        return <Bio {...props} loading={true} page={item}  />;
       case 'contact':
-        return <Contact {...props} loading={props.loading} page={item} />;
+        return <Contact {...props} loading={true} page={item} />;
       case 'home':
       default:
         return <Home {...props} loading={true} page={item} />;
