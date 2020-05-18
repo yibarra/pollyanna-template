@@ -17,8 +17,8 @@
     content: '';
     height: 100%;
     left: 0;
-    //mix-blend-mode: screen;
-    opacity: 0.4;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
     position: absolute;
     pointer-events: none;
     top: 0;
