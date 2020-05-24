@@ -1,33 +1,45 @@
-import React, { Fragment } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-import Slider from '../Slider';
-import WebdoorItem from './WebdoorItem';
+import ReactScrollWheelHandler from "react-scroll-wheel-handler";
+import { useSwipeable } from 'react-swipeable';
+import useMobileDetect from 'use-mobile-detect-hook';
+
+import SliderBase from '../Slider/Base';
+import WebdoorContent from './WebdoorContent';
+import WebdoorInfo from './WebdoorInfo';
 
 import './webdoor.scss';
 
 // Webdoor
-const Webdoor = ({ items, current, last, setCurrent }) => {
-  // callback set current
-  const callback = (current) => {
-    if (isNaN(current)) return false;
+const Webdoor = ({ items, current, last, setCurrent, onPrevNext }) => {
+  // mobile
+  const detectMobile = useMobileDetect();
 
-    const item = items[current];
-
-    if (item instanceof Object) {
-      setCurrent(current);
+  // handlder mobile
+  const handlerMobile = useCallback(value => {
+    if (detectMobile.isMobile() === false) {
+      onPrevNext(value);
     }
-  };
+  }, [ onPrevNext, detectMobile ]);
+
+  // handlers
+  const handlers = useSwipeable({
+    onSwipedLeft: () => setTimeout(() => onPrevNext('next'), 100),
+    onSwipedRight: () => setTimeout(() => onPrevNext('prev'), 100),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
   // render
   return (
-    <section className="webdoor">
-      {items &&
-        <Fragment>
-          <Slider current={current} last={last} callback={callback} items={items} type={1} background={true}>
-            {items.map((item, index) => <WebdoorItem {...item} key={index} />)}
-          </Slider>
-        </Fragment>}
+    <section className="webdoor" {...handlers}>
+      <ReactScrollWheelHandler
+        upHandler={() => handlerMobile('prev')}
+        downHandler={() => handlerMobile('next')}>
+          <WebdoorInfo current={current} last={last} length={items.length} setCurrent={setCurrent} />
+          <WebdoorContent items={items} current={current} setCurrent={setCurrent} />
+      </ReactScrollWheelHandler>
     </section>
   );
 };
@@ -37,6 +49,7 @@ Webdoor.propTypes = {
   last: PropTypes.number,
   items: PropTypes.array,
   setCurrent: PropTypes.func.isRequired,
+  onPrevNext: PropTypes.func.isRequired,
 }
 
-export default Webdoor;
+export default SliderBase(Webdoor);

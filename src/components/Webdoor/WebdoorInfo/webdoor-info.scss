@@ -1,0 +1,82 @@
+/* --- WEBDOOR INFO --- */
+@import '../../../styles/settings/colors';
+@import '../../../styles/tools/mixins';
+
+.webdoor-info {
+  left: 0;
+  height: 100%;
+  position: absolute !important;
+  top: 0;
+  width: 75vw;
+  vertical-align: top;
+  z-index: 5 !important;
+
+  &--gallery {
+    float: left;
+    height: 100%;
+    position: relative;
+    pointer-events: auto;
+    width: calc(100% - 20px);
+    z-index: 1;
+    vertical-align: top;
+
+    .parallax {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      left: 0;
+      height: 100%;
+      pointer-events: auto;
+      position: absolute;
+      top: 0;
+      width: 100%;
+  
+      &--item {
+        position: absolute;
+      }
+    }
+
+    img {
+      pointer-events: none;
+    }
+  }
+
+  .icon-tooltip-block {
+    width: 90px;
+  }
+
+  .number-text {
+    bottom: 70px;
+    left: 10px;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+/* --- QUERIES --- */
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 1024px) {
+  .webdoor-info {
+    max-width: none;
+    width: 60vw;
+
+    .icon-tooltip-block {
+      display: none;
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .webdoor-info {
+    float: left;
+    height: 660px;
+    position: relative !important;
+    width: 100vw;
+
+    &--gallery {
+      height: 600px;
+      width: 100%;
+    }
+  }
+}

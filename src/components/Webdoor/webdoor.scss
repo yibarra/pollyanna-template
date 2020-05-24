@@ -6,7 +6,6 @@
 @import './../../styles/components/typography';
 
 .webdoor {
-  @include box-display;
   height: 100vh;
   float: left;
   overflow: hidden;
@@ -15,17 +14,8 @@
   width: 100%;
   vertical-align: top;
 
-  .slider {
-    height: 100vh;
-    margin: 0;
+  > div[timeout] {
     width: 100%;
-    z-index: 4;
-
-    &--container {
-      height: 100vh;
-      float: right;
-      width: 100%;
-    }
   }
 }
 
@@ -33,28 +23,13 @@
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
   .webdoor {
-    height: auto;
-    
-    .slider {
-      height: auto;
-      padding-bottom: 50px;
-
-      &--background {
-        max-width: initial;
-        padding: 70px 0 0;
-        width: 100%;
-      }
-    }
+    height: calc(100vh - 100px);
   }
 }
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 640px) {
   .webdoor {
-    .slider {
-      &--background {
-        padding: 0;
-      }
-    }
+    height: auto;
   }
 }

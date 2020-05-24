@@ -8,17 +8,17 @@ import './slider-controls.scss';
  * 
  * @param {*} props 
  */
-const SliderControls = (props) => {
+const SliderControls = ({ current, length, setCurrent, type }) => {
   // create item
   const createItem =  () => {
     const items = [];
 
-    if (props.type === 1 || props.type === 2 || props.type === 4) {
-      for (let i = 0; i < props.length; i++) {
-        items.push(typeElement(props.type, i));
+    if (type === 1 || type === 2 || type === 4) {
+      for (let i = 0; i < length; i++) {
+        items.push(typeElement(type, i));
       }
-    } else if (props.type === 3) {
-      items.push(typeElement(props.type));
+    } else if (type === 3) {
+      items.push(typeElement(type));
     }
 
     return items;
@@ -31,20 +31,18 @@ const SliderControls = (props) => {
     switch (type) {
       case 3: 
         return <li className="slider--controls--item" key={index}></li>;
-      case 4:
-      case 2:
       case 1: 
       default:
-        return <li className="slider--controls--item" data-current={props.current === index} key={index}>
-          <button className="item" onClick={() => props.setCurrent(index)}></button>
+        return <li className="slider--controls--item" data-current={current === index} key={index}>
+          <button className="item" onClick={() => setCurrent(index)}></button>
         </li>;
     }
   };
 
   // return
   return (
-    <ul className="slider--controls" data-type={props.type}>
-      {createItem(props.current)}
+    <ul className="slider--controls" data-type={type}>
+      {createItem(current)}
     </ul>
   )
 }

@@ -8,102 +8,59 @@
 
 .webdoor {
   &--item {
-    @include box-display;
-    left: 0;
+    border: none;
+    border-right: 1px solid var(--text-color);
     height: 100vh;
-    max-width: 230px;
-    pointer-events: none;
+    padding: 0 40px 0 0;
     position: absolute;
-    top: 0;
+    pointer-events: auto;
     width: 100%;
-    z-index: 5;
+    will-change: transform;
 
-    &--content {
-      @include box-display;
+    .container,
+    .description,
+    .title {
       float: left;
-      height: 100vh;
-      padding: 0;
+      margin: 0;
       position: relative;
+      width: 100%;
+      white-space: pre-line;
+    }
 
-      .container,
-      .description,
-      .title {
-        float: left;
-        margin: 0;
-        position: relative;
-        width: 100%;
-        white-space: pre-line;
-      }
+    .container {
+      align-content: center;
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+      flex-flow: row wrap;
+      height: 100%;
+    }
 
-      .container {
-        @include box-display;
-        align-content: center;
-        align-items: center;
-        display: inline-flex;
-        justify-content: center;
-        flex-flow: row wrap;
-        height: 100%;
-      }
+    .description {
+      @extend %text;
+      margin: 0;
+      padding: 0 0 0 20px;
+      width: 100%;
+    }
 
-      .description {
-        @extend %text;
-        margin: 0 0 20px;
-        padding: 0 0 0 20px;
-        width: calc(100% - 20px);
-      }
+    .btn-more {
+      margin: 20px 0 0 auto;
+      pointer-events: auto;
+      z-index: 10;
 
-      .btn-more {
-        margin: 20px 0 0 auto;
-        pointer-events: auto;
-        z-index: 10;
-
-        &.r {
-          &:before {
-            left: 100%;
-            right: initial;
-            width: calc(30vw - 320px);
-          }
+      &.r {
+        &:before {
+          left: 100%;
+          right: initial;
+          width: 40px;
         }
-      }
-
-      .title {
-        @extend %title-block-1;
-        margin: 0 0 20px;
-        text-transform: uppercase;
-      }
-
-      &:before {
-        @include box-display;
-        background-color: var(--text-color);
-        content: '';
-        height: 0vh;
-        left: -40px;
-        position: absolute;
-        top: 0;
-        transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1);
-        transition-delay: 600ms;
-        width: 1px;
       }
     }
-  }
 
-  .slider {
-    &--item {
-      &[data-active="true"] {
-        .webdoor {
-          &--item {
-            &--content {
-              .container {
-                animation: webdoor-item-change 700ms cubic-bezier(0.75, 0.25, 0.25, 0.75) 200ms both;
-              }
-
-              &:before {
-                animation: webdoor-line-change 800ms cubic-bezier(0.75, 0.25, 0.25, 0.75) 0ms both;
-              }
-            }
-          }
-        }
-      }
+    .title {
+      @extend %title-block-1;
+      margin: 0 0 20px;
+      text-transform: uppercase;
     }
   }
 }
@@ -112,8 +69,6 @@
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
   .webdoor {
-    margin: 0 0 40px;
-
     &--item {
       &--content {
         margin: 0;
@@ -137,33 +92,20 @@
   }
 }
 
-/* --- ANIMATIONS --- */
-@keyframes webdoor-line-change {
-  0% {
-    height: 100%;
-    top: 0;
-  }
-  50% {
-    height: 0;
-    top: 100%;
-  }
-  51% {
-    height: 0;
-    top: 0;
-  }
-  100% {
-    height: 100%;
-    top: 0;
-  }
-}
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .webdoor {
+    &--item {
+      height: 100%;
+      padding: 0 20px;
 
-@keyframes webdoor-item-change {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  70% {
-    transform: translateX(0);
-    opacity: 1;
+      .btn-more {
+        &.r {
+          &:before {
+            width: 20px;
+          }
+        }
+      }
+    }
   }
 }

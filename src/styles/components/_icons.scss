@@ -1,0 +1,41 @@
+/* --- ICONS --- */
+
+/* --- ICONS --- */
+@import '../settings/colors';
+@import '../settings/fonts';
+@import '../tools/mixins';
+
+%icon-tooltip-block {
+  @include font($font-default, 10px, 400, var(--background-color));
+  animation: spaceboots 0.8s infinite forwards;
+  background-color: var(--text-color);
+  bottom: 20px;
+  height: auto;
+  left: 50vw;
+  line-height: 1em;
+  right: initial;
+  padding: 4px 10px;
+  position: absolute;
+  transform: translate(-50%, 0);
+  width: auto;
+
+  .text {
+    
+  }
+
+  &:before {
+    background-color: var(--text-color);
+    border: none;
+    border-left: 1px solid transparent;
+    content: '';
+    height: 20px;
+    left: 50%;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    width: 0;
+    vertical-align: top;
+  }
+}

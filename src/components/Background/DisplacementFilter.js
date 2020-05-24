@@ -63,7 +63,7 @@ class DisplacementFilters {
       this.stage.filters = [
         this.displacementFilter, 
         new PIXI.filters.BlurFilter(4, 4),
-        new PIXI.filters.NoiseFilter(0.1)
+        new PIXI.filters.NoiseFilter(0.08)
       ];
       this.stage.addChild(this.displacementSprite);
     }

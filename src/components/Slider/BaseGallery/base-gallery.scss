@@ -1,0 +1,29 @@
+/* --- BASE GALLERY --- */
+
+.base-gallery {
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+
+  &--list,
+  &--item {
+    float: left;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    vertical-align: top;
+  }
+
+  &--item {
+    display: none;
+    position: absolute;
+    pointer-events: auto;
+    width: 100%;
+    will-change: transform;
+  }
+}

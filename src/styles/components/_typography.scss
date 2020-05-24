@@ -1,4 +1,6 @@
 /* --- TYPOGRAPHY --- */
+@import './icons';
+
 @import './../settings/settings';
 @import './../tools/mixins';
 
@@ -20,4 +22,8 @@
   @include font($font-text, 13px, 400, var(--text-color));
   line-height: 1.7em;
   letter-spacing: 0.02em;
+}
+
+.icon-tooltip-block {
+  @extend %icon-tooltip-block;
 }

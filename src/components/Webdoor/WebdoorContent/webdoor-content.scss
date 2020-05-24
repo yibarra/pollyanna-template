@@ -1,0 +1,79 @@
+/* --- WEBDOOR CONTENT --- */
+@import '../../../styles/settings/settings';
+@import '../../../styles/tools/mixins';
+
+.webdoor {
+  &--content {
+    float: right;
+    height: 100vh;
+    max-width: 380px;
+    overflow: hidden;
+    pointer-events: auto;
+    position: relative;
+    width: 35vw;
+
+    &--list {
+      float: left;
+      height: 100%;
+      padding: 0 0 0 40px;
+      position: relative;
+      pointer-events: auto;
+      width: 100%;
+      vertical-align: top;
+    }
+
+    &:before {
+      background-color: var(--text-color);
+      border: none;
+      border-left: 1px solid transparent;
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 0;
+    }
+  }
+}
+
+/* --- QUERIES --- */
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 1024px) {
+  .webdoor {
+    &--content {
+      max-width: none;
+      width: 40vw;
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 768px) {
+  .webdoor {
+    &--content {
+      height: calc(100vh - 100px);
+    }
+  }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+  .webdoor {
+    &--content {
+      height: 400px;
+      width: 100vw;
+
+      &--list {
+        border-top: 1px solid var(--text-color);
+        display: inline-flex;
+        flex-flow: row nowrap;
+        margin: 10px 0 0;
+        padding: 0;
+      }
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+}

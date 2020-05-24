@@ -1,10 +1,9 @@
 /* --- HEADER --- */
-@import './../../styles/settings/settings';
+@import './../../styles/settings/colors';
 @import './../../styles/tools/mixins';
 
 .header {
-  @include box-display;
-  @include noise;
+  background-color: transparent;
   float: left;
   height: auto;
   left: 0;
@@ -17,27 +16,10 @@
   &--top {
     z-index: 2;
   }
-
-  &:after {
-    @include box-display;
-    background-color: var(--background-color);
-    content: '';
-    display: none;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    vertical-align: top;
-  }
   
   &:before {
     display: none;
     z-index: 2;
-  }
-  
-  &:after {
-    z-index: 1;
   }
 }
 

@@ -21,6 +21,11 @@
 /* Extra Small Devices, Phones */ 
 @media only screen and (max-width : 640px) {
   .mini-player {
-    display: none;
+    bottom: initial;
+    right: initial;
+    height: 0;
+    position: relative;
+    top: -180px;
+    width: 100%;
   }
 }
