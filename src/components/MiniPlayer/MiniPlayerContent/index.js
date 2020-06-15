@@ -43,7 +43,7 @@ const MiniPlayerContent = ({ color, current, onPrevNext, items }) => {
             color={color}
             height={60}
             item={items[current]}
-            width={310}
+            width={320}
             setAnimation={setCallbackAnimation} />
         </Fragment>}
     </Fragment>

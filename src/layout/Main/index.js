@@ -23,7 +23,7 @@ const Main = ({ location }) => {
       <PageProvider location={location}>
         <Theme>
           <Loader />
-          <Background items={[ '/images/bg-bio.jpg', '/images/bg-contact.jpg', '/images/bg-visualizer.jpg' ]} location={location} />
+          <Background items={[ '/images/bg-1.jpg', '/images/bg-2.jpg', '/images/bg-3.jpg', '/images/bg-4.jpg', '/images/bg-5.jpg' ]} location={location} />
 
           <AudiosProvider>
             <Content location={location} />

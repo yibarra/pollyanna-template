@@ -61,6 +61,7 @@ const BaseGallery = ({ children, length, current, setCurrent }) => {
           <a.div
             {...drag()}
             key={i}
+            data-current={i === current}
             className="base-gallery--item"
             style={{ display, transform: x.interpolate(x => `translate3d(${x}px,0,0)`) }}>
               {children[i]}

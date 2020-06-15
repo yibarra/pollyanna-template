@@ -9,7 +9,6 @@
 .webdoor {
   &--item {
     border: none;
-    border-right: 1px solid var(--text-color);
     height: 100vh;
     padding: 0 40px 0 0;
     position: absolute;
@@ -93,11 +92,13 @@
 }
 
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width : 640px) {
   .webdoor {
     &--item {
-      height: 100%;
+      height: auto;
+      float: left;
       padding: 0 20px;
+      position: relative;
 
       .btn-more {
         &.r {

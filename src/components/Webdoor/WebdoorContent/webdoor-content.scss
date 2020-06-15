@@ -52,15 +52,19 @@
   .webdoor {
     &--content {
       height: calc(100vh - 100px);
+
+      &--list {
+        padding: 0 0 0 30px;
+      }
     }
   }
 }
 
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width : 640px) {
   .webdoor {
     &--content {
-      height: 400px;
+      height: auto;
       width: 100vw;
 
       &--list {
@@ -68,7 +72,7 @@
         display: inline-flex;
         flex-flow: row nowrap;
         margin: 10px 0 0;
-        padding: 0;
+        padding: 40px 0;
       }
 
       &:before {

@@ -69,3 +69,14 @@
     }
   }
 }
+
+/* --- QUERIES --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .mini-player {
+    &--controls {
+      bottom: -66px;
+      left: calc((100% - 320px) - 50px);
+    }
+  }
+}

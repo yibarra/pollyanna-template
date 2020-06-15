@@ -16,7 +16,7 @@
     height: 100%;
     position: relative;
     pointer-events: auto;
-    width: calc(100% - 20px);
+    width: 100%;
     z-index: 1;
     vertical-align: top;
 
@@ -60,23 +60,68 @@
     max-width: none;
     width: 60vw;
 
+    &--gallery {
+      .base-gallery {
+        &--item {
+          .parallax {
+            &--item {
+              transform: none !important;
+            }
+          }
+        }
+      }
+    }
+
     .icon-tooltip-block {
       display: none;
     }
   }
 }
 
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .webdoor-info {
+    .number-text {
+      left: 25px;
+    }
+  }
+}
+
 /* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width : 640px) {
   .webdoor-info {
     float: left;
-    height: 660px;
+    height: 530px;
     position: relative !important;
     width: 100vw;
 
     &--gallery {
-      height: 600px;
+      height: 470px;
       width: 100%;
+
+      .parallax {
+        display: inline-block;
+        
+        &--item {
+          height: 100%;
+          float: left;
+          position: relative;
+          width: 100%;
+        }
+      }
+
+      img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .number-text {
+      .current,
+      .last {
+        color: var(--background-color);
+      }
     }
   }
 }

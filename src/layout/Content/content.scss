@@ -44,3 +44,12 @@
     }
   }
 }
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .content {
+    .page-current {
+      min-height: auto;
+    }
+  }
+}

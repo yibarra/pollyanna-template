@@ -56,3 +56,23 @@
     }
   }
 }
+
+/* --- QUERIES --- */
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .mini-player-timer {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 320px;
+
+    .progress {
+      left: initial;
+      width: 100%;
+
+      canvas {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -27,3 +27,17 @@
     will-change: transform;
   }
 }
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .base-gallery {
+    &--item {
+      display: none !important;
+      position: relative;
+
+      &[data-current="true"] {
+        display: inline-block !important;
+      }
+    }
+  }
+}

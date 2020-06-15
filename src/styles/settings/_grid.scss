@@ -96,3 +96,11 @@ body {
     padding: 0;
   }
 }
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 640px) {
+  .page {
+    align-items: flex-start;
+    min-height: auto;
+  }
+}
