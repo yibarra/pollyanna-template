@@ -38,7 +38,6 @@ const ContactInfo = ({ contacts, credits }) => {
           {credits && credits.map((item, index) => <li className="contact--info--item" key={index}>
             <a className="text" href={item.url} rel="noopener noreferrer" target="_blank">
               <span className="title">{item.name}</span>
-              {valueElement('link', item.pro)}
             </a>
           </li>)}
         </ul>
